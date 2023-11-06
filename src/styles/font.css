@@ -97,11 +97,10 @@ http://scripts.sil.org/OFL
     url('../assets/fonts/nanoom/NanumMyeongjo.otf') format('otf');
 }
 
+/*TODO: 웹다운이 아닌 ttf로 실행할 수 있도록 변경*/
 @font-face {
   font-family: 'Handletter';
-  src:
-    local('NanumSonPyeonJiCe'),
-    url('../assets/fonts/nanoom/NanumSonPyeonJiCe.ttf') format('ttf');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
