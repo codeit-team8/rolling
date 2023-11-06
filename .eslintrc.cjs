@@ -44,6 +44,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
+    "import/no-extraneous-dependencies": 'off',
     'import/no-unresolved': 'off',
   },
 };
