@@ -6,19 +6,19 @@ import closeIcon from '@/assets/icons/close.svg';
 
 function Toast() {
   return (
-    <Container>
+    <ToastContainer>
       <CompletedDiv>
         <CompletedImg src={completedIcon} alt="완료 표시" />
         <Message>URL이 복사되었습니다.</Message>
       </CompletedDiv>
       <CloseImg src={closeIcon} alt="닫기 표시" />
-    </Container>
+    </ToastContainer>
   );
 }
 
 export default Toast;
 
-const Container = styled.div`
+const ToastContainer = styled.div`
   display: flex;
   width: 52.4rem;
   height: 6.4rem;
@@ -49,7 +49,6 @@ const CloseImg = styled.img`
 `;
 
 const Message = styled.span`
-  font-family: 'Handletter';
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 2.6rem;
