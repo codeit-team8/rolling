@@ -1,17 +1,17 @@
 import styled from 'styled-components';
-import CompletedIcon from '@/assets/completed.svg';
-import CloseIcon from '@/assets/close.svg';
+import completedIcon from '@/assets/icons/completed.svg';
+import closeIcon from '@/assets/icons/close.svg';
 
-// 나중에 추가할 목록: 닫기 버튼 set함수
+// TODO: 나중에 닫기 버튼에 set함수 추가
 
 function Toast() {
   return (
     <Container>
       <CompletedDiv>
-        <Completed src={CompletedIcon} alt="완료 표시" />
+        <CompletedImg src={completedIcon} alt="완료 표시" />
         <Message>URL이 복사되었습니다.</Message>
       </CompletedDiv>
-      <Close src={CloseIcon} alt="닫기 표시" />
+      <CloseImg src={closeIcon} alt="닫기 표시" />
     </Container>
   );
 }
@@ -37,12 +37,12 @@ const CompletedDiv = styled.div`
   gap: 1.2rem;
 `;
 
-const Completed = styled.img`
+const CompletedImg = styled.img`
   width: 2.4rem;
   height: 2.4rem;
 `;
 
-const Close = styled.img`
+const CloseImg = styled.img`
   width: 2.4rem;
   height: 2.4rem;
   flex-shrink: 0;
@@ -51,7 +51,6 @@ const Close = styled.img`
 const Message = styled.span`
   font-size: 1.6rem;
   font-weight: 400;
-  font-family: Pretendard;
   line-height: 2.6rem;
   letter-spacing: -0.016rem;
 `;
