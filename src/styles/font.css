@@ -90,17 +90,11 @@ http://scripts.sil.org/OFL
 
 @font-face {
   font-family: 'Nanum';
-  font-weight: 400;
-  font-style: normal;
-  src:
-    local('NanumMyeongjo'),
-    url('../assets/fonts/nanoom/NanumMyeongjo.otf') format('otf');
+  src: url('../assets/fonts/nanoom/NanumMyeongjo.otf') format('truetype');
 }
 
 /*TODO: 웹다운이 아닌 ttf로 실행할 수 있도록 변경*/
 @font-face {
   font-family: 'Handletter';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+  src: url('../assets/fonts/nanoom/NanumSonPyeonJiCe.ttf') format('opentype');
 }
