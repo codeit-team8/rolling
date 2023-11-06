@@ -93,7 +93,6 @@ http://scripts.sil.org/OFL
   src: url('../assets/fonts/nanoom/NanumMyeongjo.otf') format('truetype');
 }
 
-/*TODO: 웹다운이 아닌 ttf로 실행할 수 있도록 변경*/
 @font-face {
   font-family: 'Handletter';
   src: url('../assets/fonts/nanoom/NanumSonPyeonJiCe.ttf') format('opentype');
