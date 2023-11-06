@@ -12,13 +12,13 @@ function ListCard() {
         <span>30</span>
         명이 작성했어요!
       </WriterCounter>
-      <SubContainer>
+      <BottomContainer>
         <EmojiContainer>
           <div>이모지1</div>
           <div>이모지2</div>
           <div>이모지3</div>
         </EmojiContainer>
-      </SubContainer>
+      </BottomContainer>
       <PatternImg src={purplePatternImg} />
     </CardContainer>
   );
@@ -76,7 +76,7 @@ const WriterCounter = styled.div`
   letter-spacing: -0.016rem;
 `;
 
-const SubContainer = styled.div`
+const BottomContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
