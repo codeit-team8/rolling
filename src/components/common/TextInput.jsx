@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const Regex = /^[\sa-zA-Z0-9가-힣]{2,20}$/;
+const REGEX = /^[\sa-zA-Z0-9가-힣]{2,20}$/;
 
 export default function TextInput() {
   const [value, setValue] = useState('');
@@ -22,7 +22,7 @@ export default function TextInput() {
 
   const handleBlur = () => {
     const text = value.trim();
-    const result = Regex.test(text);
+    const result = REGEX.test(text);
     setIsValid(result);
     createErrorMessage(text, result);
   };
@@ -53,13 +53,16 @@ const InputBox = styled.input`
   outline-color: ${({ $isValid }) => ($isValid ? 'var(--gray-300)' : 'var(--Error)')};
   padding: 1.2rem 1.6rem;
   color: var(--gray-900);
+
   &:hover {
     outline: 0.1rem solid var(--gray-500);
   }
+
   &:focus,
   &:active {
     outline: 0.2rem solid var(--gray-700);
   }
+
   &:disabled {
     background-color: var(--gray-100);
     outline: 0.1rem solid var(--gray-300);
