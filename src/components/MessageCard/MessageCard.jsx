@@ -22,7 +22,7 @@ function MessageCard() {
     <MessageCardWrapper>
       <MessageCardTop>
         <DeleteBox>
-          <DeleteImg src={deleteIcon} alt='메시지 카드 삭제 버튼' />
+          <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" />
         </DeleteBox>
         <MessageCardProfile>
           <ProfileImageWrapper>
