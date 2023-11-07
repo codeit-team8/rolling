@@ -97,3 +97,10 @@ http://scripts.sil.org/OFL
   font-family: 'Handletter';
   src: url('../assets/fonts/nanoom/NanumSonPyeonJiCe.ttf') format('opentype');
 }
+
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/Poppins/Poppins-Bold.ttf') format('opentype');
+}
