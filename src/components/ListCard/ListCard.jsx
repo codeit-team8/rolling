@@ -35,8 +35,9 @@ const CardContainer = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   background: var(--purple-200, #ecd9ff);
-  box-shadow: 0px 0.2rem 1.2rem 0px rgba(0, 0, 0, 0.08);
-  @media (min-width: 481px) {
+  box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+
+  @media (min-width: 768px) {
     width: 27.5rem;
     height: 26rem;
   }
@@ -54,7 +55,8 @@ const Recipient = styled.h1`
   font-weight: 700;
   line-height: 2.8rem;
   letter-spacing: -0.018rem;
-  @media (min-width: 481px) {
+
+  @media (min-width: 768px) {
     font-size: 2.4rem;
     line-height: 3.6rem;
     letter-spacing: -0.024px;
@@ -83,10 +85,12 @@ const WriterCounter = styled.div`
   font-weight: 400;
   line-height: 2rem;
   letter-spacing: -0.007rem;
-  @media (min-width: 481px) {
+
+  @media (min-width: 768px) {
     font-size: 1.6rem;
     line-height: 2.6rem;
     letter-spacing: -0.016px;
+
     span {
       font-size: 1.6rem;
       letter-spacing: -0.016px;
@@ -103,7 +107,8 @@ const BottomContainer = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding-top: 1.6rem;
   margin-top: 4.3rem;
-  @media (min-width: 481px) {
+
+  @media (min-width: 768px) {
     width: 22.7rem;
   }
 `;
@@ -122,7 +127,8 @@ const PatternImg = styled.img`
   height: 14.2rem;
   flex-shrink: 0;
   border-radius: 0 0 16px 0;
-  @media (min-width: 481px) {
+
+  @media (min-width: 768px) {
     width: 14.2rem;
   }
 `;

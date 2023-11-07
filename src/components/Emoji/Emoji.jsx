@@ -31,7 +31,7 @@ const EmojiElement = styled.span`
 `;
 
 const EmojiCount = styled.span`
-  color: #fff;
+  color: var(--white);
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 2rem;

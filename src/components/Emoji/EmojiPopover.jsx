@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 
+// TODO : 팝오버 컨테이너에 이모지 컴포넌트 들어가야 함.
+
 function EmojiPopover() {
-  return (
-    <EmojiPopoverContainer>
-      {/* <Emoji reaction={REACTION} />
-      <Emoji reaction={REACTION} />
-      <Emoji reaction={REACTION} />
-      <Emoji reaction={REACTION} /> */}
-    </EmojiPopoverContainer>
-  );
+  return <EmojiPopoverContainer></EmojiPopoverContainer>;
 }
 
 export default EmojiPopover;
@@ -27,13 +22,13 @@ const EmojiPopoverContainer = styled.div`
   background: var(--white);
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
 
-  @media (min-width: 481px) and (max-width: 1024px) {
+  @media (min-width: 768px) {
     width: 24.8rem;
     height: 13.4rem;
     padding: 2.4rem;
   }
 
-  @media (min-width: 1025px) {
+  @media (min-width: 1248px) {
     width: 31.2rem;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
