@@ -4,13 +4,11 @@ import logo from '@/assets/icons/logo.svg';
 function Nav() {
   return (
     <NavWrapper>
-      <NavContainer>
-        <NavTitle>
-          <Logo src={logo} alt="로고 이미지" />
-          <Title>Rolling</Title>
-        </NavTitle>
-        <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
-      </NavContainer>
+      <NavTitle>
+        <Logo src={logo} alt="로고 이미지" />
+        <Title>Rolling</Title>
+      </NavTitle>
+      <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
     </NavWrapper>
   );
 }
@@ -18,15 +16,18 @@ function Nav() {
 export default Nav;
 
 const NavWrapper = styled.div`
-  width: 100%;
-  padding: 1.2rem 2rem;
-`;
-
-const NavContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 auto;
   gap: 7.9rem;
+  width: 100%;
+  height: 6.4rem;
+  padding: 1.2rem 2rem;
+
+  @media (min-width: 1200px) {
+    max-width: 124rem;
+  }
 `;
 
 const NavTitle = styled.div`
@@ -67,4 +68,8 @@ const PaperCreateButton = styled.button`
   font-weight: 700;
   line-height: 2.6rem;
   letter-spacing: -0.016rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.6rem;
+  }
 `;
