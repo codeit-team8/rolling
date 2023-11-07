@@ -1,14 +1,19 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import logo from '@/assets/icons/logo.svg';
 
 function Nav() {
   return (
     <NavWrapper>
-      <NavTitle>
-        <Logo src={logo} alt="로고 이미지" />
-        <Title>Rolling</Title>
-      </NavTitle>
-      <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
+      <Link to="/">
+        <NavTitle>
+          <Logo src={logo} alt="로고 이미지" />
+          <Title>Rolling</Title>
+        </NavTitle>
+      </Link>
+      <Link to="/post">
+        <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
+      </Link>
     </NavWrapper>
   );
 }
