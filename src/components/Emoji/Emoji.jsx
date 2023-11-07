@@ -15,7 +15,7 @@ const EmojiContainer = styled.div`
   display: flex;
   width: fit-content;
   height: 2.8rem;
-  padding: 0.4rem 0.8rem;
+  padding: 0.4rem 0.7rem;
   align-items: flex-start;
   gap: 0.2rem;
   border-radius: 32px;
