@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const MessageCardWrapper = styled.div`
   width: 38.4rem;
+  position: relative;
   height: 28rem;
   padding: 2.8rem 2.4rem;
   border-radius: 16px;
@@ -17,6 +18,27 @@ export const MessageCardTop = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   gap: 1.5rem;
+`;
+
+export const DeleteBox = styled.div`
+  display: inline-flex;
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  right: 2.4rem;
+  top: 2.8rem;
+  padding: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--gray-300, #ccc);
+  background: var(--white, #fff);
+`;
+
+export const DeleteImg = styled.img`
+  width: 2.4rem;
+  height: 2.4rem;
 `;
 
 export const MessageCardProfile = styled.div`

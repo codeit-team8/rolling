@@ -4,6 +4,8 @@ import {
   AuthorFrom,
   AuthorTitle,
   AuthorWrapper,
+  DeleteBox,
+  DeleteImg,
   MessageBody,
   MessageCardDivLine,
   MessageCardProfile,
@@ -13,11 +15,15 @@ import {
   ProfileImage,
   ProfileImageWrapper,
 } from '@/components/MessageCard/MessageCard.style.jsx';
+import deleteIcon from '@/assets/icons/deleted.svg';
 
 function MessageCard() {
   return (
     <MessageCardWrapper>
       <MessageCardTop>
+        <DeleteBox>
+          <DeleteImg src={deleteIcon} alt='메시지 카드 삭제 버튼' />
+        </DeleteBox>
         <MessageCardProfile>
           <ProfileImageWrapper>
             <ProfileImage />
