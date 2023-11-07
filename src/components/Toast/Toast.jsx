@@ -49,7 +49,6 @@ const CloseImg = styled.img`
 `;
 
 const Message = styled.span`
-  font-family: 'Handletter';
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 2.6rem;
