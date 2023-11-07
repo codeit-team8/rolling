@@ -74,7 +74,7 @@ export const AuthorTitle = styled.div`
   gap: 0.6rem;
 `;
 
-export const AuthorFrom = styled.h3`
+export const AuthorFrom = styled.span`
   color: var(--black);
   font-size: 2rem;
   font-style: normal;
@@ -86,7 +86,7 @@ export const Author = styled.h3`
   color: var(--black);
   font-size: 2rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 2.4rem;
 `;
 
@@ -107,8 +107,6 @@ export const MessageBody = styled.div`
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   font-size: 1.8rem;
-  font-style: normal;
-  font-weight: 400;
   line-height: 2.8rem;
   letter-spacing: -0.018px;
 `;
@@ -116,8 +114,6 @@ export const MessageBody = styled.div`
 export const MessageDate = styled.span`
   color: var(--gray-400, #999);
   font-size: 1.2rem;
-  font-style: normal;
-  font-weight: 400;
   line-height: 1.8rem;
   letter-spacing: -0.006rem;
 `;
