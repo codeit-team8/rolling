@@ -121,6 +121,7 @@ const PatternImg = styled.img`
   width: 10.7rem;
   height: 14.2rem;
   flex-shrink: 0;
+  border-radius: 0 0 16px 0;
   @media (min-width: 481px) {
     width: 14.2rem;
   }

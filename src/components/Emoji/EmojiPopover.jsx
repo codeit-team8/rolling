@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Emoji from './Emoji';
 
 function EmojiPopover() {
   return (
