@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-function Emoji() {
+function Emoji({ reaction }) {
   return (
-    <EmojiContainer>
-      <EmojiElement>😆</EmojiElement>
-      <EmojiCount>1</EmojiCount>
+    <EmojiContainer id={reaction.id}>
+      <EmojiElement>{reaction.emoji}</EmojiElement>
+      <EmojiCount>{reaction.count}</EmojiCount>
     </EmojiContainer>
   );
 }
