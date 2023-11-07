@@ -3,7 +3,7 @@ import purplePatternImg from '@/assets/images/card_pattern_purple.png';
 
 // TODO : 작성자들에 아바타 컴포넌트 추가, 작성 인원 수 추가, 이모지 컴포넌트 추가, 컬러에 따라 카드배경색, 패턴 다르게 받기
 
-function ListCard() {
+function PageCard() {
   return (
     <CardContainer>
       <Recipient>To. 민혁</Recipient>
@@ -24,7 +24,7 @@ function ListCard() {
   );
 }
 
-export default ListCard;
+export default PageCard;
 
 const CardContainer = styled.div`
   position: relative;
@@ -35,7 +35,7 @@ const CardContainer = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   background: var(--purple-200, #ecd9ff);
-  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
 `;
 
 const Recipient = styled.h1`
