@@ -15,9 +15,9 @@ function Dropdown() {
       <DropdownBtn $isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
         {selected}
         {isActive ? (
-          <ArrowIcon src={arrowBottomIcon} alt="아래화살표" />
-        ) : (
           <ArrowIcon src={arrowTopIcon} alt="위화살표" />
+        ) : (
+          <ArrowIcon src={arrowBottomIcon} alt="아래화살표" />
         )}
       </DropdownBtn>
       {isActive && (
