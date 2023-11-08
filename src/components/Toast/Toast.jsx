@@ -42,7 +42,7 @@ const fade = (x) => keyframes`
 
 const ToastContainer = styled.div`
   position: absolute;
-  bottom: 88px;
+  bottom: 8.8rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -62,6 +62,11 @@ const ToastContainer = styled.div`
     width: 52.4rem;
     height: 6.4rem;
     gap: 25.3rem;
+    bottom: 5rem;
+  }
+
+  @media (min-width: 1248px) {
+    bottom: 7rem;
   }
 `;
 
