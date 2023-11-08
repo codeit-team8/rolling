@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import { useEffect, useState } from 'react';
 import PaperCard from '@/components/PaperCard/PaperCard.jsx';
+import { paperCardSettings } from '@/util/carousel.jsx';
+import { NextArrow, PrevArrow } from '@/styles/Button.jsx';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { paperCardSettings } from '@/util/carousel.jsx';
-import { useState } from 'react';
-import { NextArrow, PrevArrow } from '@/styles/Button.jsx';
 
 function RollingPaperList({ paperCardList }) {
+  const [isGreaterPCWidth, setIsGreaterPCWidth] = useState(false);
   const [showPrev, setShowPrev] = useState(false);
   const [showNext, setShowNext] = useState(true);
   const [cardCount, setCardCount] = useState(0);
@@ -32,23 +33,41 @@ function RollingPaperList({ paperCardList }) {
     }
   };
 
+  const handleSize = () => {
+    if (window.innerWidth >= 1248) {
+      setIsGreaterPCWidth(true);
+    } else {
+      setIsGreaterPCWidth(false);
+    }
+  };
+
+  useEffect(() => {
+    handleSize();
+    window.addEventListener('resize', handleSize);
+
+    return () => window.removeEventListener('resize', handleSize);
+  }, []);
+
   return (
     <Div>
       <PaperListContainer>
-        {/*<PaperListSlide>*/}
-        {/*  {[1, 2, 3, 4, 5].map((num) => (*/}
-        {/*    <PaperCard number={num} key={num} />*/}
-        {/*  ))}*/}
-        {/*</PaperListSlide>*/}
-        <PaperListSlider {...paperCardSettings}
-                         prevArrow={<PrevArrow onClick={handleClickPrev} showPrev={showPrev} />}
-                         nextArrow={<NextArrow onClick={handleClickNext} showNext={showNext} />}>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-            <PaperCard number={num} key={num} />
-          ))}
-        </PaperListSlider>
-        {/*<NextArrow onClick={next} />*/}
-        {/*<PrevArrow onClick={prev} />*/}
+        {isGreaterPCWidth ? (
+          <PaperListSlider
+            {...paperCardSettings}
+            prevArrow={<PrevArrow onClick={handleClickPrev} showPrev={showPrev} />}
+            nextArrow={<NextArrow onClick={handleClickNext} showNext={showNext} />}
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+              <PaperCard number={num} key={num} />
+            ))}
+          </PaperListSlider>
+        ) : (
+          <PaperListSlide>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <PaperCard number={num} key={num} />
+            ))}
+          </PaperListSlide>
+        )}
       </PaperListContainer>
     </Div>
   );
