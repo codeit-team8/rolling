@@ -10,9 +10,19 @@ const options = ['옵션예시1번', '옵션예시2번', '옵션예시3번', '�
 function Dropdown() {
   const [selected, setSelected] = useState(options[1]);
   const [isActive, setIsActive] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsActive((prev) => !prev);
+  };
+
+  const handleDropdownContent = (option) => {
+    setSelected(option);
+    setIsActive(false);
+  };
+
   return (
     <DropdownContainer>
-      <DropdownBtn $isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
+      <DropdownBtn $isActive={isActive} onClick={toggleDropdown}>
         {selected}
         {isActive ? (
           <ArrowIcon src={arrowTopIcon} alt="위화살표" />
@@ -23,13 +33,7 @@ function Dropdown() {
       {isActive && (
         <DropdownContentsWrapper>
           {options.map((option) => (
-            <DropdownContent
-              key={option}
-              onClick={() => {
-                setSelected(option);
-                setIsActive(false);
-              }}
-            >
+            <DropdownContent key={option} onClick={() => handleDropdownContent(option)}>
               {option}
             </DropdownContent>
           ))}
@@ -80,6 +84,7 @@ const DropdownContentsWrapper = styled.div`
   border-radius: 8px;
   border: 1px solid var(--gray-300, #ccc);
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 `;
 
 const DropdownContent = styled.div`
