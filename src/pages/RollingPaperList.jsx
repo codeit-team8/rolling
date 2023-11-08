@@ -4,12 +4,33 @@ import PaperCard from '@/components/PaperCard/PaperCard.jsx';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { paperCardSettings } from '@/util/carousel.jsx';
+import { useState } from 'react';
+import { NextArrow, PrevArrow } from '@/styles/Button.jsx';
 
-function RollingPaperList() {
-  // const slickRef = useRef();
-  //
-  // const prev = useCallback(() => slickRef.current.slickPrev(), []);
-  // const next = useCallback(() => slickRef.current.slickNext(), []);
+function RollingPaperList({ paperCardList }) {
+  const [showPrev, setShowPrev] = useState(false);
+  const [showNext, setShowNext] = useState(true);
+  const [cardCount, setCardCount] = useState(0);
+
+  const handleClickPrev = () => {
+    setCardCount(cardCount - 1);
+    if (cardCount === 0) {
+      setShowPrev(false);
+    }
+    if (!showNext) {
+      setShowNext(true);
+    }
+  };
+
+  const handleClickNext = () => {
+    setCardCount(cardCount + 1);
+    if (cardCount === paperCardList.length) {
+      setShowNext(false);
+    }
+    if (!showPrev) {
+      setShowPrev(true);
+    }
+  };
 
   return (
     <Div>
@@ -19,7 +40,9 @@ function RollingPaperList() {
         {/*    <PaperCard number={num} key={num} />*/}
         {/*  ))}*/}
         {/*</PaperListSlide>*/}
-        <PaperListSlider {...paperCardSettings}>
+        <PaperListSlider {...paperCardSettings}
+                         prevArrow={<PrevArrow onClick={handleClickPrev} showPrev={showPrev} />}
+                         nextArrow={<NextArrow onClick={handleClickNext} showNext={showNext} />}>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
             <PaperCard number={num} key={num} />
           ))}
@@ -48,7 +71,6 @@ const PaperListContainer = styled.div`
 `;
 
 const PaperListSlider = styled(Slider)`
-
   .slick-prev::before,
   .slick-next::before {
     opacity: 0;

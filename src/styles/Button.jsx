@@ -3,19 +3,19 @@ import nextArrow from '@/assets/icons/arrow_right.svg';
 import prevArrow from '@/assets/icons/arrow_left.svg';
 import ellipse from '@/assets/icons/ellipse.svg';
 
-export function NextArrow({ onClick }) {
+export function PrevArrow({ onClick, showPrev }) {
   return (
-    <NextButton onClick={onClick}>
-      <ArrowImg src={nextArrow} alt='다음 화살표 버튼' />
-    </NextButton>
+    <PrevButton onClick={onClick} $showPrev={showPrev}>
+      <ArrowImg src={prevArrow} alt="다음 화살표 버튼" />
+    </PrevButton>
   );
 }
 
-export function PrevArrow({ onClick }) {
+export function NextArrow({ onClick, showNext }) {
   return (
-    <PrevButton onClick={onClick}>
-      <ArrowImg src={prevArrow} alt='다음 화살표 버튼' />
-    </PrevButton>
+    <NextButton onClick={onClick} $showNext={showNext}>
+      <ArrowImg src={nextArrow} alt="다음 화살표 버튼" />
+    </NextButton>
   );
 }
 
@@ -45,10 +45,12 @@ const ArrowImg = styled.img`
   flex-shrink: 0;
 `;
 
-const NextButton = styled(ArrowButton)`
-  right: -0.4rem;
-`;
-
 const PrevButton = styled(ArrowButton)`
   left: -1.9rem;
+  display: ${({ $showPrev }) => ($showPrev ? 'flex' : 'none')};
+`;
+
+const NextButton = styled(ArrowButton)`
+  right: -0.4rem;
+  display: ${({ $showNext }) => ($showNext ? 'flex' : 'none')};
 `;
