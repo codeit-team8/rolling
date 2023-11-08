@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import '@/styles/font.css';
 import { useState } from 'react';
@@ -60,7 +59,7 @@ const DropDownBtn = styled.div`
   cursor: pointer;
 
   ${({ $isActive }) =>
-    $isActive ? `outline: 2px solid var(--gray-500, #555);` : `outline: 1px solid var(--gray-500, #555);`}
+    $isActive ? 'outline: 2px solid var(--gray-500, #555);' : 'outline: 1px solid var(--gray-500, #555);'}
 
   &:hover {
     outline: 1px solid var(--gray-500, #555);
