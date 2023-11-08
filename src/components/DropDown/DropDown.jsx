@@ -7,23 +7,23 @@ import arrowBottomIcon from '@/assets/icons/arrow_bottom.svg';
 // TODO: option리스트를 배열로 받기
 const options = ['옵션예시1번', '옵션예시2번', '옵션예시3번', '옵션예시4번'];
 
-function DropDown() {
+function Dropdown() {
   const [selected, setSelected] = useState(options[1]);
   const [isActive, setIsActive] = useState(false);
   return (
-    <Style>
-      <DropDownBtn $isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
+    <DropdownContainer>
+      <DropdownBtn $isActive={isActive} onClick={() => setIsActive((prev) => !prev)}>
         {selected}
         {isActive ? (
           <ArrowIcon src={arrowBottomIcon} alt="아래화살표" />
         ) : (
           <ArrowIcon src={arrowTopIcon} alt="위화살표" />
         )}
-      </DropDownBtn>
+      </DropdownBtn>
       {isActive && (
-        <DropDownContentsWrapper>
+        <DropdownContentsWrapper>
           {options.map((option) => (
-            <DropDownContent
+            <DropdownContent
               key={option}
               onClick={() => {
                 setSelected(option);
@@ -31,24 +31,24 @@ function DropDown() {
               }}
             >
               {option}
-            </DropDownContent>
+            </DropdownContent>
           ))}
-        </DropDownContentsWrapper>
+        </DropdownContentsWrapper>
       )}
-    </Style>
+    </DropdownContainer>
   );
 }
-const Style = styled.div`
+const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-const DropDownBtn = styled.div`
-  width: 320px;
-  padding: 12px 16px;
-  font-size: 16px;
+const DropdownBtn = styled.div`
+  width: 32rem;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
   font-weight: 400;
   color: var(--gray-500, #555);
   border-radius: 8px;
@@ -59,10 +59,10 @@ const DropDownBtn = styled.div`
   cursor: pointer;
 
   ${({ $isActive }) =>
-    $isActive ? 'outline: 2px solid var(--gray-500, #555);' : 'outline: 1px solid var(--gray-500, #555);'}
+    $isActive ? 'outline: 2px solid var(--gray-500, #555);' : 'outline: 1px solid var(--gray-300, #ccc);'}
 
   &:hover {
-    outline: 1px solid var(--gray-500, #555);
+    outline: 2px solid var(--gray-500, #555);
     color: var(--gray-500, #555);
   }
 
@@ -73,18 +73,18 @@ const DropDownBtn = styled.div`
   }
 `;
 
-const DropDownContentsWrapper = styled.div`
-  margin-top: 8px;
-  width: 320px;
-  padding: 10px 0;
+const DropdownContentsWrapper = styled.div`
+  margin-top: 0.8rem;
+  width: 32rem;
+  padding: 1rem 0;
   border-radius: 8px;
   border: 1px solid var(--gray-300, #ccc);
-  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
 `;
 
-const DropDownContent = styled.div`
-  padding: 12px 16px;
-  font-size: 16px;
+const DropdownContent = styled.div`
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
   cursor: pointer;
 
   &:hover {
@@ -93,8 +93,8 @@ const DropDownContent = styled.div`
 `;
 
 const ArrowIcon = styled.img`
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
 `;
 
-export default DropDown;
+export default Dropdown;
