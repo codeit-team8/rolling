@@ -1,18 +1,16 @@
 import styled from 'styled-components';
-import Slider from 'react-slick';
 import PaperCard from '@/components/PaperCard/PaperCard.jsx';
-import { paperCardSettings } from '@/util/carousel.js';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 function RollingPaperList() {
   return (
     <PaperListContainer>
-      <Slider {...paperCardSettings}>
+      <PaperListSlide>
         {[1, 2, 3, 4, 5].map((num) => (
           <PaperCard number={num} key={num} />
         ))}
-      </Slider>
+      </PaperListSlide>
     </PaperListContainer>
   );
 }
@@ -21,14 +19,35 @@ export default RollingPaperList;
 
 const PaperListContainer = styled.div`
   width: 100%;
-  overflow: hidden;
+  //overflow: hidden;
+`;
 
-  .slick-track {
-    display: flex;
-    gap: 10px;
+const PaperListSlide = styled.div`
+  display: flex;
+  gap: 1.2rem;
+  overflow: scroll;
 
-    [data-index='0'] {
-      margin-left: 2rem;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:first-child {
+    padding-left: 2rem;
+  }
+
+  &:last-child {
+    padding-right: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    gap: 2rem;
+
+    &:first-child {
+      padding-left: 2.4rem;
+    }
+
+    &:last-child {
+      padding-right: 2.4rem;
     }
   }
 `;
