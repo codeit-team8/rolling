@@ -4,11 +4,13 @@ import { useState } from 'react';
 import arrowTopIcon from '@/assets/icons/arrow_top.svg';
 import arrowBottomIcon from '@/assets/icons/arrow_bottom.svg';
 
-// TODO: option리스트를 배열로 받기
-const options = ['옵션예시1번', '옵션예시2번', '옵션예시3번', '옵션예시4번'];
+const OPTIONS = {
+  relationship: ['친구', '지인', '동료', '가족'],
+  font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
+};
 
-function Dropdown() {
-  const [selected, setSelected] = useState(options[1]);
+function Dropdown({ selectOption }) {
+  const [selected, setSelected] = useState(OPTIONS[selectOption][1]);
   const [isActive, setIsActive] = useState(false);
 
   const toggleDropdown = () => {
@@ -32,7 +34,7 @@ function Dropdown() {
       </DropdownBtn>
       {isActive && (
         <DropdownContentsWrapper>
-          {options.map((option) => (
+          {OPTIONS[selectOption].map((option) => (
             <DropdownContent key={option} onClick={() => handleDropdownContent(option)}>
               {option}
             </DropdownContent>
