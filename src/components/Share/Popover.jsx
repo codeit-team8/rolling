@@ -5,7 +5,7 @@ import Toast from '@/components/Toast/Toast';
 import shareKakao from '@/components/Share/shareKakao.jsx';
 
 const { Kakao } = window;
-// TODO::searchParams를 인자로 받아와서 공유
+// TODO:searchParams를 인자로 받아와서 공유
 const PATH = 'post';
 const URL = 'http://localhost:5173/post';
 
@@ -14,7 +14,6 @@ export default function Popover() {
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init('838406c66469f9358aef57104417a0d7');
-    console.log(Kakao.isInitialized());
   }, []);
 
   const handleClick = () => {
