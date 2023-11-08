@@ -4,7 +4,7 @@ import EmojiPopover from '@/components/Emoji/EmojiPopover';
 import Emoji from './Emoji';
 import mockReactions from '@/assets/mock/mockReactions';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
-import EmojiPicker from './EmojiPicker';
+import EmojiAdd from './EmojiAdd';
 
 // TODO: emoji api로 받아오기
 export default function EmojiList() {
@@ -29,7 +29,7 @@ export default function EmojiList() {
         </ArrowButton>
         {isOpen && <EmojiPopover popoverReactions={popoverReactions} />}
       </Box>
-      <EmojiPicker />
+      <EmojiAdd />
     </EmojiListContainer>
   );
 }

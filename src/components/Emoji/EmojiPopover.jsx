@@ -7,7 +7,7 @@ function EmojiPopover({ popoverReactions }) {
   return (
     <EmojiPopoverContainer>
       {popoverReactions.map((reaction) => (
-        <Emoji reaction={reaction} />
+        <Emoji reaction={reaction} key={reaction.emoji} />
       ))}
     </EmojiPopoverContainer>
   );

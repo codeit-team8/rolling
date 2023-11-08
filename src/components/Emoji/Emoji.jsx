@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 function Emoji({ reaction }) {
-  console.log(reaction);
   return (
     <EmojiContainer id={reaction.id}>
       <EmojiElement>{reaction.emoji}</EmojiElement>
@@ -16,12 +15,15 @@ const EmojiContainer = styled.div`
   display: flex;
   width: fit-content;
   height: 2.8rem;
-  padding: 0.4rem 0.7rem;
-  align-items: flex-start;
+  padding: 0.4rem 0.8rem;
+  align-items: center;
   gap: 0.2rem;
   border-radius: 32px;
   background: rgba(0, 0, 0, 0.54);
   cursor: pointer;
+  @media (min-width: 768px) {
+    padding: 0.6rem 1.2rem;
+  }
 `;
 
 const EmojiElement = styled.span`
