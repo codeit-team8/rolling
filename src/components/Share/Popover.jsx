@@ -1,26 +1,41 @@
 import { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import PopOverPortal from './PopOverPortal';
-import Toast from '../Toast/Toast';
+import styled from 'styled-components';
+import PopOverPortal from '@/components/Share/PopOverPortal';
+import Toast from '@/components/Toast/Toast';
+import shareKakao from '@/components/Share/shareKakao.jsx';
 
+const { Kakao } = window;
 // TODO::searchParams를 인자로 받아와서 공유
+const PATH = 'post';
+const URL = 'http://localhost:5173/post';
+
 export default function Popover() {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    Kakao.cleanup();
+    Kakao.init('838406c66469f9358aef57104417a0d7');
+    console.log(Kakao.isInitialized());
+  }, []);
 
   const handleClick = () => {
     if (!isOpen) {
       setIsOpen(true);
     }
+    window.navigator.clipboard.writeText(URL);
   };
 
   const handleClose = () => {
     setIsOpen(false);
   };
 
+  const handleKakao = () => {
+    shareKakao(Kakao, PATH);
+  };
+
   useEffect(() => {
     const myTimeout = setTimeout(() => {
       setIsOpen(false);
-    }, 3000);
+    }, 4000);
     return () => {
       clearTimeout(myTimeout);
     };
@@ -28,7 +43,7 @@ export default function Popover() {
 
   return (
     <PopoverContainer>
-      <Button>카카오톡 공유</Button>
+      <Button onClick={handleKakao}>카카오톡 공유</Button>
       <Button onClick={handleClick}>URL 공유</Button>
       <PopOverPortal>
         <Toast onClose={handleClose} isOpen={isOpen} />

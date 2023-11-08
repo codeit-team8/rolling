@@ -56,7 +56,7 @@ const ToastContainer = styled.div`
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.8);
   color: var(--white, #fff);
-  animation: ${({ $isOpen }) => ($isOpen ? fade(1) : fade(0))} 1s forwards;
+  animation: ${({ $isOpen }) => ($isOpen ? fade(1) : fade(0))} 0.5s forwards;
 
   @media (min-width: 768px) {
     width: 52.4rem;
