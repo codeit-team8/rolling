@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 function Emoji({ reaction }) {
+  console.log(reaction);
   return (
     <EmojiContainer id={reaction.id}>
       <EmojiElement>{reaction.emoji}</EmojiElement>
@@ -20,6 +21,7 @@ const EmojiContainer = styled.div`
   gap: 0.2rem;
   border-radius: 32px;
   background: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
 `;
 
 const EmojiElement = styled.span`
@@ -35,5 +37,6 @@ const EmojiCount = styled.span`
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 2rem;
+  padding-left: 0.2rem;
   letter-spacing: -0.007px;
 `;

@@ -1,9 +1,9 @@
-import Popover from '@/components/Share/Popover';
+import EmojiList from '../components/Emoji/EmojiList';
 
 function Post() {
   return (
     <div>
-      <Popover />
+      <EmojiList />
     </div>
   );
 }
