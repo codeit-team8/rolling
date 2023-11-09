@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PopOverPortal from '@/components/Share/PopOverPortal';
+import PopoverPortal from '@/components/Share/PopoverPortal.jsx';
 import Toast from '@/components/Toast/Toast';
 import shareKakao from '@/components/Share/shareKakao.jsx';
 
@@ -44,9 +44,9 @@ export default function Popover() {
     <PopoverContainer>
       <Button onClick={handleKakao}>카카오톡 공유</Button>
       <Button onClick={handleClick}>URL 공유</Button>
-      <PopOverPortal>
+      <PopoverPortal>
         <Toast onClose={handleClose} isOpen={isOpen} />
-      </PopOverPortal>
+      </PopoverPortal>
     </PopoverContainer>
   );
 }
