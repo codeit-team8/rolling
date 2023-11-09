@@ -5,13 +5,13 @@ import addImg from '@/assets/icons/add-20.svg';
 
 export default function EmojiAdd() {
   const [isOpen, setIsOpen] = useState(false);
-  const handleClick = () => {
+  const handleOpenClick = () => {
     setIsOpen((prev) => !prev);
   };
 
   return (
     <EmojiAddContainer>
-      <Box onClick={handleClick} type="button">
+      <Box onClick={handleOpenClick} type="button">
         <EmojiImg src={addImg} alt="이모지 추가" />
         <Text>추가</Text>
       </Box>

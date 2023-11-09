@@ -43,6 +43,7 @@ const EmojiPopoverContainer = styled.div`
   @media (min-width: 1248px) {
     width: 31.2rem;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+
     :nth-child(n + 7) {
       display: block;
     }
