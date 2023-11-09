@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+const OPTIONS = {
+  컬러: [
+    'var(--orange-200, #FFE2AD)',
+    'var(--purple-200, #ECD9FF)',
+    'var(--blue-200, #B1E4FF)',
+    'var(--green-200, #D0F5C3)',
+  ],
+  이미지: [''],
+};
+
 function Option() {
   return (
     <div>
@@ -20,12 +30,17 @@ function Option() {
 export default Option;
 
 const ButtonContainer = styled.div`
+  width: 236px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   margin-bottom: 28px;
+  background: var(--gray-100, #f6f6f6);
+  border-radius: 6px;
 
   @media (min-width: 768px) {
     margin-bottom: 40px;
+    width: 244px;
   }
 `;
 
@@ -70,8 +85,8 @@ const Button = styled.button`
   font-weight: 700;
   line-height: 26px;
   letter-spacing: -0.16px;
-  color: var(--purple-700, #861dee);
+  // color: var(--purple-700, #861dee);
   border-radius: 6px;
-  border: 2px solid var(--purple-600, #9935ff);
-  background: var(--white, #fff);
+  // border: 2px solid var(--purple-600, #9935ff);
+  // background: var(--white, #fff);
 `;
