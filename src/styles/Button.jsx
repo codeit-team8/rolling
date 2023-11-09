@@ -5,7 +5,6 @@ import prevArrow from '@/assets/icons/arrow_left.svg';
 const START_INDEX = 1;
 const LAST_INDEX = 4;
 
-
 export function PrevArrow({ onClick, paperIndex }) {
   const showPrev = paperIndex >= START_INDEX;
   return (
