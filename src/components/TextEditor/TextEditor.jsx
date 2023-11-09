@@ -2,9 +2,14 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 
-const modules = {
+// prettier-ignore
+const MODULES = {
   toolbar: {
-    container: [['bold', 'italic', 'underline'], [{ align: [] }], [{ list: 'bullet' }, { list: 'ordered' }]],
+    container: [
+      ['bold', 'italic', 'underline'],
+      [{ align: [] }],
+      [{ list: 'bullet' }, { list: 'ordered' }],
+    ],
   },
 };
 
@@ -12,7 +17,7 @@ function TextEditor({ contentHTML, setContentHTML }) {
   return (
     <TextEditorContainer>
       <ReactQuill
-        modules={modules}
+        modules={MODULES}
         value={contentHTML || ''}
         style={{ height: '100%' }}
         onChange={(e) => setContentHTML(e)}
