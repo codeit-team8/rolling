@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import { useEffect, useState } from 'react';
 import PaperCard from '@/components/PaperCard/PaperCard.jsx';
 import { paperCardSettings } from '@/util/carousel.jsx';
-import { NextArrow, PrevArrow } from '@/styles/Button.jsx';
+import { NextArrow, PrevArrow } from '@/styles/button/ArrowButton.jsx';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
