@@ -9,28 +9,14 @@ import 'slick-carousel/slick/slick-theme.css';
 
 function RollingPaperList({ paperCardList }) {
   const [isGreaterPCWidth, setIsGreaterPCWidth] = useState(false);
-  const [showPrev, setShowPrev] = useState(false);
-  const [showNext, setShowNext] = useState(true);
-  const [cardCount, setCardCount] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleClickPrev = () => {
-    setCardCount(cardCount - 1);
-    if (cardCount === 0) {
-      setShowPrev(false);
-    }
-    if (!showNext) {
-      setShowNext(true);
-    }
-  };
+  const settings = {
+    ...paperCardSettings,
 
-  const handleClickNext = () => {
-    setCardCount(cardCount + 1);
-    if (cardCount === paperCardList.length) {
-      setShowNext(false);
-    }
-    if (!showPrev) {
-      setShowPrev(true);
-    }
+    afterChange(index) {
+      setCurrentIndex(index);
+    },
   };
 
   const handleSize = () => {
@@ -48,14 +34,15 @@ function RollingPaperList({ paperCardList }) {
     return () => window.removeEventListener('resize', handleSize);
   }, []);
 
+  // TODO : DIV, 페이퍼 카드는 임시로 만든 것으로 나중에 삭제해야합니다.
   return (
     <Div>
       <PaperListContainer>
         {isGreaterPCWidth ? (
           <PaperListSlider
-            {...paperCardSettings}
-            prevArrow={<PrevArrow onClick={handleClickPrev} showPrev={showPrev} />}
-            nextArrow={<NextArrow onClick={handleClickNext} showNext={showNext} />}
+            {...settings}
+            prevArrow={<PrevArrow paperIndex={currentIndex} />}
+            nextArrow={<NextArrow paperIndex={currentIndex} />}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
               <PaperCard number={num} key={num} />
