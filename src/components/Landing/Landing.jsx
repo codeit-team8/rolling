@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-import * as F from '@/styles/fontType';
 import * as S from '@/components/Landing/LandingStyle';
 import landingImg1 from '@/assets/images/img_01.png';
 import landingImg2 from '@/assets/images/img_02.png';
