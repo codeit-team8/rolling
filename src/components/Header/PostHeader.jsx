@@ -3,8 +3,10 @@ import HeaderLine from '@/styles/HeaderLine.jsx';
 import EmojiList from '@/components/Emoji/EmojiList.jsx';
 import Share from '@/components/Share/Share.jsx';
 import EmojiAdd from '@/components/Emoji/EmojiAdd.jsx';
+import ProfileImageGroup from '@/styles/profileImage/ProfileImageGroup.jsx';
 
-function PostHeader() {
+function PostHeader({ profileImages }) {
+  const profilePosting = [...profileImages].slice(0, 4);
   return (
     <PostHeaderContainer>
       <PostUserContainer>
@@ -12,6 +14,16 @@ function PostHeader() {
       </PostUserContainer>
       <PostHeaderLine />
       <HeaderServiceContainer>
+        <PostUserCounterContainer>
+          <ProfileImageGroup profileImages={profilePosting} />
+          <PostUserCounter>
+            <h1>
+              <span>600</span>
+              명이 작성했어요!
+            </h1>
+          </PostUserCounter>
+        </PostUserCounterContainer>
+        <ButtonDivLine />
         <HeaderService>
           <EmojiList />
           <ButtonContainer>
@@ -33,9 +45,17 @@ const PostHeaderContainer = styled.header`
 
   @media (min-width: 768px) {
     display: flex;
+    justify-content: space-between;
     height: 6.8rem;
     padding: 0 2.4rem;
     gap: 6.8rem;
+  }
+
+  @media (min-width: 1248px) {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0;
+    gap: 26.3rem;
   }
 `;
 
@@ -52,6 +72,31 @@ const PostUserContainer = styled.div`
 const PostHeaderLine = styled(HeaderLine)`
   @media (min-width: 768px) {
     display: none;
+  }
+`;
+
+const PostUserCounterContainer = styled.div`
+  display: none;
+
+  @media (min-width: 1248px) {
+    display: flex;
+    gap: 1.1rem;
+  }
+`;
+
+const PostUserCounter = styled.div`
+  display: flex;
+  h1 {
+    color: var(--gray-900, #181818);
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.7rem;
+
+    span {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
   }
 `;
 
@@ -74,14 +119,21 @@ const HeaderServiceContainer = styled.div`
   display: flex;
   padding: 0.8rem 0;
   align-items: center;
+
+  @media (min-width: 1248px) {
+    gap: 2.8rem;
+  }
 `;
 
 const HeaderService = styled.div`
   display: flex;
-  width: 100%;
   padding: 0 2rem;
   gap: 0.2rem;
   align-items: flex-start;
+
+  @media (min-width: 1248px) {
+    padding: 0;
+  }
 `;
 
 const ButtonContainer = styled.div`

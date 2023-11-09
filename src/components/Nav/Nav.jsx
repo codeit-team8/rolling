@@ -40,8 +40,9 @@ const NavWrapper = styled.nav`
     display: flex;
   }
 
-  @media (min-width: 1200px) {
-    max-width: 124rem;
+  @media (min-width: 1248px) {
+    max-width: 120rem;
+    padding: 1.2rem 0;
   }
 `;
 
