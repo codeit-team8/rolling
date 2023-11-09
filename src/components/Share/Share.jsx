@@ -21,9 +21,20 @@ const ShareContainer = styled.div`
   border-radius: 6px;
   border: 1px solid var(--gray-300, #ccc);
   background: var(--white, #fff);
+
+  @media (min-width: 768px) {
+    padding: 0.6rem 1.6rem;
+    width: 5.6rem;
+    height: 3.6rem;
+  }
 `;
 
 const ShareIcon = styled.img`
   width: 2rem;
   height: 2rem;
+
+  @media (min-width: 768px) {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
 `;
