@@ -1,19 +1,25 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 import logo from '@/assets/icons/logo.svg';
 
 function Nav() {
+  const match = useMatch('/post/*');
+  const isPostPage = match.pathnameBase === '/post';
+  console.log(isPostPage);
+
   return (
-    <NavWrapper>
+    <NavWrapper $isPostPage={isPostPage}>
       <Link to="/">
         <NavTitle>
           <Logo src={logo} alt="로고 이미지" />
           <Title>Rolling</Title>
         </NavTitle>
       </Link>
-      <Link to="/post">
-        <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
-      </Link>
+      <ButtonContainer $isPostPage={isPostPage}>
+        <Link to="/post">
+          <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
+        </Link>
+      </ButtonContainer>
     </NavWrapper>
   );
 }
@@ -21,7 +27,7 @@ function Nav() {
 export default Nav;
 
 const NavWrapper = styled.nav`
-  display: flex;
+  display: ${({ $isPostPage }) => ($isPostPage ? 'none' : 'flex')};
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
@@ -29,6 +35,10 @@ const NavWrapper = styled.nav`
   width: 100%;
   height: 6.4rem;
   padding: 1.2rem 2rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
 
   @media (min-width: 1200px) {
     max-width: 124rem;
@@ -54,6 +64,10 @@ const Title = styled.h1`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+`;
+
+const ButtonContainer = styled.div`
+  display: ${({ $isPostPage }) => ($isPostPage ? 'none' : 'flex')};
 `;
 
 const PaperCreateButton = styled.button`
