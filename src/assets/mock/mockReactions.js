@@ -6,12 +6,12 @@ const mockReactions = {
     {
       id: 1,
       emoji: '🥰',
-      count: 8,
+      count: 24,
     },
     {
       id: 2,
       emoji: '😄',
-      count: 7,
+      count: 16,
     },
     {
       id: 3,
