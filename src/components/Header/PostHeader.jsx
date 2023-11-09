@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import HeaderLine from '@/styles/HeaderLine.jsx';
+import EmojiList from '@/components/Emoji/EmojiList.jsx';
+import Share from '@/components/Share/Share.jsx';
+import EmojiAdd from '@/components/Emoji/EmojiAdd.jsx';
 
 function PostHeader() {
 
@@ -11,7 +14,12 @@ function PostHeader() {
       <HeaderLine />
       <HeaderServiceContainer>
         <HeaderService>
-
+          <EmojiList />
+          <ButtonContainer>
+            <EmojiAdd />
+            <ButtonDivLine />
+            <Share />
+          </ButtonContainer>
         </HeaderService>
       </HeaderServiceContainer>
     </PostHeaderContainer>
@@ -28,7 +36,7 @@ const PostHeaderContainer = styled.header`
 const PostUserContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 1.2rem 2rem;
 `;
 
 const PostUser = styled.h1`
@@ -48,6 +56,21 @@ const HeaderServiceContainer = styled.div`
 
 const HeaderService = styled.div`
   display: flex;
+  width: 100%;
   padding: 0 2rem;
+  gap: 0.2rem;
+  align-items: flex-start;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
+  gap: 1.5rem;
+`;
+
+const ButtonDivLine = styled.div`
+  width: 1px;
+  height: 2.8rem;
+  background: var(--gray-200, #eee);
 `;
