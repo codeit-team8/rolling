@@ -1,5 +1,12 @@
+import { useState } from 'react';
+import TextEditor from '@/components/TextEditor/TextEditor';
+
 function FromPage() {
-  return <div>FromPage입니다</div>;
+  const [contentHTML, setContentHTML] = useState('');
+
+  const handleContent = (value) => setContentHTML(value);
+
+  return <TextEditor content={contentHTML} onChange={handleContent} />;
 }
 
 export default FromPage;

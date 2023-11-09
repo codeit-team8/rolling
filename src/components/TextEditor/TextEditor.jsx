@@ -1,22 +1,30 @@
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import styled from 'styled-components';
 
-function TextEditor() {
+const modules = {
+  toolbar: {
+    container: [['bold', 'italic', 'underline'], [{ align: [] }], [{ list: 'bullet' }, { list: 'ordered' }]],
+  },
+};
+
+function TextEditor({ content, onChange }) {
   return (
-    <Editor
-      toolbarHidden
-      wrapperClassName="wrapper-class"
-      editorClassName="editor-class"
-      toolbarClassName="toolbar-class"
-      toolbar={{
-        inline: { inDropdown: true },
-        list: { inDropdown: true },
-        textAlign: { inDropdown: true },
-        link: { inDropdown: true },
-        history: { inDropdown: true },
-      }}
-    />
+    <TextEditorContainer>
+      <ReactQuill
+        modules={modules}
+        value={content || ''}
+        style={{ height: '100%' }}
+        onChange={(content, delta, source, editor) => onChange(editor.getHTML())}
+      />
+    </TextEditorContainer>
   );
 }
 
 export default TextEditor;
+
+const TextEditorContainer = styled.div`
+  width: 72rem;
+  height: 26rem;
+  padding: 0.1rem 0.1rem 1.6rem 0.1rem;
+`;
