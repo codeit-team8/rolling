@@ -3,10 +3,10 @@ import purplePatternImg from '@/assets/images/card_pattern_purple.png';
 
 // TODO : 작성자들에 아바타 컴포넌트 추가, 작성 인원 수 추가, 이모지 컴포넌트 추가, 컬러에 따라 카드배경색, 패턴 다르게 받기
 
-function ListCard() {
+function PaperCard({ number }) {
   return (
     <CardContainer>
-      <Recipient>To. 민혁</Recipient>
+      <Recipient>{`To. 민혁 ${number}`}</Recipient>
       <Writers>작성자들</Writers>
       <WriterCounter>
         <span>30</span>
@@ -24,7 +24,7 @@ function ListCard() {
   );
 }
 
-export default ListCard;
+export default PaperCard;
 
 const CardContainer = styled.div`
   position: relative;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const REGEX = /^[\sa-zA-Z0-9가-힣]{2,20}$/;
 
-export default function TextInput() {
+function TextInput() {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -41,6 +41,8 @@ export default function TextInput() {
     </>
   );
 }
+
+export default TextInput;
 
 const InputBox = styled.input`
   font-size: 1.6rem;
