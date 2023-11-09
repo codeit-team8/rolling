@@ -68,5 +68,8 @@ const Box = styled.button`
 
   @media (min-width: 768px) {
     padding: 0.6rem 1.6rem;
+    width: 8.8rem;
+    height: 3.6rem;
+    gap: 0.4rem;
   }
 `;
