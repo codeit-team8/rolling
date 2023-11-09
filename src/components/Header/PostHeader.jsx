@@ -30,12 +30,23 @@ export default PostHeader;
 const PostHeaderContainer = styled.header`
   width: 100%;
   height: 10.4rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+    height: 6.8rem;
+    padding: 0 2.4rem;
+    gap: 6.8rem;
+  }
 `;
 
 const PostUserContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1.2rem 2rem;
+
+  @media (min-width: 768px) {
+    padding: 0;
+  }
 `;
 
 const PostHeaderLine = styled(HeaderLine)`
@@ -51,6 +62,12 @@ const PostUser = styled.h1`
   font-weight: 700;
   line-height: 2.8rem;
   letter-spacing: -0.018rem;
+
+  @media (min-width: 768px) {
+    font-size: 2.8rem;
+    line-height: 4.2rem;
+    letter-spacing: -0.028rem;
+  }
 `;
 
 const HeaderServiceContainer = styled.div`

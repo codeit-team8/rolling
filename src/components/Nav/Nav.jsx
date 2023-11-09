@@ -3,9 +3,8 @@ import { Link, useMatch } from 'react-router-dom';
 import logo from '@/assets/icons/logo.svg';
 
 function Nav() {
-  const match = useMatch('/post/*');
+  const match = useMatch('/post/*') ?? '/';
   const isPostPage = match.pathnameBase === '/post';
-  console.log(isPostPage);
 
   return (
     <NavWrapper $isPostPage={isPostPage}>
@@ -35,6 +34,7 @@ const NavWrapper = styled.nav`
   width: 100%;
   height: 6.4rem;
   padding: 1.2rem 2rem;
+  border-bottom: 1px solid #ededed;
 
   @media (min-width: 768px) {
     display: flex;
