@@ -23,7 +23,7 @@ function PostHeader({ profileImages }) {
             </h1>
           </PostUserCounter>
         </PostUserCounterContainer>
-        <ButtonDivLine />
+        <ProfileDivLine />
         <HeaderService>
           <EmojiList />
           <ButtonContainer>
@@ -147,4 +147,12 @@ const ButtonDivLine = styled.div`
   width: 1px;
   height: 2.8rem;
   background: var(--gray-200, #eee);
+`;
+
+const ProfileDivLine = styled(ButtonDivLine)`
+  display: none;
+
+  @media (min-width: 1248px) {
+    display: block;
+  }
 `;
