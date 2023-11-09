@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import Emoji from './Emoji';
 
-// TODO : 팝오버 컨테이너에 이모지 컴포넌트 들어가야 함.
-
 function EmojiPopover({ popoverReactions }) {
   return (
     <EmojiPopoverContainer>
