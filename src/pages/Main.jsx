@@ -1,11 +1,5 @@
-import EmojiList from '@/components/Emoji/EmojiList';
-
 function Main() {
-  return (
-    <div>
-      <EmojiList />
-    </div>
-  );
+  return <div>Main 페이지입니다.</div>;
 }
 
 export default Main;
