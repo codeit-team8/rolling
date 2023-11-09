@@ -1,21 +1,33 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+
+const CATEGORIES = ['컬러', '이미지'];
 
 const OPTIONS = {
-  컬러: [
+  backgroundColor: [
     'var(--orange-200, #FFE2AD)',
     'var(--purple-200, #ECD9FF)',
     'var(--blue-200, #B1E4FF)',
     'var(--green-200, #D0F5C3)',
   ],
-  이미지: [''],
+  backgroundImageURL: [],
 };
 
 function Option() {
+  const [isCategorySelect, setIsCategorySelect] = useState(0);
+
+  const handleClick = (index) => {
+    setIsCategorySelect(index);
+  };
+
   return (
     <div>
       <ButtonContainer>
-        <Button>컬러</Button>
-        <Button>이미지</Button>
+        {CATEGORIES.map((category, index) => (
+          <Button key={index} onClick={() => handleClick(index)} $isActive={isCategorySelect === index}>
+            {category}
+          </Button>
+        ))}
       </ButtonContainer>
       <CardContainer>
         <ColorChip></ColorChip>
@@ -28,7 +40,6 @@ function Option() {
 }
 
 export default Option;
-
 const ButtonContainer = styled.div`
   width: 236px;
   height: 40px;
@@ -58,7 +69,6 @@ const CardContainer = styled.div`
     flex-direction: row;
   }
 `;
-
 const ColorChip = styled.div`
   display: flex;
   align-items: center;
@@ -76,17 +86,16 @@ const ColorChip = styled.div`
     height: 16.8rem;
   }
 `;
-
 const Button = styled.button`
   width: 122px;
   padding: 7px 14px;
   font-size: 16px;
   text-align: center;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 26px;
   letter-spacing: -0.16px;
-  // color: var(--purple-700, #861dee);
   border-radius: 6px;
-  // border: 2px solid var(--purple-600, #9935ff);
-  // background: var(--white, #fff);
+  color: ${({ $isActive }) => ($isActive ? 'var(--purple-700, #861dee)' : 'none')};
+  background: ${({ $isActive }) => ($isActive ? 'var(--white, #fff)' : 'none')};
+  outline: ${({ $isActive }) => ($isActive ? '2px solid var(--purple-600, #9935ff)' : 'none')};
 `;
