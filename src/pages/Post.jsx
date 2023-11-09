@@ -1,11 +1,5 @@
-import Popover from '@/components/Share/Popover';
-
 function Post() {
-  return (
-    <div>
-      <Popover />
-    </div>
-  );
+  return <div>Post페이지 입니다.</div>;
 }
 
 export default Post;
