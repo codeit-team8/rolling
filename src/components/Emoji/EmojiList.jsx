@@ -45,7 +45,6 @@ const Box = styled.div`
 `;
 
 const EmojiListContainer = styled.div`
-  margin-left: 20rem;
   ${FlexCenter}
   gap: 0.2rem;
 `;
