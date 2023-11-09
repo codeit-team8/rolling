@@ -17,7 +17,7 @@ import {
 } from '@/components/MessageCard/MessageCard.style.jsx';
 import deleteIcon from '@/assets/icons/deleted.svg';
 
-function MessageCard() {
+function MessageCard({ contentHTML }) {
   return (
     <MessageCardWrapper>
       <MessageCardTop>
@@ -38,7 +38,9 @@ function MessageCard() {
         </MessageCardProfile>
       </MessageCardTop>
       <MessageCardDivLine />
-      <MessageBody>코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또 하세요!</MessageBody>
+      <MessageBody>
+        <div dangerouslySetInnerHTML={{ __html: contentHTML }}></div>
+      </MessageBody>
       <MessageDate>2023.07.08</MessageDate>
     </MessageCardWrapper>
   );
