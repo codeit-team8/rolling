@@ -5,13 +5,12 @@ import Share from '@/components/Share/Share.jsx';
 import EmojiAdd from '@/components/Emoji/EmojiAdd.jsx';
 
 function PostHeader() {
-
   return (
     <PostHeaderContainer>
       <PostUserContainer>
         <PostUser>To. Ashley Kim</PostUser>
       </PostUserContainer>
-      <HeaderLine />
+      <PostHeaderLine />
       <HeaderServiceContainer>
         <HeaderService>
           <EmojiList />
@@ -37,6 +36,12 @@ const PostUserContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1.2rem 2rem;
+`;
+
+const PostHeaderLine = styled(HeaderLine)`
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const PostUser = styled.h1`
