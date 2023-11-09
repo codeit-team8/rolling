@@ -12,7 +12,7 @@ export default function EmojiAdd() {
   return (
     <EmojiAddContainer>
       <Box onClick={handleClick} type="button">
-        <EmojiImg src={addImg} />
+        <EmojiImg src={addImg} alt="이모지 추가" />
         <Text>추가</Text>
       </Box>
       {isOpen && (
@@ -49,6 +49,7 @@ const Text = styled.div`
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 2.4rem;
+
   @media (min-width: 768px) {
     display: block;
   }

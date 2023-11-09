@@ -21,6 +21,7 @@ const EmojiContainer = styled.div`
   border-radius: 32px;
   background: rgba(0, 0, 0, 0.54);
   cursor: pointer;
+
   @media (min-width: 768px) {
     padding: 0.6rem 1.2rem;
   }

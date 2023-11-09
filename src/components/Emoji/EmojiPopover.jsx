@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Emoji from './Emoji';
+import Emoji from '@/components/Emoji/Emoji';
 
 function EmojiPopover({ popoverReactions }) {
   return (
@@ -29,6 +29,7 @@ const EmojiPopoverContainer = styled.div`
   border: 0.1rem solid #b6b6b6;
   background: var(--white);
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+
   :nth-child(n + 7) {
     display: none;
   }

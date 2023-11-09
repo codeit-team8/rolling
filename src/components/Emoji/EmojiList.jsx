@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import EmojiPopover from '@/components/Emoji/EmojiPopover';
-import Emoji from './Emoji';
+import Emoji from '@/components/Emoji/Emoji';
 import mockReactions from '@/assets/mock/mockReactions';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
-import EmojiAdd from './EmojiAdd';
+import EmojiAdd from '@/components/Emoji/EmojiAdd';
 
 // TODO: emoji api로 받아오기
 export default function EmojiList() {
@@ -25,7 +25,7 @@ export default function EmojiList() {
           ))}
         </DefaultEmojis>
         <ArrowButton onClick={handleArrowClick} type="button">
-          <img src={arrowDownImg} alt="" />
+          <img src={arrowDownImg} alt="드롭다운" />
         </ArrowButton>
         {isOpen && <EmojiPopover popoverReactions={popoverReactions} />}
       </Box>
