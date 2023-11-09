@@ -79,6 +79,7 @@ export const Text = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 0.4rem;
+
   @media (min-width: 768px) {
     gap: 0.8rem;
   }
@@ -95,6 +96,7 @@ export const Img = styled.img`
 
 export const Br = styled.br`
   display: none;
+
   @media (min-width: 1248px) {
     display: block;
   }
