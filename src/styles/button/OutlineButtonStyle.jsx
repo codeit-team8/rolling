@@ -29,7 +29,7 @@ const OutlineButtonStyle = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ $size }) => SIZE[$size]}
+  ${({ $size = '28' }) => SIZE[$size]}
 
   &:disabled {
     background: var(--gray-300, #ccc);
