@@ -6,7 +6,7 @@ function FromPage() {
 
   const handleContent = (value) => setContentHTML(value);
 
-  return <TextEditor content={contentHTML} onChange={handleContent} />;
+  return <TextEditor contentHTML={contentHTML} onChange={handleContent} />;
 }
 
 export default FromPage;

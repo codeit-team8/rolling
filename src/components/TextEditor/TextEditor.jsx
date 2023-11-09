@@ -8,12 +8,12 @@ const modules = {
   },
 };
 
-function TextEditor({ content, onChange }) {
+function TextEditor({ contentHTML, onChange }) {
   return (
     <TextEditorContainer>
       <ReactQuill
         modules={modules}
-        value={content || ''}
+        value={contentHTML || ''}
         style={{ height: '100%' }}
         onChange={(content, delta, source, editor) => onChange(editor.getHTML())}
       />

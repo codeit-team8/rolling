@@ -20,7 +20,7 @@ function Nav() {
 
 export default Nav;
 
-const NavWrapper = styled.div`
+const NavWrapper = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
