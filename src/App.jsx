@@ -12,7 +12,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/list" element={<RollingPaperList />} />
+        <Route path="/list" element={<RollingPaperList paperCardList={[1, 2, 3, 4, 5]} />} />
         <Route path="/post" element={<Post />} />
       </Routes>
     </div>

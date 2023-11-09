@@ -3,7 +3,7 @@ import nextArrow from '@/assets/icons/arrow_right.svg';
 import prevArrow from '@/assets/icons/arrow_left.svg';
 
 const START_INDEX = 1;
-const LAST_INDEX = 4;
+const CARD_SHOW_LENGTH = 4;
 
 export function PrevArrow({ onClick, paperIndex }) {
   const showPrev = paperIndex >= START_INDEX;
@@ -14,8 +14,9 @@ export function PrevArrow({ onClick, paperIndex }) {
   );
 }
 
-export function NextArrow({ onClick, paperIndex }) {
-  const showNext = paperIndex < LAST_INDEX;
+export function NextArrow({ onClick, paperIndex, length }) {
+  const lastIndex = length - CARD_SHOW_LENGTH;
+  const showNext = paperIndex < lastIndex;
   return (
     <NextButton onClick={onClick} $showNext={showNext}>
       <ArrowImg src={nextArrow} alt="다음 화살표 버튼" />

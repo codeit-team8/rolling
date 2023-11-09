@@ -34,7 +34,6 @@ function RollingPaperList({ paperCardList }) {
     return () => window.removeEventListener('resize', handleSize);
   }, []);
 
-  // TODO : DIV, 페이퍼 카드는 임시로 만든 것으로 나중에 삭제해야합니다.
   return (
     <Div>
       <PaperListContainer>
@@ -42,15 +41,15 @@ function RollingPaperList({ paperCardList }) {
           <PaperListSlider
             {...settings}
             prevArrow={<PrevArrow paperIndex={currentIndex} />}
-            nextArrow={<NextArrow paperIndex={currentIndex} />}
+            nextArrow={<NextArrow paperIndex={currentIndex} length={paperCardList.length} />}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+            {paperCardList.map((num) => (
               <PaperCard number={num} key={num} />
             ))}
           </PaperListSlider>
         ) : (
           <PaperListSlide>
-            {[1, 2, 3, 4, 5].map((num) => (
+            {paperCardList.map((num) => (
               <PaperCard number={num} key={num} />
             ))}
           </PaperListSlide>
