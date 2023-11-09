@@ -1,11 +1,5 @@
-import EmojiList from '../components/Emoji/EmojiList';
-
 function Post() {
-  return (
-    <div>
-      <EmojiList />
-    </div>
-  );
+  return <div>Post페이지 입니다.</div>;
 }
 
 export default Post;

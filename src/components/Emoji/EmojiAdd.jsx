@@ -1,7 +1,7 @@
-import addImg from '@/assets/icons/add-20.svg';
+import { useState } from 'react';
 import styled from 'styled-components';
 import EmojiPicker from 'emoji-picker-react';
-import { useState } from 'react';
+import addImg from '@/assets/icons/add-20.svg';
 
 export default function EmojiAdd() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,9 +9,6 @@ export default function EmojiAdd() {
     setIsOpen((prev) => !prev);
   };
 
-  const handleEmojiClick = ({ emoji }) => {
-    console.log(emoji);
-  };
   return (
     <EmojiAddContainer>
       <Box onClick={handleClick} type="button">
@@ -20,7 +17,7 @@ export default function EmojiAdd() {
       </Box>
       {isOpen && (
         <EmojiPickerBox>
-          <EmojiPicker width="30.6914rem" height="39.2746rem" onEmojiClick={handleEmojiClick} />
+          <EmojiPicker width="30.6914rem" height="39.2746rem" />
         </EmojiPickerBox>
       )}
     </EmojiAddContainer>
