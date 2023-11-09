@@ -1,5 +1,11 @@
+import PostHeader from '@/components/Header/PostHeader.jsx';
+
 function Post() {
-  return <div>Post페이지 입니다.</div>;
+  return (
+    <>
+      <PostHeader />
+    </>
+  );
 }
 
 export default Post;
