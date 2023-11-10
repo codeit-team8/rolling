@@ -17,7 +17,7 @@ export default function EmojiAdd() {
       </Box>
       {isOpen && (
         <EmojiPickerBox>
-          <EmojiPicker width="30.6914rem" height="39.2746rem" />
+          <EmojiPicker width="30.6914rem" height="39.2746rem" lazyLoadEmojis="true" />
         </EmojiPickerBox>
       )}
     </EmojiAddContainer>
