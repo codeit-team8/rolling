@@ -85,8 +85,8 @@ const OptionContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
 `;
+
 const ButtonContainer = styled.div`
-  // justify-content: center;
   align-items: flex-start;
   width: 236px;
   height: 40px;
@@ -116,6 +116,7 @@ const CardContainer = styled.div`
     flex-direction: row;
   }
 `;
+
 const ColorChip = styled.div`
   display: flex;
   align-items: center;
