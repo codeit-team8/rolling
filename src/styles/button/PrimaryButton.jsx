@@ -14,7 +14,7 @@ const SIZE = {
   `,
 };
 
-const PrimaryButtonStyle = styled.button`
+const PrimaryButton = styled.button`
   ${({ $size = 'big' }) => SIZE[$size]}
   color: var(--white, #FFF);
   text-align: center;
@@ -41,4 +41,4 @@ const PrimaryButtonStyle = styled.button`
   }
 `;
 
-export default PrimaryButtonStyle;
+export default PrimaryButton;
