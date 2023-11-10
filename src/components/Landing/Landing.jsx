@@ -1,4 +1,4 @@
-import * as S from '@/components/Landing/Landing.Style';
+import * as S from '@/components/Landing/Landing.style';
 import landingImg1 from '@/assets/images/img_01.png';
 import landingImg2 from '@/assets/images/img_02.png';
 
