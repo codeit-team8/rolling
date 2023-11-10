@@ -44,6 +44,7 @@ function Dropdown({ selectOption }) {
     </DropdownContainer>
   );
 }
+
 const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;

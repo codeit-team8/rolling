@@ -28,7 +28,6 @@ function EmojiList() {
         </ArrowButton>
         {isOpen && <EmojiPopover popoverReactions={popoverReactions} />}
       </Box>
-
     </EmojiListContainer>
   );
 }
