@@ -137,7 +137,10 @@ const ImageChip = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
-  background: ${(props) => `url(${props.$imageUrls})`};
+  background: ${({ $isSelected, $imageUrls }) =>
+    $isSelected
+      ? `linear-gradient(rgba(169, 169, 169, 0.5), rgba(169, 169, 169, 0.5)), url(${$imageUrls})`
+      : `url(${$imageUrls})`};
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
