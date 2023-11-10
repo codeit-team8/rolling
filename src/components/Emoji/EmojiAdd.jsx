@@ -17,7 +17,7 @@ export default function EmojiAdd() {
       </Box>
       {isOpen && (
         <EmojiPickerBox>
-          <EmojiPicker width="30.6914rem" height="39.2746rem" />
+          <EmojiPicker width="30.6914rem" height="39.2746rem" lazyLoadEmojis="true" />
         </EmojiPickerBox>
       )}
     </EmojiAddContainer>
@@ -40,7 +40,11 @@ const EmojiPickerBox = styled.div`
   flex-shrink: 0;
   top: 100%;
   margin-top: 0.5rem;
-  right: 0;
+  right: -6rem;
+
+  @media (min-width: 768px) {
+    right: 0;
+  }
 `;
 
 const Text = styled.div`
