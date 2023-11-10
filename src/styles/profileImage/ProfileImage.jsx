@@ -3,9 +3,9 @@ import avatar from '@/assets/icons/avatar.svg';
 
 // TODO: 프로필 이미지 컴포넌트 사용할 때 상속해서 크기에 맞게 스타일 컴포넌트 수정만 해주시면 됩니다.
 
-function ProfileImage({ profileImage, size, order }) {
+function ProfileImage({ profileImage, size, order, position }) {
   return (
-    <ProfileImageContainer $size={size} $order={order}>
+    <ProfileImageContainer $size={size} $order={order} $position={position}>
       <Image src={profileImage || avatar} alt="아바타" />
     </ProfileImageContainer>
   );
@@ -18,7 +18,7 @@ export const ProfileImageContainer = styled.div`
   width: ${({ $size }) => $size || '5.6rem'};
   height: ${({ $size }) => $size || '5.6rem'};
   z-index: ${({ $order }) => $order};
-  position: absolute;
+  position: ${({ $position }) => $position || 'absolute'};
   left: ${({ $order }) => `${$order * 1.7}rem`};
   align-items: center;
   flex-shrink: 0;

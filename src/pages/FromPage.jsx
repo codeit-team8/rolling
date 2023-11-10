@@ -7,7 +7,7 @@ function FromPage() {
 
   return (
     <div>
-      <TextEditor contentHTML={contentHTML} setContentHTML={setContentHTML} />
+      {/* <TextEditor contentHTML={contentHTML} setContentHTML={setContentHTML} /> */}
       <ProfileSelect />
     </div>
   );
