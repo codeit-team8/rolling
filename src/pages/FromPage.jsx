@@ -2,6 +2,8 @@ import { useState } from 'react';
 import TextEditor from '@/components/TextEditor/TextEditor';
 import ProfileSelect from '@/components/Profile/ProfileSelect';
 
+// TODO : 프로필 셀렉 props에 클릭이벤트 (프로필 선택 시 사진 바꾸기) 주기
+
 const imageMockData = {
   imageUrls: [
     'https://fastly.picsum.photos/id/268/100/100.jpg?hmac=eqOIwP24u5Z5zeRyWxuRm-47F6O4HGh_2t7ydnCLB1g',
