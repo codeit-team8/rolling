@@ -1,27 +1,38 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 import logo from '@/assets/icons/logo.svg';
+import OutlineButton from '@/styles/button/OutlineButton.jsx';
+import { FONT14B } from '@/styles/fontType.js';
+import { NavDivLine } from '@/styles/DivLine.jsx';
 
 function Nav() {
+  const match = useMatch('/post/*') ?? '/';
+  const isPostPage = match.pathnameBase === '/post';
+
   return (
-    <NavWrapper>
-      <Link to="/">
-        <NavTitle>
-          <Logo src={logo} alt="로고 이미지" />
-          <Title>Rolling</Title>
-        </NavTitle>
-      </Link>
-      <Link to="/post">
-        <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
-      </Link>
-    </NavWrapper>
+    <>
+      <NavContainer $isPostPage={isPostPage}>
+        <Link to="/">
+          <NavTitle>
+            <Logo src={logo} alt="로고 이미지" />
+            <Title>Rolling</Title>
+          </NavTitle>
+        </Link>
+        <ButtonContainer $isPostPage={isPostPage}>
+          <Link to="/post">
+            <PaperCreateButton $size="H40">롤링 페이퍼 만들기</PaperCreateButton>
+          </Link>
+        </ButtonContainer>
+      </NavContainer>
+      <NavDivLine $isPostPage={isPostPage} />
+    </>
   );
 }
 
 export default Nav;
 
-const NavWrapper = styled.div`
-  display: flex;
+const NavContainer = styled.nav`
+  display: ${({ $isPostPage }) => ($isPostPage ? 'none' : 'flex')};
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
@@ -30,8 +41,13 @@ const NavWrapper = styled.div`
   height: 6.4rem;
   padding: 1.2rem 2rem;
 
-  @media (min-width: 1200px) {
-    max-width: 124rem;
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  @media (min-width: 1248px) {
+    max-width: 120rem;
+    padding: 1.2rem 0;
   }
 `;
 
@@ -56,25 +72,13 @@ const Title = styled.h1`
   line-height: normal;
 `;
 
-const PaperCreateButton = styled.button`
-  display: flex;
-  height: 4rem;
-  padding: 0.8rem 1.6rem;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--gray-300, #ccc);
-  background: var(--white, #fff);
-  color: var(--gray-900, #181818);
-  text-align: center;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 2.6rem;
-  letter-spacing: -0.016rem;
+const ButtonContainer = styled.div`
+  display: ${({ $isPostPage }) => ($isPostPage ? 'none' : 'flex')};
+`;
 
-  @media (min-width: 768px) {
+const PaperCreateButton = styled(OutlineButton)`
+  color: var(--gray-900, #181818);
+  ${FONT14B} @media(min-width: 768 px) {
     font-size: 1.6rem;
   }
 `;
