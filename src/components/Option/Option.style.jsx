@@ -95,12 +95,3 @@ export const CategoryButton = styled.button`
   background: ${({ $isActive }) => ($isActive ? 'var(--white, #fff)' : 'none')};
   outline: ${({ $isActive }) => ($isActive ? '2px solid var(--purple-600, #9935ff)' : 'none')};
 `;
-
-export const SelectIcon = styled.img`
-  width: 44px;
-  height: 44px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;

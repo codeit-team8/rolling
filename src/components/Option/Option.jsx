@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import mockBackgroundImg from '@/assets/mock/mockBackgroundImg';
 import selectIcon from '@/assets/icons/select.svg';
-import { useState } from 'react';
+import SelectIcon from '@/styles/button/SelectIcon';
 import {
   OptionContainer,
   ButtonContainer,
@@ -8,7 +9,6 @@ import {
   ColorChip,
   ImageChip,
   CategoryButton,
-  SelectIcon,
 } from '@/components/Option/Option.style';
 
 const CATEGORIES = ['컬러', '이미지'];
