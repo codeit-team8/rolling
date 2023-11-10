@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Landing from '@/components/Landing/Landing';
-import PrimaryButtonStyle from '@/styles/button/PrimaryButtonStyle';
+import PrimaryButtonStyle from '@/styles/button/PrimaryButton.Style';
 
 function Main() {
   return (
