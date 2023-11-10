@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Landing from '@/components/Landing/Landing';
-import PrimaryButtonStyle from '@/styles/button/PrimaryButton.style';
+import PrimaryButton from '@/styles/button/PrimaryButton';
 
 function Main() {
   return (
@@ -33,7 +33,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const Button = styled(PrimaryButtonStyle)`
+const Button = styled(PrimaryButton)`
   width: 100%;
   margin: 4.9rem 0 2.4rem;
 
