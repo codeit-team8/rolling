@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PopoverPortal from '@/components/Share/PopoverPortal.jsx';
 import Toast from '@/components/Toast/Toast';
-import shareKakao from '@/components/Share/shareKakao.jsx';
+import shareKakao from '@/components/Share/ShareKakao.jsx';
 
 const { Kakao } = window;
 // TODO:searchParams를 인자로 받아와서 공유

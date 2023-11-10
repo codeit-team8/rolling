@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import shareIcon from '@/assets/icons/share.svg';
 import Popover from '@/components/Share/Popover.jsx';
+import OutlineButton from '@/styles/button/OutlineButton.jsx';
 
 function Share() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ function Share() {
 
   return (
     <ShareContainer>
-      <ShareButton onClick={handleOpenClick}>
+      <ShareButton onClick={handleOpenClick} $size="H36">
         <ShareIcon src={shareIcon} alt="공유 버튼" />
       </ShareButton>
       {isOpen && (
@@ -30,16 +31,10 @@ const ShareContainer = styled.div`
   position: relative;
 `;
 
-const ShareButton = styled.button`
-  display: flex;
+const ShareButton = styled(OutlineButton)`
   width: 3.6rem;
   height: 3.2rem;
   padding: 0.6rem 0.8rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  border: 1px solid var(--gray-300, #ccc);
-  background: var(--white, #fff);
 
   @media (min-width: 768px) {
     padding: 0.6rem 1.6rem;
