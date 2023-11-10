@@ -11,7 +11,6 @@ function Main() {
         <Button>구경해보기</Button>
       </LinkStyle>
     </MainContainer>
-  );
 }
 
 const MainContainer = styled.div`

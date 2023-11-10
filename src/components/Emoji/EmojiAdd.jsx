@@ -56,14 +56,20 @@ const Text = styled.div`
 `;
 
 const Box = styled.button`
-  padding: 0.6rem 0.8rem;
-  border: 1px solid var(--gray-300, #ccc);
-  border-radius: 8px;
   display: flex;
+  padding: 0.6rem 0.8rem;
   justify-content: center;
   align-items: center;
+  width: 3.6rem;
+  height: 3.2rem;
+  border: 1px solid var(--gray-300, #ccc);
+  border-radius: 8px;
   gap: 1rem;
+
   @media (min-width: 768px) {
     padding: 0.6rem 1.6rem;
+    width: 8.8rem;
+    height: 3.6rem;
+    gap: 0.4rem;
   }
 `;

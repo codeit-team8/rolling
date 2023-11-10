@@ -1,10 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import GlobalStyle from '@/styles/GlobalStyle.js';
-import Nav from '@/components/Nav/Nav.jsx';
 import Post from '@/pages/Post.jsx';
 import Main from '@/pages/Main.jsx';
-import RollingPaperList from '@/pages/RollingPaperList.jsx';
-import FromPage from '@/pages/FromPage';
+import Nav from '@/components/Nav/Nav.jsx';
 
 function App() {
   return (
@@ -13,9 +11,10 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/list" element={<RollingPaperList />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/from" element={<FromPage />} />
+        <Route path="/list" element={<Main />} />
+        <Route path="/post" element={<Post />}>
+          <Route path=":postId" element={<Post />} />
+        </Route>
       </Routes>
     </div>
   );
