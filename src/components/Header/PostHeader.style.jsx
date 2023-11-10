@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import HeaderLine from '@/styles/HeaderLine.jsx';
+import { HeaderDivLine } from '@/styles/DivLine.jsx';
 import { ButtonDivLine } from '@/styles/button/ButtonDivLine.jsx';
 
 export const PostHeaderContainer = styled.header`
@@ -32,7 +32,7 @@ export const PostUserContainer = styled.div`
   }
 `;
 
-export const PostHeaderLine = styled(HeaderLine)`
+export const PostHeaderLine = styled(HeaderDivLine)`
   @media (min-width: 768px) {
     display: none;
   }
