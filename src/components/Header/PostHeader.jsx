@@ -17,7 +17,8 @@ import {
 import { ButtonDivLine } from '@/styles/button/ButtonDivLine.jsx';
 
 function PostHeader({ profileImages }) {
-  const profilePosting = [...profileImages].slice(0, 4);
+  const profilePosting = [...profileImages].slice(0, 3);
+
   return (
     <PostHeaderContainer>
       <PostUserContainer>
