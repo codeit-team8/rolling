@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link, useMatch } from 'react-router-dom';
 import logo from '@/assets/icons/logo.svg';
+import OutlineButton from '@/styles/button/OutlineButton.jsx';
+import { FONT14B } from '@/styles/fontType.js';
 
 function Nav() {
   const match = useMatch('/post/*') ?? '/';
@@ -16,7 +18,7 @@ function Nav() {
       </Link>
       <ButtonContainer $isPostPage={isPostPage}>
         <Link to="/post">
-          <PaperCreateButton>롤링 페이퍼 만들기</PaperCreateButton>
+          <PaperCreateButton $size="H40">롤링 페이퍼 만들기</PaperCreateButton>
         </Link>
       </ButtonContainer>
     </NavWrapper>
@@ -71,23 +73,9 @@ const ButtonContainer = styled.div`
   display: ${({ $isPostPage }) => ($isPostPage ? 'none' : 'flex')};
 `;
 
-const PaperCreateButton = styled.button`
-  display: flex;
-  height: 4rem;
-  padding: 0.8rem 1.6rem;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--gray-300, #ccc);
-  background: var(--white, #fff);
+const PaperCreateButton = styled(OutlineButton)`
   color: var(--gray-900, #181818);
-  text-align: center;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 2.6rem;
-  letter-spacing: -0.016rem;
+  ${FONT14B}
 
   @media (min-width: 768px) {
     font-size: 1.6rem;
