@@ -6,7 +6,7 @@ import avatar from '@/assets/icons/avatar.svg';
 function ProfileImage({ profileImage, size, order }) {
   return (
     <ProfileImageContainer $size={size} $order={order}>
-      <img src={profileImage || avatar} alt="아바타" />
+      <Image src={profileImage || avatar} alt="아바타" />
     </ProfileImageContainer>
   );
 }
@@ -24,11 +24,11 @@ export const ProfileImageContainer = styled.div`
   flex-shrink: 0;
   border-radius: 100px;
   border: 0.1rem solid var(--gray-200, #eee);
+`;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 100px;
-  }
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100px;
 `;
