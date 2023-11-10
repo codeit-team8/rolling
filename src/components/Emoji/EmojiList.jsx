@@ -4,10 +4,9 @@ import EmojiPopover from '@/components/Emoji/EmojiPopover';
 import Emoji from '@/components/Emoji/Emoji';
 import mockReactions from '@/assets/mock/mockReactions';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
-import EmojiAdd from '@/components/Emoji/EmojiAdd';
 
 // TODO: emoji api로 받아오기
-export default function EmojiList() {
+function EmojiList() {
   const [isOpen, setIsOpen] = useState(false);
   const { results } = mockReactions;
   const defaultReactions = [...results].slice(0, 3);
@@ -29,10 +28,11 @@ export default function EmojiList() {
         </ArrowButton>
         {isOpen && <EmojiPopover popoverReactions={popoverReactions} />}
       </Box>
-      <EmojiAdd />
     </EmojiListContainer>
   );
 }
+
+export default EmojiList;
 
 const FlexCenter = css`
   display: flex;
