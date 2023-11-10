@@ -39,7 +39,7 @@ function MessageCard({ contentHTML }) {
       </MessageCardTop>
       <MessageCardDivLine />
       <MessageBody>
-        <div dangerouslySetInnerHTML={{ __html: contentHTML }}></div>
+        <div dangerouslySetInnerHTML={{ __html: contentHTML }} />
       </MessageBody>
       <MessageDate>2023.07.08</MessageDate>
     </MessageCardWrapper>
