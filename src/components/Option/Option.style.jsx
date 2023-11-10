@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const OptionContainer = styled.div`
-  margin: 0 20px;
+  margin: 0 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,30 +10,30 @@ export const OptionContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   align-items: flex-start;
-  width: 236px;
-  height: 40px;
+  width: 23.6rem;
+  height: 4rem;
   display: flex;
   flex-direction: row;
-  margin-bottom: 28px;
+  margin-bottom: 2.8rem;
   background: var(--gray-100, #f6f6f6);
   border-radius: 6px;
 
-  @media (min-width: 768px) {
-    margin-bottom: 40px;
-    width: 244px;
+  @media (min-width: 76.8rem) {
+    margin-bottom: 4rem;
+    width: 24.4rem;
   }
 `;
 
 export const CardContainer = styled.div`
   display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(2, 154px);
-  grid-template-rows: repeat(2, 154px);
+  gap: 1.2rem;
+  grid-template-columns: repeat(2, 15.4rem);
+  grid-template-rows: repeat(2, 15.4rem);
   justify-items: center;
   align-items: center;
   margin: auto;
 
-  @media (min-width: 768px) {
+  @media (min-width: 76.8rem) {
     display: flex;
     flex-direction: row;
   }
@@ -47,12 +47,12 @@ export const ColorChip = styled.div`
   height: 15.4rem;
   flex-shrink: 0;
   border-radius: 16px;
-  border: 0.1rem solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
   cursor: pointer;
   position: relative;
 
-  @media (min-width: 768px) {
+  @media (min-width: 76.8rem) {
     width: 16.8rem;
     height: 16.8rem;
   }
@@ -66,8 +66,8 @@ export const ImageChip = styled.div`
   height: 15.4rem;
   flex-shrink: 0;
   border-radius: 16px;
-  border: 0.1rem solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
   background: ${({ $isSelected, $imageUrls }) =>
     $isSelected
       ? `linear-gradient(rgba(169, 169, 169, 0.5), rgba(169, 169, 169, 0.5)), url(${$imageUrls})`
@@ -77,19 +77,19 @@ export const ImageChip = styled.div`
   cursor: pointer;
   position: relative;
 
-  @media (min-width: 768px) {
+  @media (min-width: 76.8rem) {
     width: 16.8rem;
     height: 16.8rem;
   }
 `;
 export const CategoryButton = styled.button`
-  width: 122px;
-  padding: 7px 14px;
-  font-size: 16px;
+  width: 12.2rem;
+  padding: 0.7rem 1.4rem;
+  font-size: 1.6rem;
   text-align: center;
   font-weight: 400;
-  line-height: 26px;
-  letter-spacing: -0.16px;
+  line-height: 2.6rem;
+  letter-spacing: -0.16rem;
   border-radius: 6px;
   color: ${({ $isActive }) => ($isActive ? 'var(--purple-700, #861dee)' : 'none')};
   background: ${({ $isActive }) => ($isActive ? 'var(--white, #fff)' : 'none')};
