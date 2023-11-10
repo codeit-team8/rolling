@@ -36,7 +36,6 @@ const NavWrapper = styled.nav`
   width: 100%;
   height: 6.4rem;
   padding: 1.2rem 2rem;
-  border-bottom: 1px solid #ededed;
 
   @media (min-width: 768px) {
     display: flex;
