@@ -8,10 +8,10 @@ export const HeaderDivLine = styled.div`
 `;
 
 export const NavDivLine = styled.div`
-  display: none;
+  display: ${({ $isPostPage }) => ($isPostPage ? 'none' : 'block')};
   width: 100%;
   border-bottom: 1px solid #ededed;
-  
+
   @media (min-width: 768px) {
     display: block;
   }

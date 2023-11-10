@@ -3,31 +3,35 @@ import { Link, useMatch } from 'react-router-dom';
 import logo from '@/assets/icons/logo.svg';
 import OutlineButton from '@/styles/button/OutlineButton.jsx';
 import { FONT14B } from '@/styles/fontType.js';
+import { NavDivLine } from '@/styles/DivLine.jsx';
 
 function Nav() {
   const match = useMatch('/post/*') ?? '/';
   const isPostPage = match.pathnameBase === '/post';
 
   return (
-    <NavWrapper $isPostPage={isPostPage}>
-      <Link to="/">
-        <NavTitle>
-          <Logo src={logo} alt="로고 이미지" />
-          <Title>Rolling</Title>
-        </NavTitle>
-      </Link>
-      <ButtonContainer $isPostPage={isPostPage}>
-        <Link to="/post">
-          <PaperCreateButton $size="H40">롤링 페이퍼 만들기</PaperCreateButton>
+    <>
+      <NavContainer $isPostPage={isPostPage}>
+        <Link to="/">
+          <NavTitle>
+            <Logo src={logo} alt="로고 이미지" />
+            <Title>Rolling</Title>
+          </NavTitle>
         </Link>
-      </ButtonContainer>
-    </NavWrapper>
+        <ButtonContainer $isPostPage={isPostPage}>
+          <Link to="/post">
+            <PaperCreateButton $size="H40">롤링 페이퍼 만들기</PaperCreateButton>
+          </Link>
+        </ButtonContainer>
+      </NavContainer>
+      <NavDivLine $isPostPage={isPostPage} />
+    </>
   );
 }
 
 export default Nav;
 
-const NavWrapper = styled.nav`
+const NavContainer = styled.nav`
   display: ${({ $isPostPage }) => ($isPostPage ? 'none' : 'flex')};
   align-items: center;
   justify-content: space-between;
@@ -74,9 +78,7 @@ const ButtonContainer = styled.div`
 
 const PaperCreateButton = styled(OutlineButton)`
   color: var(--gray-900, #181818);
-  ${FONT14B}
-
-  @media (min-width: 768px) {
+  ${FONT14B} @media(min-width: 768 px) {
     font-size: 1.6rem;
   }
 `;
