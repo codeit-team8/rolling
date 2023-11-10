@@ -22,8 +22,7 @@ const OPTIONS = {
 function Option({ selectOption }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
   const [isActive, setIsActive] = useState(OPTIONS[selectOption][0]);
-  const [isActiveChip, setIsActiveChip] = useState;
-  // const [isSelect, setIsSelect] = useState(OP);
+  const [selectedChipIndex, setSelectedChipIndex] = useState(0);
 
   const selectChip = {
     color: <ColorChip />,
@@ -32,14 +31,16 @@ function Option({ selectOption }) {
 
   const handleClick = (index) => {
     setIsCategorySelect(index);
+    setSelectedChipIndex(0);
   };
 
-  const handleChip = () => {
+  const handleChip = (index) => {
     setIsActive((prev) => !prev);
+    setSelectedChipIndex(index);
   };
 
   return (
-    <div>
+    <OptionContainer>
       <ButtonContainer>
         {CATEGORIES.map((category, index) => (
           <Button key={index} onClick={() => handleClick(index)} $isActive={isCategorySelect === index}>
@@ -50,22 +51,43 @@ function Option({ selectOption }) {
       <CardContainer>
         {isCategorySelect === 0 &&
           OPTIONS.backgroundColor.map((color, index) => (
-            <ColorChip key={index} onClick={handleChip} style={{ backgroundColor: color }}>
-              {isActive && <SelectIcon src={selectIcon} alt="선택아이콘" />}
+            <ColorChip
+              key={index}
+              onClick={() => handleChip(index)}
+              style={{ backgroundColor: color }}
+              $isSelected={selectedChipIndex === index}
+            >
+              {selectedChipIndex === index && <SelectIcon src={selectIcon} alt="선택아이콘" />}
             </ColorChip>
           ))}
         {isCategorySelect === 1 &&
           OPTIONS.backgroundImageURL.map((imageURL, index) => (
-            <ImageChip key={index} onClick={handleChip} backgroundImageURL={imageURL}></ImageChip>
+            <ImageChip
+              key={index}
+              onClick={() => handleChip(index)}
+              backgroundImageURL={imageURL}
+              $isSelected={selectedChipIndex === index}
+            >
+              {selectedChipIndex === index && <SelectIcon src={selectIcon} alt="선택아이콘" />}
+            </ImageChip>
           ))}
       </CardContainer>
-    </div>
+    </OptionContainer>
   );
 }
 
 export default Option;
 
+const OptionContainer = styled.div`
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+`;
 const ButtonContainer = styled.div`
+  // justify-content: center;
+  align-items: flex-start;
   width: 236px;
   height: 40px;
   display: flex;
@@ -123,8 +145,9 @@ const ImageChip = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
-  // background-image: url(${(props) => props.backgroundImageURL};
+  background-image: ${(props) => `url(${props.backgroundImageURL})`};
   background-size: cover;
+  background-repeat: no-repeat;
   cursor: pointer;
   position: relative;
 
