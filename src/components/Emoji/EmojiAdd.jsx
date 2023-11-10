@@ -40,7 +40,11 @@ const EmojiPickerBox = styled.div`
   flex-shrink: 0;
   top: 100%;
   margin-top: 0.5rem;
-  right: 0;
+  right: -6rem;
+
+  @media (min-width: 768px) {
+    right: 0;
+  }
 `;
 
 const Text = styled.div`
