@@ -43,7 +43,7 @@ function Option({ selectOption }) {
     <OptionContainer>
       <ButtonContainer>
         {CATEGORIES.map((category, index) => (
-          <Button key={index} onClick={() => handleClick(index)} $isActive={isCategorySelect === index}>
+          <Button key={category} onClick={() => handleClick(index)} $isActive={isCategorySelect === index}>
             {category}
           </Button>
         ))}
@@ -52,7 +52,7 @@ function Option({ selectOption }) {
         {isCategorySelect === 0 &&
           OPTIONS.backgroundColor.map((color, index) => (
             <ColorChip
-              key={index}
+              key={color}
               onClick={() => handleChip(index)}
               style={{ backgroundColor: color }}
               $isSelected={selectedChipIndex === index}
@@ -63,9 +63,9 @@ function Option({ selectOption }) {
         {isCategorySelect === 1 &&
           OPTIONS.backgroundImageURL.map((imageURL, index) => (
             <ImageChip
-              key={index}
+              key={imageURL}
               onClick={() => handleChip(index)}
-              backgroundImageURL={imageURL}
+              $backgroundImageURL={imageURL}
               $isSelected={selectedChipIndex === index}
             >
               {selectedChipIndex === index && <SelectIcon src={selectIcon} alt="선택아이콘" />}
@@ -146,7 +146,7 @@ const ImageChip = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
-  background-image: ${(props) => `url(${props.backgroundImageURL})`};
+  background: ${(props) => `url(${props.$backgroundImageURL})`};
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
