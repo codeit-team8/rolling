@@ -1,16 +1,5 @@
-import styled from 'styled-components';
-import PrimaryButtonStyle from '@/styles/button/PrimaryButtonStyle';
-
 function Main() {
-  return (
-    <div>
-      <Button>신느</Button>
-    </div>
-  );
+  return <div>Main 페이지입니다.</div>;
 }
-
-const Button = styled(PrimaryButtonStyle)`
-  width: 10rem;
-`;
 
 export default Main;
