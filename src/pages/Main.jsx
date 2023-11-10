@@ -1,10 +1,15 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Landing from '@/components/Landing/Landing';
+import PrimaryButtonStyle from '@/styles/button/PrimaryButtonStyle';
 
 function Main() {
   return (
     <MainContainer>
       <Landing />
+      <LinkStyle to="/list">
+        <Button>구경해보기</Button>
+      </LinkStyle>
     </MainContainer>
   );
 }
@@ -25,6 +30,26 @@ const MainContainer = styled.div`
 
   @media (min-width: 1248px) {
     padding: 6rem 2.4rem;
+  }
+`;
+
+const Button = styled(PrimaryButtonStyle)`
+  width: 100%;
+  margin: 4.9rem 0 2.4rem;
+
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 1248px) {
+    width: 28rem;
+    margin: auto;
+    margin-top: 4.8rem;
+  }
+`;
+
+const LinkStyle = styled(Link)`
+  @media (min-width: 1248px) {
+    margin: auto;
   }
 `;
 
