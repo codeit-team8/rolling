@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import selectIcon from '@/assets/icons/select.svg';
 import { useState } from 'react';
 
 const CATEGORIES = ['컬러', '이미지'];
@@ -18,9 +19,11 @@ const OPTIONS = {
   ],
 };
 
-function Option() {
+function Option({ selectOption }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
-  const [isActive, setIsActive] = useState(OPTIONS.backgroundColor[0]);
+  const [isActive, setIsActive] = useState(OPTIONS[selectOption][0]);
+  const [isActiveChip, setIsActiveChip] = useState;
+  // const [isSelect, setIsSelect] = useState(OP);
 
   const selectChip = {
     color: <ColorChip />,
@@ -31,8 +34,8 @@ function Option() {
     setIsCategorySelect(index);
   };
 
-  const handleColorChip = (index) => {
-    setIsActive(OPTIONS.backgroundColor[index]);
+  const handleChip = () => {
+    setIsActive((prev) => !prev);
   };
 
   return (
@@ -46,9 +49,15 @@ function Option() {
       </ButtonContainer>
       <CardContainer>
         {isCategorySelect === 0 &&
-          OPTIONS.backgroundColor.map((color, index) => <ColorChip key={index} style={{ backgroundColor: color }} />)}
+          OPTIONS.backgroundColor.map((color, index) => (
+            <ColorChip key={index} onClick={handleChip} style={{ backgroundColor: color }}>
+              {isActive && <SelectIcon src={selectIcon} alt="선택아이콘" />}
+            </ColorChip>
+          ))}
         {isCategorySelect === 1 &&
-          OPTIONS.backgroundImageURL.map((imageURL, index) => <ImageChip key={index} backgroundImageURL={imageURL} />)}
+          OPTIONS.backgroundImageURL.map((imageURL, index) => (
+            <ImageChip key={index} onClick={handleChip} backgroundImageURL={imageURL}></ImageChip>
+          ))}
       </CardContainer>
     </div>
   );
@@ -95,6 +104,8 @@ const ColorChip = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  position: relative;
 
   @media (min-width: 768px) {
     width: 16.8rem;
@@ -114,6 +125,8 @@ const ImageChip = styled.div`
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
   // background-image: url(${(props) => props.backgroundImageURL};
   background-size: cover;
+  cursor: pointer;
+  position: relative;
 
   @media (min-width: 768px) {
     width: 16.8rem;
@@ -132,4 +145,13 @@ const Button = styled.button`
   color: ${({ $isActive }) => ($isActive ? 'var(--purple-700, #861dee)' : 'none')};
   background: ${({ $isActive }) => ($isActive ? 'var(--white, #fff)' : 'none')};
   outline: ${({ $isActive }) => ($isActive ? '2px solid var(--purple-600, #9935ff)' : 'none')};
+`;
+
+const SelectIcon = styled.img`
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
