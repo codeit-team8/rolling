@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import * as F from '@/styles/fontType';
 import ProfileImage from '@/styles/profileImage/ProfileImage';
 
-function ProfileSelect() {
+// 미디어쿼리 적용하기
+function ProfileSelect({ imageData }) {
   return (
     <ProfileSelectContainer>
       <H1>프로필 이미지</H1>
@@ -10,7 +11,11 @@ function ProfileSelect() {
         <ProfileImage size="8rem" position="static" />
         <SelectDiv>
           <P>프로필 이미지를 선택해 주세요.</P>
-          <ClickDiv>데이터를 받고 map하기</ClickDiv>
+          <ClickDiv>
+            {imageData.imageUrls.map((url) => (
+              <ProfileImage profileImage={url} size="4rem" position="static" />
+            ))}
+          </ClickDiv>
         </SelectDiv>
       </Section>
     </ProfileSelectContainer>
@@ -55,6 +60,9 @@ const P = styled.p`
 `;
 
 const ClickDiv = styled.div`
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   width: 20.8rem;
   height: 8.4rem;
   border: 1px solid green;
