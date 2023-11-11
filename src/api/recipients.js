@@ -64,3 +64,22 @@ export async function deleteRecipientsId({ id }) {
     throw new Error('롤링 페이퍼 대상 조회를 실패했습니다.');
   }
 }
+
+/**
+ * 대상에게 리액션 달기 API
+ * @param {number} id - 페이퍼 ID
+ * @param {string} emoji - 이모지
+ * @param {string} type - 이모지 개수 +/- 여부(”increase” | “decrease”)
+ * @returns {Promise<any>}
+ */
+export async function reactionToRecipient({ id, emoji, type }) {
+  try {
+    const response = await axios.post(`${DOMAIN_TEAM}/recipients/${id}/reactions/`, {
+      emoji,
+      type,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('롤링 페이퍼 대상으로 리액션 주기를 실패했습니다.');
+  }
+}
