@@ -29,7 +29,7 @@ function TextEditor({ contentHTML, setContentHTML }) {
 export default TextEditor;
 
 const TextEditorContainer = styled.div`
-  width: 72rem;
+  width: -webkit-fill-available;
   height: 26rem;
   padding: 0.1rem 0.1rem 1.6rem 0.1rem;
 `;
