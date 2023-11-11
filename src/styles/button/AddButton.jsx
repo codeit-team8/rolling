@@ -1,11 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import plusIcon from '@/assets/icons/plus.svg';
 
-// TODO :
-
-function AddButton({ onClick, disabled }) {
+function AddButton({ disabled }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/post/{id}/message`);
+  };
   return (
-    <AddButtonContainer onClick={onClick} disabled={disabled}>
+    <AddButtonContainer onClick={handleClick} disabled={disabled}>
       <img src={plusIcon} alt="추가 버튼" />
     </AddButtonContainer>
   );
