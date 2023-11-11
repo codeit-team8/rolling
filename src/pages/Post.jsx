@@ -1,15 +1,28 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
+import { getMessages } from '@/api/message';
 
 function Post() {
+  const [messageContents, setMessageContents] = useState([]);
+
+  const getmessageContents = async () => {
+    const { results } = await getMessages();
+    setMessageContents(results);
+  };
+
+  useEffect(() => {
+    getmessageContents();
+  }, []);
+
   return (
     <>
       <PostHeader profileImages={['', '', '', '', '']} />
       <PostContainer>
         <PlusMessageCard />
-        <MessageCard />
+        <MessageCard messageContents={messageContents} />
         <MessageCard />
         <MessageCard />
         <MessageCard />

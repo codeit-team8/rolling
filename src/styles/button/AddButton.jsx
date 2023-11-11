@@ -7,6 +7,7 @@ function AddButton({ disabled }) {
   const handleClick = () => {
     navigate(`/post/{id}/message`);
   };
+
   return (
     <AddButtonContainer onClick={handleClick} disabled={disabled}>
       <img src={plusIcon} alt="추가 버튼" />
