@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
 export const MessageCardWrapper = styled.div`
-  width: 38.4rem;
+  width: 32rem;
   position: relative;
-  height: 28rem;
-  padding: 2.8rem 2.4rem;
+  height: 23rem;
+  padding: 1.6rem;
   border-radius: 16px;
   background: var(--white);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+
+  @media (min-width: 768px) {
+    width: 38.4rem;
+    height: 28rem;
+    padding: 2.8rem 2.4rem;
+  }
 `;
 
 export const MessageCardTop = styled.div`
@@ -91,15 +97,17 @@ export const Author = styled.h3`
 `;
 
 export const MessageCardDivLine = styled.div`
-  width: 33.6rem;
+  width: 27.2rem;
   height: 1px;
   background: var(--gray-200);
+
+  @media (min-width: 768px) {
+    width: 33.6rem;
 `;
 
 export const MessageBody = styled.div`
   width: 100%;
   height: 10.6rem;
-  margin: 1.6rem 0;
   color: var(--gray-600, #4a4a4a);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -109,6 +117,10 @@ export const MessageBody = styled.div`
   font-size: 1.8rem;
   line-height: 2.8rem;
   letter-spacing: -0.018px;
+
+  @media (min-width: 768px) {
+    margin: 1.6rem 0;
+  }
 `;
 
 export const MessageDate = styled.span`
