@@ -25,3 +25,20 @@ export async function sendMessage({ recipientId, sender, relationship, content, 
     throw new Error('메세지 생성을 실패했습니다.');
   }
 }
+
+/**
+ * 대상에게 보내는 메세지 목록 조회 API
+ * @param recipientId - 페이퍼 ID
+ * @param {number} limit - 리턴받기 원하는 메세지 대상 객체 수. 기본값은 8
+ * @param {number} offset - 가장 앞 객체부터 건너 뛰고 싶은 객체 수.
+ * @returns {Promise<any>}
+ */
+export async function getMessages({ recipientId, limit = '', offset = '' }) {
+  try {
+    const query = `limit=${limit}&offset=${offset}`;
+    const response = await axios.get(`${DOMAIN_TEAM}/recipients/${recipientId}/messages/?${query}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('메세지 생성을 실패했습니다.');
+  }
+}
