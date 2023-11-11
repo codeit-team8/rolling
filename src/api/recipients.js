@@ -83,3 +83,20 @@ export async function reactionToRecipient({ id, emoji, type }) {
     throw new Error('롤링 페이퍼 대상으로 리액션 주기를 실패했습니다.');
   }
 }
+
+/**
+ * 대상에게 단 리액션 조회 API
+ * @param {number} id - 페이퍼 ID
+ * @param {number} limit - 리턴받기 원하는 리액션 객체 수. 기본값은 8
+ * @param {number} offset - 가장 앞 객체부터 건너 뛰고 싶은 객체 수.
+ * @returns {Promise<any>}
+ */
+export async function getReactionOfRecipient({ id, limit = 8, offset = '' }) {
+  try {
+    const query = `limit=${limit}&offset=${offset}`;
+    const response = await axios.get(`${DOMAIN_TEAM}/recipients/${id}/reactions/?${query}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('롤링 페이퍼 대상의 리액션 조회를 실패했습니다.');
+  }
+}
