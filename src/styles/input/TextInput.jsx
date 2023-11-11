@@ -76,7 +76,7 @@ const InputBox = styled.input`
 
 const Error = styled.div`
   color: var(--Error);
-  ${F.FONT12}
+  ${F.FONT12};
   width: 32rem;
   height: 1.8rem;
   margin-top: 0.4rem;
