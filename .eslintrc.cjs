@@ -47,5 +47,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
+    "max-len" : ["error", {"code": 120, "ignoreRegExpLiterals": true}],
   },
 };
