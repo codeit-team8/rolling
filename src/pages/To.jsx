@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import * as F from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
 import Option from '@/components/Option/Option';
-import { postData } from '@/service/api';
+import { postRecipients } from '@/api/recipients';
+import { getBackgroundImages } from '@/api/backgroundImages';
 
 const INIT_VALUE = {
-  team: '1-8',
   name: '',
   backgroundColor: 'beige',
   backgroundImageURL: null,
@@ -16,11 +16,12 @@ const INIT_VALUE = {
 function To() {
   const [isValidForm, setIsValidForm] = useState(false);
   const [postValue, setPostValue] = useState(INIT_VALUE);
+  const [backgroundImages, setBackgroundImages] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidForm) {
-      postData({ path: '/1-8/recipients/', data: postValue });
+      postRecipients(postValue);
     }
   };
 
@@ -34,6 +35,15 @@ function To() {
     setPostValue((prev) => ({ ...prev, name: value }));
   };
 
+  const getBackImages = useCallback(async () => {
+    const { imageUrls } = await getBackgroundImages();
+    setBackgroundImages(imageUrls);
+  }, []);
+
+  useEffect(() => {
+    getBackImages();
+  }, [getBackImages]);
+
   return (
     <ToContainer>
       <Form onSubmit={handleSubmit} onKeyDown={preventSubmitKeyDownEnter}>
@@ -45,7 +55,7 @@ function To() {
           <Title>배경화면을 선택해 주세요.</Title>
           <P>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</P>
         </TextBox2>
-        <Option setPostValue={setPostValue} />
+        <Option setPostValue={setPostValue} backgroundImages={backgroundImages} />
         <PrimaryButton type="submit" disabled={!isValidForm}>
           생성하기
         </PrimaryButton>

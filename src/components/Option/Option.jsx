@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import MOCK_BACKGROUND_IMG from '@/assets/mock/mockBackgroundImg';
 import selectIcon from '@/assets/icons/select.svg';
 import SelectIcon from '@/styles/button/SelectIcon';
 import {
@@ -13,17 +12,14 @@ import {
 
 const CATEGORIES = ['컬러', '이미지'];
 
-const OPTIONS = {
-  backgroundColor: [
-    { name: 'beige', color: 'var(--orange-200, #FFE2AD)' },
-    { name: 'purple', color: 'var(--purple-200, #ECD9FF)' },
-    { name: 'blue', color: 'var(--blue-200, #B1E4FF)' },
-    { name: 'green', color: 'var(--green-200, #D0F5C3)' },
-  ],
-  imageUrls: MOCK_BACKGROUND_IMG.imageUrls,
-};
+const BACKGROUND_COLORS = [
+  { name: 'beige', color: 'var(--orange-200, #FFE2AD)' },
+  { name: 'purple', color: 'var(--purple-200, #ECD9FF)' },
+  { name: 'blue', color: 'var(--blue-200, #B1E4FF)' },
+  { name: 'green', color: 'var(--green-200, #D0F5C3)' },
+];
 
-function Option({ setPostValue }) {
+function Option({ setPostValue, backgroundImages }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
   const [selectedChipIndex, setSelectedChipIndex] = useState(0);
 
@@ -57,7 +53,7 @@ function Option({ setPostValue }) {
       </ButtonContainer>
       <CardContainer>
         {isCategorySelect === 0 &&
-          OPTIONS.backgroundColor.map(({ name, color }, index) => (
+          BACKGROUND_COLORS.map(({ name, color }, index) => (
             <ColorChip
               key={name}
               id={name}
@@ -70,7 +66,7 @@ function Option({ setPostValue }) {
             </ColorChip>
           ))}
         {isCategorySelect === 1 &&
-          OPTIONS.imageUrls.map((imageURL, index) => (
+          backgroundImages.map((imageURL, index) => (
             <ImageChip
               key={imageURL}
               id={imageURL}
