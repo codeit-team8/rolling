@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import * as F from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
+import Option from '@/components/Option/Option';
 import { postData } from '@/service/api';
 
 const INIT_VALUE = {
@@ -12,15 +13,16 @@ const INIT_VALUE = {
   backgroundImageURL: null,
 };
 
-export default function To() {
+function To() {
   const [isValidForm, setIsValidForm] = useState(false);
   const [postValue, setPostValue] = useState(INIT_VALUE);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValidForm) {
-      postData({ path: '/1-8/recipients/', data: postValue });
-    }
+    // if (isValidForm) {
+    // postData({ path: '/1-8/recipients/', data: postValue });
+    // } else {
+    // }
   };
 
   const preventSubmitKeyDownEnter = (e) => {
@@ -44,14 +46,19 @@ export default function To() {
           <Title>배경화면을 선택해 주세요.</Title>
           <P>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</P>
         </TextBox2>
+        <Option setPostValue={setPostValue} />
         <PrimaryButton type="submit">생성하기</PrimaryButton>
       </Form>
     </ToContainer>
   );
 }
 
+export default To;
+
 const ToContainer = styled.div`
-  padding: 5rem 2rem 0 2rem;
+  padding: 5rem 2rem 2.4rem 2rem;
+  max-width: 76rem;
+  margin: auto;
 `;
 
 const FlexColumn = css`

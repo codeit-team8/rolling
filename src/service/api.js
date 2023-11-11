@@ -14,3 +14,15 @@ export const postData = async ({ path, data }) => {
     return error;
   }
 };
+
+export const getData = async (path) => {
+  try {
+    const response = await axios({
+      method: 'get',
+      url: `${URL}${path}`,
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
