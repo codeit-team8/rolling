@@ -19,10 +19,9 @@ function To() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (isValidForm) {
-    // postData({ path: '/1-8/recipients/', data: postValue });
-    // } else {
-    // }
+    if (isValidForm) {
+      postData({ path: '/1-8/recipients/', data: postValue });
+    }
   };
 
   const preventSubmitKeyDownEnter = (e) => {
@@ -47,7 +46,9 @@ function To() {
           <P>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</P>
         </TextBox2>
         <Option setPostValue={setPostValue} />
-        <PrimaryButton type="submit">생성하기</PrimaryButton>
+        <PrimaryButton type="submit" disabled={!isValidForm}>
+          생성하기
+        </PrimaryButton>
       </Form>
     </ToContainer>
   );
