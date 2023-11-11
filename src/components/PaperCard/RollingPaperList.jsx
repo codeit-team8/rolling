@@ -35,37 +35,29 @@ function RollingPaperList({ paperCardList }) {
   }, []);
 
   return (
-    <Div>
-      <PaperListContainer>
-        {isGreaterPCWidth ? (
-          <PaperListSlider
-            {...settings}
-            prevArrow={<PrevArrow paperIndex={currentIndex} />}
-            nextArrow={<NextArrow paperIndex={currentIndex} length={paperCardList.length} />}
-          >
-            {paperCardList.map((num) => (
-              <PaperCard number={num} key={num} />
-            ))}
-          </PaperListSlider>
-        ) : (
-          <PaperListSlide>
-            {paperCardList.map((num) => (
-              <PaperCard number={num} key={num} />
-            ))}
-          </PaperListSlide>
-        )}
-      </PaperListContainer>
-    </Div>
+    <PaperListContainer>
+      {isGreaterPCWidth ? (
+        <PaperListSlider
+          {...settings}
+          prevArrow={<PrevArrow paperIndex={currentIndex} />}
+          nextArrow={<NextArrow paperIndex={currentIndex} length={paperCardList.length} />}
+        >
+          {paperCardList.map((num) => (
+            <PaperCard number={num} key={num} />
+          ))}
+        </PaperListSlider>
+      ) : (
+        <PaperListSlide>
+          {paperCardList.map((num) => (
+            <PaperCard number={num} key={num} />
+          ))}
+        </PaperListSlide>
+      )}
+    </PaperListContainer>
   );
 }
 
 export default RollingPaperList;
-
-const Div = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 const PaperListContainer = styled.div`
   width: 100%;
