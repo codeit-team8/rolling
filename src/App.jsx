@@ -3,7 +3,7 @@ import GlobalStyle from '@/styles/GlobalStyle.js';
 import Post from '@/pages/Post.jsx';
 import Main from '@/pages/Main.jsx';
 import Nav from '@/components/Nav/Nav.jsx';
-import From from '@/pages/FromPage';
+import From from '@/pages/From.jsx';
 
 function App() {
   return (
