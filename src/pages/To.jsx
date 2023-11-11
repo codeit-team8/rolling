@@ -3,20 +3,24 @@ import styled, { css } from 'styled-components';
 import * as F from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
+import { postData } from '@/service/api';
 
 const INIT_VALUE = {
   team: '1-8',
   name: '',
-  backgroundColor: 'begie',
-  backgroundImageURL: '',
+  backgroundColor: 'beige',
+  backgroundImageURL: null,
 };
 
 export default function To() {
-  const [isValidForm, setIsValidForm] = useState(null);
+  const [isValidForm, setIsValidForm] = useState(false);
   const [postValue, setPostValue] = useState(INIT_VALUE);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isValidForm) {
+      postData({ path: '/1-8/recipients/', data: postValue });
+    }
   };
 
   const preventSubmitKeyDownEnter = (e) => {
