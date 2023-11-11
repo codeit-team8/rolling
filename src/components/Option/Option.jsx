@@ -1,6 +1,5 @@
-/* eslint-disable operator-linebreak */
 import { useState } from 'react';
-import mockBackgroundImg from '@/assets/mock/mockBackgroundImg';
+import MOCK_BACKGROUND_IMG from '@/assets/mock/mockBackgroundImg';
 import selectIcon from '@/assets/icons/select.svg';
 import SelectIcon from '@/styles/button/SelectIcon';
 import {
@@ -21,13 +20,12 @@ const OPTIONS = {
     'var(--blue-200, #B1E4FF)',
     'var(--green-200, #D0F5C3)',
   ],
-  imageUrls: mockBackgroundImg.imageUrls,
+  imageUrls: MOCK_BACKGROUND_IMG.imageUrls,
 };
 
 function Option({ selectOption }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [isActive, setIsActive] = useState(OPTIONS[selectOption][0]);
+  const [, setIsActive] = useState(OPTIONS[selectOption][0]);
   const [selectedChipIndex, setSelectedChipIndex] = useState(0);
 
   const handleClick = (index) => {
@@ -44,7 +42,6 @@ function Option({ selectOption }) {
     <OptionContainer>
       <ButtonContainer>
         {CATEGORIES.map((category, index) => (
-          // eslint-disable-next-line max-len
           <CategoryButton key={category} onClick={() => handleClick(index)} $isActive={isCategorySelect === index}>
             {category}
           </CategoryButton>

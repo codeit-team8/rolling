@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Landing from '@/components/Landing/Landing';
 import PrimaryButton from '@/styles/button/PrimaryButton';
+import Option from '@/components/Option/Option';
 
 function Main() {
   return (
@@ -10,6 +11,7 @@ function Main() {
       <LinkStyle to="/list">
         <Button>구경해보기</Button>
       </LinkStyle>
+      <Option selectOption={'backgroundColor'} />
     </MainContainer>
   );
 }

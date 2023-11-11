@@ -18,7 +18,7 @@ export const ButtonContainer = styled.div`
   background: var(--gray-100, #f6f6f6);
   border-radius: 6px;
 
-  @media (min-width: 76.8rem) {
+  @media (min-width: 768px) {
     margin-bottom: 4rem;
     width: 24.4rem;
   }
@@ -33,7 +33,7 @@ export const CardContainer = styled.div`
   align-items: center;
   margin: auto;
 
-  @media (min-width: 76.8rem) {
+  @media (min-width: 768px) {
     display: flex;
     flex-direction: row;
   }
@@ -52,7 +52,7 @@ export const ColorChip = styled.div`
   cursor: pointer;
   position: relative;
 
-  @media (min-width: 76.8rem) {
+  @media (min-width: 768px) {
     width: 16.8rem;
     height: 16.8rem;
   }
@@ -77,11 +77,12 @@ export const ImageChip = styled.div`
   cursor: pointer;
   position: relative;
 
-  @media (min-width: 76.8rem) {
+  @media (min-width: 768px) {
     width: 16.8rem;
     height: 16.8rem;
   }
 `;
+
 export const CategoryButton = styled.button`
   width: 12.2rem;
   padding: 0.7rem 1.4rem;
