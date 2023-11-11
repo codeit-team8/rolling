@@ -19,6 +19,10 @@ const AddButtonContainer = styled.button`
   border-radius: 100px;
   background-color: var(--gray-500);
   padding: 1.6rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
