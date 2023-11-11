@@ -68,28 +68,28 @@ const FlexColumn = css`
 `;
 
 const Form = styled.form`
-  ${FlexColumn}
+  ${FlexColumn};
   gap: 4.8rem;
   margin: auto;
   max-width: 120rem;
 `;
 
 const TextBox = styled.div`
-  ${FlexColumn}
+  ${FlexColumn};
   gap: 1.2rem;
 `;
 
 const TextBox2 = styled.div`
-  ${FlexColumn}
+  ${FlexColumn};
   gap: 0.4rem;
 `;
 
 const Title = styled.div`
-  ${F.FONT24B}
+  ${F.FONT24B};
   color: var(--gray-900, #181818);
 `;
 
 const P = styled.p`
-  ${F.FONT16}
+  ${F.FONT16};
   color: var(--gray-500, #555);
 `;

@@ -48,7 +48,7 @@ function TextInput({ setIsValidForm, getPostValue }) {
 export default TextInput;
 
 const InputBox = styled.input`
-  ${F.FONT16}
+  ${F.FONT16};
   width: 100%;
   height: 5rem;
   border-radius: 8px;
