@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import selectIcon from '@/assets/icons/select.svg';
 import SelectIcon from '@/styles/button/SelectIcon';
+import { getBackgroundImages } from '@/api/backgroundImages';
 import {
   OptionContainer,
   ButtonContainer,
@@ -19,9 +20,15 @@ const BACKGROUND_COLORS = [
   { name: 'green', color: 'var(--green-200, #D0F5C3)' },
 ];
 
-function Option({ setPostValue, backgroundImages }) {
+function Option({ setPostValue }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
   const [selectedChipIndex, setSelectedChipIndex] = useState(0);
+  const [backgroundImages, setBackgroundImages] = useState([]);
+
+  const getBackImages = useCallback(async () => {
+    const { imageUrls } = await getBackgroundImages();
+    setBackgroundImages(imageUrls);
+  }, []);
 
   const handleClickCategory = (index) => {
     setIsCategorySelect(index);
@@ -36,6 +43,10 @@ function Option({ setPostValue, backgroundImages }) {
       setPostValue((prev) => ({ ...prev, backgroundColor: 'beige', backgroundImageURL: e.target.id }));
     }
   };
+
+  useEffect(() => {
+    getBackImages();
+  }, [getBackImages]);
 
   return (
     <OptionContainer>

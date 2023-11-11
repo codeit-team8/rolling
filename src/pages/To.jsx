@@ -1,11 +1,11 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import * as F from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
 import Option from '@/components/Option/Option';
 import { postRecipients } from '@/api/recipients';
-import { getBackgroundImages } from '@/api/backgroundImages';
 
 const INIT_VALUE = {
   name: '',
@@ -16,12 +16,20 @@ const INIT_VALUE = {
 function To() {
   const [isValidForm, setIsValidForm] = useState(false);
   const [postValue, setPostValue] = useState(INIT_VALUE);
-  const [backgroundImages, setBackgroundImages] = useState([]);
+  const navigate = useNavigate();
+
+  const postResponse = useCallback(
+    async (value) => {
+      const response = await postRecipients(value);
+      navigate(`${response.id}`);
+    },
+    [navigate],
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidForm) {
-      postRecipients(postValue);
+      postResponse(postValue);
     }
   };
 
@@ -35,15 +43,6 @@ function To() {
     setPostValue((prev) => ({ ...prev, name: value }));
   };
 
-  const getBackImages = useCallback(async () => {
-    const { imageUrls } = await getBackgroundImages();
-    setBackgroundImages(imageUrls);
-  }, []);
-
-  useEffect(() => {
-    getBackImages();
-  }, [getBackImages]);
-
   return (
     <ToContainer>
       <Form onSubmit={handleSubmit} onKeyDown={preventSubmitKeyDownEnter}>
@@ -55,7 +54,7 @@ function To() {
           <Title>배경화면을 선택해 주세요.</Title>
           <P>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</P>
         </TextBox2>
-        <Option setPostValue={setPostValue} backgroundImages={backgroundImages} />
+        <Option setPostValue={setPostValue} />
         <PrimaryButton type="submit" disabled={!isValidForm}>
           생성하기
         </PrimaryButton>

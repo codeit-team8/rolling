@@ -14,8 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list" element={<Main />} />
-        <Route path="/post" element={<To />}>
+        <Route path="/post">
+          <Route index element={<To />} />
           <Route path=":postId" element={<Post />} />
+          <Route path=":postId/message" element={<FromPage />} />
         </Route>
         <Route path="/from" element={<FromPage />} />
       </Routes>
