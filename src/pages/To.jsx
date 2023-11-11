@@ -17,20 +17,25 @@ export default function To() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(isValidForm, postValue);
   };
 
-  const preventSubmitKeyDown = (e) => {
+  const preventSubmitKeyDownEnter = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
     }
   };
 
+  const getPostValue = (value) => {
+    setPostValue((prev) => ({ ...prev, name: value }));
+  };
+
   return (
     <ToContainer>
-      <Form onSubmit={handleSubmit} onKeyDown={preventSubmitKeyDown}>
+      <Form onSubmit={handleSubmit} onKeyDown={preventSubmitKeyDownEnter}>
         <TextBox>
           <Title>To.</Title>
-          <TextInput setIsValidForm={setIsValidForm} />
+          <TextInput setIsValidForm={setIsValidForm} getPostValue={getPostValue} />
         </TextBox>
         <TextBox2>
           <Title>배경화면을 선택해 주세요.</Title>

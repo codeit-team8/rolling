@@ -4,7 +4,7 @@ import * as F from '@/styles/fontType';
 
 const REGEX = /^[\sa-zA-Z0-9가-힣]{2,20}$/;
 
-function TextInput() {
+function TextInput({ setIsValidForm, getPostValue }) {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,6 +25,8 @@ function TextInput() {
     const text = value.trim();
     const result = REGEX.test(text);
     setIsValid(result);
+    setIsValidForm(result);
+    getPostValue(text);
     createErrorMessage(text, result);
   };
 
