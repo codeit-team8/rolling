@@ -17,7 +17,6 @@ export default function To() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(isValidForm, postValue);
   };
 
   const preventSubmitKeyDownEnter = (e) => {
