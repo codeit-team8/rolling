@@ -37,3 +37,17 @@ export async function postRecipients({ name, backgroundColor = 'beige', backgrou
     throw new Error('롤링 페이퍼 생성을 실패했습니다.');
   }
 }
+
+/**
+ * 롤링 페이퍼 대상 조회 API
+ * @param {number} id - 조회 대상 ID
+ * @returns {Promise<any>}
+ */
+export async function getRecipientsId({ id }) {
+  try {
+    const response = await axios.get(`${DOMAIN_TEAM}/recipients/?${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('롤링 페이퍼 대상 조회를 실패했습니다.');
+  }
+}
