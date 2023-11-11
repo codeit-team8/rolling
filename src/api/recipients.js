@@ -45,8 +45,21 @@ export async function postRecipients({ name, backgroundColor = 'beige', backgrou
  */
 export async function getRecipientsId({ id }) {
   try {
-    const response = await axios.get(`${DOMAIN_TEAM}/recipients/?${id}`);
+    const response = await axios.get(`${DOMAIN_TEAM}/recipients/${id}/`);
     return response.data;
+  } catch (error) {
+    throw new Error('롤링 페이퍼 대상 조회를 실패했습니다.');
+  }
+}
+
+/**
+ * 롤링 페이퍼 대삭 삭제 API
+ * @param {number} id - 삭제 대상 ID
+ * @returns {Promise<void>}
+ */
+export async function deleteRecipientsId({ id }) {
+  try {
+    await axios.delete(`${DOMAIN_TEAM}/recipients/${id}/`);
   } catch (error) {
     throw new Error('롤링 페이퍼 대상 조회를 실패했습니다.');
   }
