@@ -26,21 +26,22 @@ const PostContainer = styled.div`
   display: grid;
   justify-content: center;
   gap: 2.4rem;
-  // max-width: 124.8rem;
   margin: 0 auto;
+  align-items: center;
 
   background: var(--orange-200, #ffe2ad);
 
   @media (min-width: 768px) {
-    grid-template-rows: auto 2fr auto;
-    grid-template-columns: auto 2fr auto;
+    grid-template-columns: repeat(2, 38.4rem);
+    grid-template-rows: repeat(auto-fit, 28rem);
     gap: 3rem;
     padding: 4.9rem 2.4rem;
   }
 
   @media (min-width: 1248px) {
     padding: 6rem 2.4rem;
-    grid-template: auto 3fr auto / auto 3fr auto;
+    grid-template-columns: repeat(3, 38.4rem);
+    grid-template-rows: repeat(auto-fit, 28rem);
   }
 `;
 
