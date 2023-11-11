@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import RollingPaperList from '@/components/PaperCard/RollingPaperList.jsx';
-import { FONT20B } from '@/styles/fontType.js';
+import * as F from '@/styles/fontType.js';
 import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
 
 function PaperList() {
@@ -35,17 +35,30 @@ const PaperListContainer = styled.section`
   align-items: flex-start;
   margin-top: 4rem;
   gap: 1.2rem;
+
+  @media (min-width: 768px) {
+    margin-top: 5rem;
+  }
 `;
 
 const PaperListTitle = styled.h1`
-  ${FONT20B};
+  ${F.FONT20B};
   font-weight: 600;
   margin-left: 2rem;
+
+  @media (min-width: 768px) {
+    ${F.FONT24B};
+  }
 `;
 
 const ButtonContainer = styled.div`
   margin-top: 4.2rem;
   padding: 2.4rem 2rem;
+
+  @media (min-width: 768px) {
+    margin-top: 13.2rem;
+    padding: 2.4rem;
+  }
 `;
 
 const Button = styled(PrimaryButton)`
