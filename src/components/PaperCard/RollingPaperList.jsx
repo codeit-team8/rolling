@@ -73,6 +73,8 @@ const PaperListSlider = styled(Slider)`
     opacity: 0;
     display: none;
   }
+
+  padding-left: 2rem;
 `;
 
 const PaperListSlide = styled.div`

@@ -26,7 +26,17 @@ function PaperList() {
 
 export default PaperList;
 
-const PaperListMain = styled.main``;
+const PaperListMain = styled.main`
+  @media (min-width: 1248px) {
+    display: flex;
+    max-width: 120rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+  }
+`;
 
 const PaperListContainer = styled.section`
   display: flex;
@@ -48,6 +58,7 @@ const PaperListTitle = styled.h1`
 
   @media (min-width: 768px) {
     ${F.FONT24B};
+    margin-left: 2.4rem;
   }
 `;
 
@@ -59,6 +70,15 @@ const ButtonContainer = styled.div`
     margin-top: 13.2rem;
     padding: 2.4rem;
   }
+
+  @media (min-width: 1248px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    position: relative;
+    left: -1.4rem;
+  }
 `;
 
 const Button = styled(PrimaryButton)`
@@ -66,6 +86,5 @@ const Button = styled(PrimaryButton)`
 
   @media (min-width: 1248px) {
     width: 28rem;
-    margin: 4.8rem auto auto;
   }
 `;
