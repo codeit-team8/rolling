@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const OptionContainer = styled.div`
-  margin: 0 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,7 +65,7 @@ export const ImageChip = styled.div`
   height: 15.4rem;
   flex-shrink: 0;
   border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: ${({ $border }) => $border && '1px solid rgba(0, 0, 0, 0.1)'}
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
   background: ${({ $isSelected, $imageUrls }) =>
     $isSelected

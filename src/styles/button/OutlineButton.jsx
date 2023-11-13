@@ -31,11 +31,6 @@ const OutlineButton = styled.button`
   align-items: center;
   ${({ $size = 'H28' }) => SIZE[$size]}
 
-  &:disabled {
-    background: var(--gray-300, #ccc);
-    color: var(--white, #fff);
-  }
-
   &:hover {
     background: var(--gray-100, #f6f6f6);
   }
@@ -46,6 +41,11 @@ const OutlineButton = styled.button`
 
   &:focus {
     border: 1px solid var(--gray-500, #555);
+  }
+
+  &:disabled {
+    background: var(--gray-300, #ccc);
+    color: var(--white, #fff);
   }
 `;
 
