@@ -65,6 +65,8 @@ export const ProfileImageWrapper = styled.div`
 
 export const ProfileImage = styled.img`
   background: lightgray 50% / cover no-repeat;
+  width: 100%;
+  z-index: 1;
 `;
 
 export const AuthorWrapper = styled.div`

@@ -26,7 +26,7 @@ function MessageCard({ value }) {
         </DeleteBox>
         <MessageCardProfile>
           <ProfileImageWrapper>
-            <ProfileImage />
+            <ProfileImage $url={value.$profileImageURL} />
           </ProfileImageWrapper>
           <AuthorWrapper>
             <AuthorTitle>
@@ -41,7 +41,7 @@ function MessageCard({ value }) {
       <MessageBody>
         <div dangerouslySetInnerHTML={{ __html: value.content }} />
       </MessageBody>
-      <MessageDate>{value.createdAt}</MessageDate>
+      <MessageDate>{new Date(value.createdAt).toLocaleDateString()}</MessageDate>
     </MessageCardWrapper>
   );
 }
