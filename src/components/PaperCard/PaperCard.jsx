@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import ProfileImageGroup from '@/styles/profileImage/ProfileImageGroup.jsx';
 import { FONT18B, FONT24B } from '@/styles/fontType.js';
 import Emoji from '@/components/Emoji/Emoji.jsx';
@@ -12,22 +13,24 @@ function PaperCard({ card }) {
   const colorPalette = BACKGROUND_COLOR_PALETTE[backgroundColor];
 
   return (
-    <CardContainer $backgroundColor={colorPalette.color} $imageUrl={backgroundImageURL}>
-      <CardInfo>
-        <Recipient $isImage={backgroundImageURL} >{`To. ${name}`}</Recipient>
-        <ProfileImageGroup profileImages={profileImages} />
-        <WriterCounter $isImage={backgroundImageURL} >
-          <span>{messageCount}</span>
-          명이 작성했어요!
-        </WriterCounter>
-      </CardInfo>
-      <BottomContainer>
-        <EmojiContainer>
-          {reactions.length !== 0 && reactions.map((el) => <Emoji reaction={el} key={el.emoji} />)}
-        </EmojiContainer>
-      </BottomContainer>
-      <PatternImg src={colorPalette.pattern} $isImage={backgroundImageURL} />
-    </CardContainer>
+    <Link to={`/post/${card.id}`}>
+      <CardContainer $backgroundColor={colorPalette.color} $imageUrl={backgroundImageURL}>
+        <CardInfo>
+          <Recipient $isImage={backgroundImageURL}>{`To. ${name}`}</Recipient>
+          <ProfileImageGroup profileImages={profileImages} />
+          <WriterCounter $isImage={backgroundImageURL}>
+            <span>{messageCount}</span>
+            명이 작성했어요!
+          </WriterCounter>
+        </CardInfo>
+        <BottomContainer>
+          <EmojiContainer>
+            {reactions.length !== 0 && reactions.map((el) => <Emoji reaction={el} key={el.emoji} />)}
+          </EmojiContainer>
+        </BottomContainer>
+        <PatternImg src={colorPalette.pattern} $isImage={backgroundImageURL} />
+      </CardContainer>
+    </Link>
   );
 }
 
@@ -42,12 +45,13 @@ const CardContainer = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   background: ${({ $backgroundColor, $imageUrl }) =>
-    ($imageUrl 
-            ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})` 
-            : `${$backgroundColor}`)};
+          ($imageUrl
+                  ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+                  : `${$backgroundColor}`)};
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 
   @media (min-width: 768px) {
     width: 27.5rem;

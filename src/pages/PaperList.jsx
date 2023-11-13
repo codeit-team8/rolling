@@ -40,7 +40,7 @@ function PaperList() {
         <RollingPaperList paperCardList={recentPaperCardList} />
       </PaperListContainer>
       <ButtonContainer>
-        <Link to='/post'>
+        <Link to="/post">
           <Button $size="big">나도 만들어보기</Button>
         </Link>
       </ButtonContainer>
