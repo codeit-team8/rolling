@@ -16,7 +16,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
       <Img src={ErrorImg} alt="" />
       <P>{message}</P>
       <ReTryButton $size="small" onClick={handleClick}>
-        다시시도
+        다시 시도
       </ReTryButton>
     </ErrorContainer>
   );
