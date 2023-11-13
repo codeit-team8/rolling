@@ -133,7 +133,7 @@ const PatternImg = styled.img`
   height: 14.2rem;
   flex-shrink: 0;
   border-radius: 0 0 16px 0;
-  display: ${({ $isImage }) => ($isImage ? 'none' : 'static')};
+  display: ${({ $isImage }) => ($isImage ? 'none' : 'static')} !important;
 
   @media (min-width: 768px) {
     width: 14.2rem;
