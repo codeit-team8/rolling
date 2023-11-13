@@ -9,3 +9,22 @@ export const BACKGROUND_COLORS = [
   { name: 'blue', color: 'var(--blue-200, #B1E4FF)', pattern: bluePattern },
   { name: 'green', color: 'var(--green-200, #D0F5C3)', pattern: greenPattern },
 ];
+
+export const BACKGROUND_COLOR_PALETTE = {
+  beige: {
+    color: 'var(--orange-200, #FFE2AD)',
+    pattern: yellowPattern,
+  },
+  purple: {
+    color: 'var(--purple-200, #ECD9FF)',
+    pattern: purplePattern,
+  },
+  blue: {
+    color: 'var(--blue-200, #B1E4FF)',
+    pattern: bluePattern,
+  },
+  green: {
+    color: 'var(--green-200, #D0F5C3)',
+    pattern: greenPattern,
+  },
+};

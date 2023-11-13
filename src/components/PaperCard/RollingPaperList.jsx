@@ -42,14 +42,14 @@ function RollingPaperList({ paperCardList }) {
           prevArrow={<PrevArrow paperIndex={currentIndex} />}
           nextArrow={<NextArrow paperIndex={currentIndex} length={paperCardList.length} />}
         >
-          {paperCardList.map((num) => (
-            <PaperCard number={num} key={num} />
+          {paperCardList.map((card) => (
+            <PaperCard card={card} key={card.id} />
           ))}
         </PaperListSlider>
       ) : (
         <PaperListSlide>
-          {paperCardList.map((num) => (
-            <PaperCard number={num} key={num} />
+          {paperCardList.map((card) => (
+            <PaperCard card={card} key={card.id} />
           ))}
         </PaperListSlide>
       )}
