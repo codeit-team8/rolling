@@ -42,7 +42,9 @@ const CardContainer = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   background: ${({ $backgroundColor, $imageUrl }) =>
-    ($imageUrl ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})` : `${$backgroundColor}`)};
+    ($imageUrl 
+            ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})` 
+            : `${$backgroundColor}`)};
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
