@@ -19,7 +19,6 @@ function App() {
           <Route path=":postId" element={<Post />} />
           <Route path=":postId/message" element={<FromPage />} />
         </Route>
-        <Route path="/from" element={<FromPage />} />
       </Routes>
     </div>
   );
