@@ -24,10 +24,6 @@ const PrimaryButton = styled.button`
   align-items: center;
   gap: 1rem;
 
-  &:disabled {
-    background-color: var(--gray-300, #ccc);
-  }
-
   &:hover {
     background-color: var(--purple-700, #861dee);
   }
@@ -38,6 +34,10 @@ const PrimaryButton = styled.button`
 
   &:focus {
     background-color: var(--purple-800, #6e0ad1);
+  }
+
+  &:disabled {
+    background-color: var(--gray-300, #ccc);
   }
 `;
 
