@@ -58,7 +58,7 @@ const DropdownContainer = styled.div`
 `;
 
 const DropdownBtn = styled.div`
-  width: 32rem;
+  width: 38.5rem;
   padding: 1.2rem 1.6rem;
   font-size: 1.6rem;
   font-weight: 400;
@@ -87,7 +87,7 @@ const DropdownBtn = styled.div`
 
 const DropdownContentsWrapper = styled.div`
   margin-top: 0.8rem;
-  width: 32rem;
+  width: 100%;
   padding: 1rem 0;
   border-radius: 8px;
   border: 1px solid var(--gray-300, #ccc);

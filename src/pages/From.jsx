@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { FONT24B } from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
@@ -48,7 +48,7 @@ function From() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidForm) {
-      postResponse(postValue); // 전달
+      postResponse(postValue);
     }
     console.log(postValue);
   };
@@ -63,6 +63,11 @@ function From() {
   const getPostValue = (value) => {
     setPostValue((prev) => ({ ...prev, sender: value }));
   };
+
+  useEffect(() => {
+    // 이미지 불러와서 ProfileSelect의 imageDate에 넣고 싶은데 안 되네요.
+    const imageDatas = getProfileImages();
+  }, []);
 
   return (
     <FromContainer>
