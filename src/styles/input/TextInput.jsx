@@ -17,7 +17,7 @@ function TextInput({ setIsValidForm, getPostValue }) {
     if (text === '') {
       setErrorMessage('값을 입력해 주세요');
     } else if (!result) {
-      setErrorMessage('유효하지 않은 이름입니다');
+      setErrorMessage('이름은 2~20글자 이내로 특수문자는 포함하지  말아주세요.');
     }
   };
 
