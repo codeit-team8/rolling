@@ -51,6 +51,7 @@ function Dropdown({ selectOption, setPostValue }) {
 }
 
 const DropdownContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,7 +59,7 @@ const DropdownContainer = styled.div`
 `;
 
 const DropdownBtn = styled.div`
-  width: 38.5rem;
+  width: 32rem;
   padding: 1.2rem 1.6rem;
   font-size: 1.6rem;
   font-weight: 400;
@@ -86,6 +87,10 @@ const DropdownBtn = styled.div`
 `;
 
 const DropdownContentsWrapper = styled.div`
+  position: absolute;
+  background-color: #fff;
+  z-index: 2;
+  top: 100%;
   margin-top: 0.8rem;
   width: 100%;
   padding: 1rem 0;

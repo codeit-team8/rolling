@@ -8,7 +8,7 @@ function ProfileSelect({ setPostValue, imageData }) {
 
   const handleSelect = ({ imageSource }) => {
     setSelectUrl(imageSource);
-    setPostValue((prev) => ({ ...prev, profileImageURL: selectUrl }));
+    setPostValue((prev) => ({ ...prev, profileImageURL: imageSource }));
   };
 
   return (

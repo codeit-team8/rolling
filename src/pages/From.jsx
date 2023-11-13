@@ -37,6 +37,7 @@ function From() {
   const [postValue, setPostValue] = useState(INIT_MESSAGE);
   const [isValidForm, setIsValidForm] = useState(false);
   const [, , sendMessageAsync] = useAsync(sendMessage);
+  const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
   const postResponse = useCallback(
     async (value) => {
@@ -45,12 +46,20 @@ function From() {
     [sendMessageAsync],
   );
 
+  const getProfile = useCallback(
+    async (value) => {
+      const response = await getProfileImagesAsync(value);
+      console.log(response);
+      return response;
+    },
+    [getProfileImagesAsync],
+  );
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValidForm) {
       postResponse(postValue);
     }
-    console.log(postValue);
   };
 
   const preventSubmitKeyDownEnter = (e) => {
@@ -59,14 +68,12 @@ function From() {
     }
   };
 
-  // 혜지님 코드에 영향 안 가도록 getPostValue 썼음
   const getPostValue = (value) => {
     setPostValue((prev) => ({ ...prev, sender: value }));
   };
 
   useEffect(() => {
-    // 이미지 불러와서 ProfileSelect의 imageDate에 넣고 싶은데 안 되네요.
-    const imageDatas = getProfileImages();
+    const imageDatas = getProfile();
   }, []);
 
   return (
@@ -101,6 +108,7 @@ function From() {
 export default From;
 
 const FromContainer = styled.div`
+  position: relative;
   padding: 5rem 2rem 2.4rem 2rem;
   max-width: 76.8rem;
   margin: 0 auto;
