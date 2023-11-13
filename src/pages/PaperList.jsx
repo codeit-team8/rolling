@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import RollingPaperList from '@/components/PaperCard/RollingPaperList.jsx';
 import * as F from '@/styles/fontType.js';
 import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
@@ -39,7 +40,9 @@ function PaperList() {
         <RollingPaperList paperCardList={recentPaperCardList} />
       </PaperListContainer>
       <ButtonContainer>
-        <Button $size="big">나도 만들어보기</Button>
+        <Link to='/post'>
+          <Button $size="big">나도 만들어보기</Button>
+        </Link>
       </ButtonContainer>
     </PaperListMain>
   );
