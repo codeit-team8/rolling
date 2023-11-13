@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import selectIcon from '@/assets/icons/select.svg';
 import SelectIcon from '@/styles/button/SelectIcon';
 import { getBackgroundImages } from '@/api/backgroundImages';
+import useAsync from '@/hooks/useAsync';
 import {
   OptionContainer,
   ButtonContainer,
@@ -24,11 +25,12 @@ function Option({ setPostValue }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
   const [selectedChipIndex, setSelectedChipIndex] = useState(0);
   const [backgroundImages, setBackgroundImages] = useState([]);
+  const [isBackgroundImagesLoading, getBackgroundImagesError, getBackgroundImagesAsync] = useAsync(getBackgroundImages);
 
   const getBackImages = useCallback(async () => {
-    const { imageUrls } = await getBackgroundImages();
+    const { imageUrls } = await getBackgroundImagesAsync();
     setBackgroundImages(imageUrls);
-  }, []);
+  }, [getBackgroundImagesAsync]);
 
   const handleClickCategory = (index) => {
     setIsCategorySelect(index);

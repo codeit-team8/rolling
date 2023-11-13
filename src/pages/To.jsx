@@ -6,6 +6,7 @@ import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
 import Option from '@/components/Option/Option';
 import { postRecipients } from '@/api/recipients';
+import useAsync from '@/hooks/useAsync';
 
 const INIT_VALUE = {
   name: '',
@@ -16,14 +17,15 @@ const INIT_VALUE = {
 function To() {
   const [isValidForm, setIsValidForm] = useState(false);
   const [postValue, setPostValue] = useState(INIT_VALUE);
+  const [isPostRecipientsLoading, postRecipientsErrorMessage, postRecipientsAsync] = useAsync(postRecipients);
   const navigate = useNavigate();
 
   const postResponse = useCallback(
     async (value) => {
-      const response = await postRecipients(value);
+      const response = await postRecipientsAsync(value);
       navigate(`${response.id}`);
     },
-    [navigate],
+    [navigate, postRecipientsAsync],
   );
 
   const handleSubmit = (e) => {
