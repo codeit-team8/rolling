@@ -17,7 +17,7 @@ import {
 } from '@/components/MessageCard/MessageCard.style.jsx';
 import deleteIcon from '@/assets/icons/deleted.svg';
 
-function MessageCard({ contentHTML }) {
+function MessageCard({ value }) {
   return (
     <MessageCardWrapper>
       <MessageCardTop>
@@ -31,17 +31,17 @@ function MessageCard({ contentHTML }) {
           <AuthorWrapper>
             <AuthorTitle>
               <AuthorFrom>From.</AuthorFrom>
-              <Author>손상희</Author>
+              <Author>{value.sender}</Author>
             </AuthorTitle>
-            <Badge relationship="지인" />
+            <Badge relationship={value.relationship} />
           </AuthorWrapper>
         </MessageCardProfile>
       </MessageCardTop>
       <MessageCardDivLine />
       <MessageBody>
-        <div dangerouslySetInnerHTML={{ __html: contentHTML }} />
+        <div dangerouslySetInnerHTML={{ __html: value.content }} />
       </MessageBody>
-      <MessageDate>2023.07.08</MessageDate>
+      <MessageDate>{value.createdAt}</MessageDate>
     </MessageCardWrapper>
   );
 }

@@ -1,34 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
-import MessageCard from '@/components/MessageCard/MessageCard';
+import MessageCardList from '@/components/MessageCard/MessageCardList';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import { getMessages } from '@/api/message';
 
 function Post() {
   const [messageContents, setMessageContents] = useState([]);
 
-  const getmessageContents = async () => {
-    const { results } = await getMessages();
+  const getMessageContents = useCallback(async () => {
+    const recipientId = 255;
+    const { results } = await getMessages({ recipientId });
     setMessageContents(results);
-  };
+  }, [getMessages]);
 
   useEffect(() => {
-    getmessageContents();
-  }, []);
+    getMessageContents();
+  }, [getMessageContents]);
 
   return (
     <>
       <PostHeader profileImages={['', '', '', '', '']} />
       <PostContainer>
         <PlusMessageCard />
-        <MessageCard messageContents={messageContents} />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
-        <MessageCard />
+        {messageContents && <MessageCardList cards={messageContents} />}
       </PostContainer>
     </>
   );
