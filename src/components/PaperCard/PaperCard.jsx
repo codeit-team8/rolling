@@ -14,9 +14,9 @@ function PaperCard({ card }) {
   return (
     <CardContainer $backgroundColor={colorPalette.color} $imageUrl={backgroundImageURL}>
       <CardInfo>
-        <Recipient>{`To. ${name}`}</Recipient>
+        <Recipient $isImage={backgroundImageURL} >{`To. ${name}`}</Recipient>
         <ProfileImageGroup profileImages={profileImages} />
-        <WriterCounter>
+        <WriterCounter $isImage={backgroundImageURL} >
           <span>{messageCount}</span>
           명이 작성했어요!
         </WriterCounter>
@@ -42,7 +42,7 @@ const CardContainer = styled.div`
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   background: ${({ $backgroundColor, $imageUrl }) =>
-    ($imageUrl ? `url(${$imageUrl})` : `${$backgroundColor}`)};
+    ($imageUrl ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})` : `${$backgroundColor}`)};
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
@@ -59,7 +59,7 @@ const Recipient = styled.h1`
   -webkit-line-clamp: 1;
   align-self: stretch;
   overflow: hidden;
-  color: var(--gray-900, #181818);
+  color: ${({ $isImage }) => ($isImage ? 'var(--white, #fff)' : 'var(--gray-900, #181818)')};
   text-overflow: ellipsis;
   ${FONT18B};
 
@@ -76,14 +76,14 @@ const CardInfo = styled.div`
 `;
 
 const WriterCounter = styled.div`
-  color: var(--gray-700, #3a3a3a);
+  color: ${({ $isImage }) => ($isImage ? 'var(--grey-200, #eee)' : 'var(--gray-700, #3a3a3a)')};
 
   span {
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 2rem;
     letter-spacing: -0.007rem;
-    color: var(--gray-700, #3a3a3a);
+    color: ${({ $isImage }) => ($isImage ? 'var(--grey-200, #eee)' : 'var(--gray-700, #3a3a3a)')};
   }
 
   font-size: 1.4rem;
