@@ -13,14 +13,17 @@ const MODULES = {
   },
 };
 
-function TextEditor({ contentHTML, setContentHTML }) {
+function TextEditor({ setPostValue }) {
+  const editorStyle = {
+    height: '100%',
+  };
+
   return (
     <TextEditorContainer>
       <ReactQuill
         modules={MODULES}
-        value={contentHTML || ''}
-        style={{ height: '100%' }}
-        onChange={(e) => setContentHTML(e)}
+        style={editorStyle}
+        onChange={(e) => setPostValue((prev) => ({ ...prev, content: e }))}
       />
     </TextEditorContainer>
   );

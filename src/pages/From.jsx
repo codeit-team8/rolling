@@ -1,13 +1,14 @@
-// 플러스 버튼으로 → From페이지로 이동
-// From 페이지 랜더링
-// 생성하기 버튼 눌렀을 경우 롤링페이퍼 화면으로 이동
+import { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
-import * as F from '@/styles/fontType';
+import { FONT24B } from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
 import ProfileSelect from '@/components/Profile/ProfileSelect';
 import Dropdown from '@/components/Dropdown/Dropdown';
 import TextEditor from '@/components/TextEditor/TextEditor';
+import { sendMessage } from '@/api/message';
+import useAsync from '@/hooks/useAsync';
+import { getProfileImages } from '@/api/profileImage';
 
 const imageMockData = {
   imageUrls: [
@@ -24,30 +25,67 @@ const imageMockData = {
   ],
 };
 
+const INIT_MESSAGE = {
+  sender: '',
+  relationship: '지인',
+  content: '',
+  font: 'Noto Sans',
+  profileImageURL: '',
+};
+
 function From() {
+  const [postValue, setPostValue] = useState(INIT_MESSAGE);
+  const [isValidForm, setIsValidForm] = useState(false);
+  const [, , sendMessageAsync] = useAsync(sendMessage);
+
+  const postResponse = useCallback(
+    async (value) => {
+      const response = await sendMessageAsync(value);
+    },
+    [sendMessageAsync],
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValidForm) {
+      postResponse(postValue); // 전달
+    }
+    console.log(postValue);
+  };
+
+  const preventSubmitKeyDownEnter = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
+
+  // 혜지님 코드에 영향 안 가도록 getPostValue 썼음
+  const getPostValue = (value) => {
+    setPostValue((prev) => ({ ...prev, sender: value }));
+  };
+
   return (
     <FromContainer>
-      <Form>
+      <Form onSubmit={handleSubmit} onKeyDown={preventSubmitKeyDownEnter}>
         <Section>
           <Title>From.</Title>
-          {/* 플레이스홀더 수정 필요 */}
-          <TextInput />
+          <TextInput setIsValidForm={setIsValidForm} getPostValue={getPostValue} />
         </Section>
         <Section>
           <Title>프로필 이미지</Title>
-          <ProfileSelect imageData={imageMockData} />
+          <ProfileSelect imageData={imageMockData} setPostValue={setPostValue} />
         </Section>
         <Section>
           <Title>상대와의 관계</Title>
-          <Dropdown selectOption="relationship" />
+          <Dropdown selectOption="relationship" setPostValue={setPostValue} />
         </Section>
         <Section>
           <Title>내용을 입력해 주세요</Title>
-          <TextEditor />
+          <TextEditor setPostValue={setPostValue} />
         </Section>
         <Section>
           <Title>폰트 선택</Title>
-          <Dropdown selectOption="font" />
+          <Dropdown selectOption="font" setPostValue={setPostValue} />
         </Section>
         <Button type="submit">생성하기</Button>
       </Form>
@@ -82,7 +120,7 @@ const Section = styled.div`
 `;
 
 const Title = styled.div`
-  ${F.FONT24B};
+  ${FONT24B};
   color: var(--gray-900, #181818);
 `;
 

@@ -9,7 +9,7 @@ const OPTIONS = {
   font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
 };
 
-function Dropdown({ selectOption }) {
+function Dropdown({ selectOption, setPostValue }) {
   const [selected, setSelected] = useState(OPTIONS[selectOption][1]);
   const [isActive, setIsActive] = useState(false);
 
@@ -20,6 +20,11 @@ function Dropdown({ selectOption }) {
   const handleDropdownContent = (option) => {
     setSelected(option);
     setIsActive(false);
+    if (selectOption === 'relationship') {
+      setPostValue((prev) => ({ ...prev, relationship: option }));
+    } else if (selectOption === 'font') {
+      setPostValue((prev) => ({ ...prev, font: option }));
+    }
   };
 
   return (

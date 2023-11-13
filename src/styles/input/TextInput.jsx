@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import * as F from '@/styles/fontType';
 
 const REGEX = /^[\sa-zA-Z0-9가-힣]{2,20}$/;
 
-function TextInput() {
+function TextInput({ setIsValidForm, getPostValue }) {
   const [value, setValue] = useState('');
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
@@ -16,7 +17,7 @@ function TextInput() {
     if (text === '') {
       setErrorMessage('값을 입력해 주세요');
     } else if (!result) {
-      setErrorMessage('유효하지 않은 이름입니다');
+      setErrorMessage('이름은 2~20글자 이내로 특수문자는 포함하지 말아주세요.');
     }
   };
 
@@ -24,6 +25,8 @@ function TextInput() {
     const text = value.trim();
     const result = REGEX.test(text);
     setIsValid(result);
+    setIsValidForm(result);
+    getPostValue(text);
     createErrorMessage(text, result);
   };
 
@@ -31,13 +34,13 @@ function TextInput() {
     <>
       <InputBox
         type="text"
-        placeholder="받는 사람 이름을 입력하세요"
+        placeholder="이름을 입력하세요"
         onBlur={handleBlur}
         onChange={handleChange}
         value={value}
-        $isValid={isValid}
+        $isValid={!isValid && isValid !== null}
       />
-      {!isValid && <Error>{errorMessage}</Error>}
+      {!isValid && isValid !== null && <Error>{errorMessage}</Error>}
     </>
   );
 }
@@ -45,14 +48,13 @@ function TextInput() {
 export default TextInput;
 
 const InputBox = styled.input`
-  font-size: 1.6rem;
-  line-height: 2.6rem;
-  width: 32rem;
+  ${F.FONT16};
+  width: 100%;
   height: 5rem;
   border-radius: 8px;
   border: none;
   outline: 0.1rem solid var(--gray-300);
-  outline-color: ${({ $isValid }) => ($isValid ? 'var(--gray-300)' : 'var(--Error)')};
+  outline-color: ${({ $isValid }) => ($isValid ? 'var(--Error)' : 'var(--gray-300)')};
   padding: 1.2rem 1.6rem;
   color: var(--gray-900);
 
@@ -74,7 +76,7 @@ const InputBox = styled.input`
 
 const Error = styled.div`
   color: var(--Error);
-  font-size: 1.2rem;
+  ${F.FONT12};
   width: 32rem;
   height: 1.8rem;
   margin-top: 0.4rem;

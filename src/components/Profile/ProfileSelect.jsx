@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { FONT24B, FONT16 } from '@/styles/fontType';
+import { FONT16 } from '@/styles/fontType';
 import ProfileImage from '@/styles/profileImage/ProfileImage';
 
-function ProfileSelect({ imageData }) {
+function ProfileSelect({ setPostValue, imageData }) {
   const [selectUrl, setSelectUrl] = useState('');
 
   const handleSelect = ({ imageSource }) => {
     setSelectUrl(imageSource);
+    setPostValue((prev) => ({ ...prev, profileImageURL: selectUrl }));
   };
 
   return (

@@ -4,6 +4,7 @@ import Post from '@/pages/Post.jsx';
 import Main from '@/pages/Main.jsx';
 import Nav from '@/components/Nav/Nav.jsx';
 import From from './pages/From';
+import To from '@/pages/To.jsx';
 
 function App() {
   return (
@@ -13,8 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list" element={<Main />} />
-        <Route path="/post" element={<Post />}>
+        <Route path="/post">
+          <Route index element={<To />} />
           <Route path=":postId" element={<Post />} />
+          <Route path=":postId/message" element={<From />} />
         </Route>
         <Route path="/from" element={<From />} />
       </Routes>
