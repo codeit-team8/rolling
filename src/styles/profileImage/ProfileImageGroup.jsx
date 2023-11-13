@@ -3,17 +3,18 @@ import ProfileImage, { ProfileImageContainer } from '@/styles/profileImage/Profi
 
 const PROFILE_SIZE = '2.8rem';
 
-function ProfileImageGroup({ profileImages }) {
+function ProfileImageGroup({ profileImages, messageCount = 0 }) {
   const lastOrder = profileImages.length;
 
   return (
     <ProfileImageGroupDiv>
       <ProfileImageGroupContainer>
-        {profileImages.map((image, index) => (
-          <ProfileImage profileImage={image} size={PROFILE_SIZE} order={index} key={index} />
-        ))}
+        {lastOrder !== 0
+          && profileImages.map((image, index) => (
+            <ProfileImage profileImage={image} size={PROFILE_SIZE} order={index} key={index} />
+          ))}
         <ProfileImageCounter $size={PROFILE_SIZE} $order={lastOrder}>
-          <ProfileCount>+6</ProfileCount>
+          <ProfileCount>+{messageCount}</ProfileCount>
         </ProfileImageCounter>
       </ProfileImageGroupContainer>
     </ProfileImageGroupDiv>
@@ -22,12 +23,13 @@ function ProfileImageGroup({ profileImages }) {
 
 export default ProfileImageGroup;
 
-const ProfileImageGroupContainer = styled.div`
-  position: relative;
-`;
-
 const ProfileImageGroupDiv = styled.div`
   width: 7.6rem;
+  height: 3rem;
+`;
+
+const ProfileImageGroupContainer = styled.div`
+  position: relative;
 `;
 
 const ProfileImageCounter = styled(ProfileImageContainer)`
