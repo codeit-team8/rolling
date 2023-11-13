@@ -1,21 +1,42 @@
 import styled from 'styled-components';
+import { useCallback, useEffect, useState } from 'react';
 import RollingPaperList from '@/components/PaperCard/RollingPaperList.jsx';
 import * as F from '@/styles/fontType.js';
 import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
+import useAsync from '@/hooks/useAsync.js';
+import { getRecipients } from '@/api/recipients.js';
 
 function PaperList() {
-  // TODO: 임시로 함
-  const paperCardList = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [likePaperCardList, setLikePaperCardList] = useState([]);
+  const [recentPaperCardList, setRecentPaperCardList] = useState([]);
+  const [getRecipientsIsLoading, getRecipientsError, getRecipientsAsync] = useAsync(getRecipients);
+
+  const handleLikeLoad = useCallback(async () => {
+    const result = await getRecipientsAsync({ sort: 'like' });
+    const likeCards = [...result.results];
+    setLikePaperCardList(likeCards);
+  }, [getRecipientsAsync]);
+
+  const handleRecentLoad = useCallback(async () => {
+    const result = await getRecipientsAsync({});
+    const recentCards = [...result.results];
+    setRecentPaperCardList(recentCards);
+  }, [getRecipientsAsync]);
+
+  useEffect(() => {
+    handleLikeLoad();
+    handleRecentLoad();
+  }, [handleLikeLoad, handleRecentLoad]);
 
   return (
     <PaperListMain>
       <PaperListContainer>
         <PaperListTitle>인기 롤링 페이퍼 🔥</PaperListTitle>
-        <RollingPaperList paperCardList={paperCardList} />
+        <RollingPaperList paperCardList={likePaperCardList} />
       </PaperListContainer>
       <PaperListContainer style={{ marginTop: '7.4rem' }}>
         <PaperListTitle>최근에 만든 롤링 페이퍼⭐️</PaperListTitle>
-        <RollingPaperList paperCardList={paperCardList} />
+        <RollingPaperList paperCardList={recentPaperCardList} />
       </PaperListContainer>
       <ButtonContainer>
         <Button $size="big">나도 만들어보기</Button>
