@@ -42,8 +42,7 @@ const Button = styled(PrimaryButton)`
 
   @media (min-width: 1248px) {
     width: 28rem;
-    margin: auto;
-    margin-top: 4.8rem;
+    margin: 4.8rem auto auto;
   }
 `;
 

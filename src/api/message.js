@@ -39,7 +39,7 @@ export async function getMessages({ recipientId, limit = '', offset = '' }) {
     const response = await axios.get(`${DOMAIN_TEAM}/recipients/${recipientId}/messages/?${query}`);
     return response.data;
   } catch (error) {
-    throw new Error('메세지 목록 조회를 실패했습니다.');
+    throw new Error('메세지 목록 조회를 실패했습니다.', { cause: { status: error.response.status } });
   }
 }
 
@@ -52,6 +52,6 @@ export async function deleteMessage({ messageId }) {
   try {
     await axios.delete(`${DOMAIN_TEAM}/messages/${messageId}/`);
   } catch (error) {
-    throw new Error('메세지 생성을 실패했습니다.');
+    throw new Error('메세지 생성을 실패했습니다.', { cause: { status: error.response.status } });
   }
 }

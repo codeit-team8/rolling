@@ -1,31 +1,25 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import selectIcon from '@/assets/icons/select.svg';
 import SelectIcon from '@/styles/button/SelectIcon';
 import { getBackgroundImages } from '@/api/backgroundImages';
 import useAsync from '@/hooks/useAsync';
 import {
-  OptionContainer,
   ButtonContainer,
   CardContainer,
+  CategoryButton,
   ColorChip,
   ImageChip,
-  CategoryButton,
+  OptionContainer,
 } from '@/components/Option/Option.style';
+import { BACKGROUND_COLORS } from '@/util/backgroundColors.jsx';
 
 const CATEGORIES = ['컬러', '이미지'];
-
-const BACKGROUND_COLORS = [
-  { name: 'beige', color: 'var(--orange-200, #FFE2AD)' },
-  { name: 'purple', color: 'var(--purple-200, #ECD9FF)' },
-  { name: 'blue', color: 'var(--blue-200, #B1E4FF)' },
-  { name: 'green', color: 'var(--green-200, #D0F5C3)' },
-];
 
 function Option({ setPostValue }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
   const [selectedChipIndex, setSelectedChipIndex] = useState(0);
   const [backgroundImages, setBackgroundImages] = useState([]);
-  const [isBackgroundImagesLoading, getBackgroundImagesError, getBackgroundImagesAsync] = useAsync(getBackgroundImages);
+  const [, , getBackgroundImagesAsync] = useAsync(getBackgroundImages);
 
   const getBackImages = useCallback(async () => {
     const { imageUrls } = await getBackgroundImagesAsync();
