@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import MessageCardList from '@/components/MessageCard/MessageCardList';
@@ -7,9 +8,9 @@ import { getMessages } from '@/api/message';
 
 function Post() {
   const [messageContents, setMessageContents] = useState([]);
+  const { recipientId } = useParams();
 
   const getMessageContents = useCallback(async () => {
-    const recipientId = 255;
     const { results } = await getMessages({ recipientId });
     setMessageContents(results);
   }, [getMessages]);

@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import MessageCard from './MessageCard';
 
 function MessageCardList({ cards }) {
-  console.log('cards:', cards);
-
   return (
     <div>
       <MessageCardWrapper>
