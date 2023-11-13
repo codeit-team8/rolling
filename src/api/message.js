@@ -22,7 +22,7 @@ export async function sendMessage({ recipientId, sender, relationship, content, 
     });
     return response.data;
   } catch (error) {
-    throw new Error('메세지 생성을 실패했습니다.');
+    throw new Error('메세지 생성을 실패했습니다.', { cause: { status: error.response.status } });
   }
 }
 
