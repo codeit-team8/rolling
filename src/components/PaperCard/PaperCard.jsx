@@ -1,26 +1,36 @@
 import styled from 'styled-components';
-import purplePatternImg from '@/assets/images/card_pattern_purple.png';
+import { Link } from 'react-router-dom';
+import ProfileImageGroup from '@/styles/profileImage/ProfileImageGroup.jsx';
+import { FONT18B, FONT24B } from '@/styles/fontType.js';
+import Emoji from '@/components/Emoji/Emoji.jsx';
+import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 
-// TODO : 작성자들에 아바타 컴포넌트 추가, 작성 인원 수 추가, 이모지 컴포넌트 추가, 컬러에 따라 카드배경색, 패턴 다르게 받기
+function PaperCard({ card }) {
+  const { name, backgroundColor, backgroundImageURL, messageCount, topReactions } = card;
+  const { recentMessages } = card;
+  const profileImages = recentMessages === 0 ? [] : recentMessages.map((message) => message.profileImageURL);
+  const reactions = [...topReactions].slice(0, 3);
+  const colorPalette = BACKGROUND_COLOR_PALETTE[backgroundColor];
 
-function PaperCard({ number }) {
   return (
-    <CardContainer>
-      <Recipient>{`To. 민혁 ${number}`}</Recipient>
-      <Writers>작성자들</Writers>
-      <WriterCounter>
-        <span>30</span>
-        명이 작성했어요!
-      </WriterCounter>
-      <BottomContainer>
-        <EmojiContainer>
-          <div>이모지1</div>
-          <div>이모지2</div>
-          <div>이모지3</div>
-        </EmojiContainer>
-      </BottomContainer>
-      <PatternImg src={purplePatternImg} />
-    </CardContainer>
+    <Link to={`/post/${card.id}`}>
+      <CardContainer $backgroundColor={colorPalette.color} $imageUrl={backgroundImageURL}>
+        <CardInfo>
+          <Recipient $isImage={backgroundImageURL}>{`To. ${name}`}</Recipient>
+          <ProfileImageGroup profileImages={profileImages} />
+          <WriterCounter $isImage={backgroundImageURL}>
+            <span>{messageCount}</span>
+            명이 작성했어요!
+          </WriterCounter>
+        </CardInfo>
+        <BottomContainer>
+          <EmojiContainer>
+            {reactions.length !== 0 && reactions.map((el) => <Emoji reaction={el} key={el.emoji} />)}
+          </EmojiContainer>
+        </BottomContainer>
+        <PatternImg src={colorPalette.pattern} $isImage={backgroundImageURL} />
+      </CardContainer>
+    </Link>
   );
 }
 
@@ -34,8 +44,14 @@ const CardContainer = styled.div`
   padding: 3rem 2.4rem 2rem;
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
-  background: var(--purple-200, #ecd9ff);
+  background: ${({ $backgroundColor, $imageUrl }) =>
+          ($imageUrl
+                  ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+                  : `${$backgroundColor}`)};
+  background-size: cover;
+  background-repeat: no-repeat;
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 
   @media (min-width: 768px) {
     width: 27.5rem;
@@ -49,36 +65,31 @@ const Recipient = styled.h1`
   -webkit-line-clamp: 1;
   align-self: stretch;
   overflow: hidden;
-  color: var(--gray-900, #181818);
+  color: ${({ $isImage }) => ($isImage ? 'var(--white, #fff)' : 'var(--gray-900, #181818)')};
   text-overflow: ellipsis;
-  font-size: 1.8rem;
-  font-weight: 700;
-  line-height: 2.8rem;
-  letter-spacing: -0.018rem;
+  ${FONT18B};
 
   @media (min-width: 768px) {
-    font-size: 2.4rem;
-    line-height: 3.6rem;
-    letter-spacing: -0.024px;
+    ${FONT24B};
   }
 `;
 
-const Writers = styled.div`
+const CardInfo = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: -1.2rem;
-  margin: 1.2rem 0;
+  flex-direction: column;
+  gap: 1.2rem;
 `;
 
 const WriterCounter = styled.div`
-  color: var(--gray-700, #3a3a3a);
+  color: ${({ $isImage }) => ($isImage ? 'var(--grey-200, #eee)' : 'var(--gray-700, #3a3a3a)')};
 
   span {
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 2rem;
     letter-spacing: -0.007rem;
-    color: var(--gray-700, #3a3a3a);
+    color: ${({ $isImage }) => ($isImage ? 'var(--grey-200, #eee)' : 'var(--gray-700, #3a3a3a)')};
   }
 
   font-size: 1.4rem;
@@ -116,6 +127,7 @@ const BottomContainer = styled.div`
 const EmojiContainer = styled.div`
   display: flex;
   align-items: flex-start;
+  z-index: 1;
   gap: 0.8rem;
 `;
 
@@ -127,6 +139,7 @@ const PatternImg = styled.img`
   height: 14.2rem;
   flex-shrink: 0;
   border-radius: 0 0 16px 0;
+  display: ${({ $isImage }) => ($isImage ? 'none' : 'static')} !important;
 
   @media (min-width: 768px) {
     width: 14.2rem;

@@ -25,7 +25,7 @@ const INIT_IMAGE = {
 function From() {
   const [postValue, setPostValue] = useState(INIT_MESSAGE);
   const [isValidForm, setIsValidForm] = useState(false);
-  const [imgData, setImgData] = useState(INIT_IMAGE);
+  const [profileImageData, setprofileImageData] = useState(INIT_IMAGE);
   const [, , sendMessageAsync] = useAsync(sendMessage);
   const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
@@ -38,7 +38,7 @@ function From() {
 
   const getProfile = useCallback(async () => {
     const response = await getProfileImagesAsync();
-    setImgData({ ...response });
+    setprofileImageData({ ...response });
   }, [getProfileImagesAsync]);
 
   const handleSubmit = (e) => {
@@ -71,7 +71,7 @@ function From() {
         </Section>
         <Section>
           <Title>프로필 이미지</Title>
-          <ProfileSelect imageData={imgData} setPostValue={setPostValue} />
+          <ProfileSelect imageData={profileImageData} setPostValue={setPostValue} />
         </Section>
         <Section>
           <Title>상대와의 관계</Title>
