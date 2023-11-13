@@ -10,21 +10,6 @@ import { sendMessage } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
 import { getProfileImages } from '@/api/profileImage';
 
-const imageMockData = {
-  imageUrls: [
-    'https://fastly.picsum.photos/id/268/100/100.jpg?hmac=eqOIwP24u5Z5zeRyWxuRm-47F6O4HGh_2t7ydnCLB1g',
-    'https://fastly.picsum.photos/id/522/100/100.jpg?hmac=qAjkBTDli2R3PAxAqv8HwfHWmdQskKVWNSDktu4tmHw',
-    'https://fastly.picsum.photos/id/494/100/100.jpg?hmac=VY3bkvgk7NyiVsjLJ0_OBS_e_LWCFTrPEvndz6syOFQ',
-    'https://fastly.picsum.photos/id/1064/100/100.jpg?hmac=ctylrOJlV6YpNYdxeSheUqNNZD7goTpAQjnF_ubkrPw',
-    'https://fastly.picsum.photos/id/571/100/100.jpg?hmac=-fQ3pFGoTNXsXIgWPhYe3lTadQTWlLh5J1Xzc9vmlQE',
-    'https://fastly.picsum.photos/id/866/100/100.jpg?hmac=ci1nxrYzr9SaVQenyuqBybKgVslILw_KRPf-cZjq4yg',
-    'https://fastly.picsum.photos/id/437/100/100.jpg?hmac=-YlB-diqK8qqcHK263TJ4YfCVbAlzbaLJECUuGfg55s',
-    'https://fastly.picsum.photos/id/1082/100/100.jpg?hmac=0rTbHjwuEo-KpMp2E4aCa2JWXFT_FPh6cqJwhTxcZl4',
-    'https://fastly.picsum.photos/id/859/100/100.jpg?hmac=6QkQ5r5_o7xGLBIk04B6BGnYhczjRVVUHfgwEZBCtyk',
-    'https://fastly.picsum.photos/id/547/100/100.jpg?hmac=GzEraiphe5k-m_Ika-BtHcx4xDxuRPW2LTQFzHjAyy4',
-  ],
-};
-
 const INIT_MESSAGE = {
   sender: '',
   relationship: '지인',
@@ -33,9 +18,14 @@ const INIT_MESSAGE = {
   profileImageURL: '',
 };
 
+const INIT_IMAGE = {
+  imageUrls: [],
+};
+
 function From() {
   const [postValue, setPostValue] = useState(INIT_MESSAGE);
   const [isValidForm, setIsValidForm] = useState(false);
+  const [imgData, setImgData] = useState(INIT_IMAGE);
   const [, , sendMessageAsync] = useAsync(sendMessage);
   const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
@@ -46,18 +36,14 @@ function From() {
     [sendMessageAsync],
   );
 
-  const getProfile = useCallback(
-    async (value) => {
-      const response = await getProfileImagesAsync(value);
-      console.log(response);
-      return response;
-    },
-    [getProfileImagesAsync],
-  );
+  const getProfile = useCallback(async () => {
+    const response = await getProfileImagesAsync();
+    setImgData({ ...response });
+  }, [getProfileImagesAsync]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValidForm) {
+    if (isValidForm && postValue.content) {
       postResponse(postValue);
     }
   };
@@ -73,7 +59,7 @@ function From() {
   };
 
   useEffect(() => {
-    const imageDatas = getProfile();
+    getProfile();
   }, []);
 
   return (
@@ -85,7 +71,7 @@ function From() {
         </Section>
         <Section>
           <Title>프로필 이미지</Title>
-          <ProfileSelect imageData={imageMockData} setPostValue={setPostValue} />
+          <ProfileSelect imageData={imgData} setPostValue={setPostValue} />
         </Section>
         <Section>
           <Title>상대와의 관계</Title>
@@ -99,7 +85,9 @@ function From() {
           <Title>폰트 선택</Title>
           <Dropdown selectOption="font" setPostValue={setPostValue} />
         </Section>
-        <Button type="submit">생성하기</Button>
+        <Button type="submit" disabled={!isValidForm || !postValue.content}>
+          생성하기
+        </Button>
       </Form>
     </FromContainer>
   );
