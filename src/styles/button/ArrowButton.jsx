@@ -46,11 +46,11 @@ const ArrowImg = styled.img`
 `;
 
 const PrevButton = styled(ArrowButton)`
-  left: -1.9rem;
+  left: 0.1rem;
   display: ${({ $showPrev }) => ($showPrev ? 'flex' : 'none')};
 `;
 
 const NextButton = styled(ArrowButton)`
-  right: -0.4rem;
+  right: -1rem;
   display: ${({ $showNext }) => ($showNext ? 'flex' : 'none')};
 `;
