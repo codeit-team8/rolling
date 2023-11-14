@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FONT15, FONT18 } from '@/styles/fontType.js';
 
 export const MessageCardWrapper = styled.div`
   width: 32rem;
@@ -119,13 +120,18 @@ export const MessageBody = styled.div`
   line-height: 2.8rem;
   letter-spacing: -0.018px;
 
-  & > * {
-    font-size: inherit;
-  }
-
   @media (min-width: 768px) {
     margin: 1.6rem 0;
-    font-size: 1.8rem;
+  }
+
+  p {
+    ${FONT15};
+    font-family: ${({ $font }) => $font};
+
+    @media (min-width: 768px) {
+      ${FONT18};
+      font-family: ${({ $font }) => $font};
+    }
   }
 `;
 
