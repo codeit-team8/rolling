@@ -82,7 +82,7 @@ function Post() {
       </PostContainer>
       {isOpenModal && (
         <Modal>
-          <MessageCardModal ref={modalRef} modalInfo={modalInfo} />
+          <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
         </Modal>
       )}
     </>

@@ -15,7 +15,7 @@ import Badge from '@/components/MessageCard/Badge.jsx';
 import { FONT15, FONT18 } from '@/styles/fontType.js';
 import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
 
-function MessageCardModal({ modalInfo }, ref) {
+function MessageCardModal({ modalInfo, handleCloseModal }, ref) {
   const { profileImageURL, sender, relationship, content, fontFamily, createdDate } = modalInfo;
 
   return (
@@ -40,7 +40,7 @@ function MessageCardModal({ modalInfo }, ref) {
         <ModalMessageBody $font={fontFamily}>
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </ModalMessageBody>
-        <ModalButton $size="small">확인</ModalButton>
+        <ModalButton $size="small" onClick={handleCloseModal}>확인</ModalButton>
       </ModalContainer>
     </>
   );
