@@ -26,7 +26,7 @@ function MessageCard({ value }) {
         </DeleteBox>
         <MessageCardProfile>
           <ProfileImageWrapper>
-            <ProfileImage $url={value.$profileImageURL} />
+            <ProfileImage src={value.profileImageURL} />
           </ProfileImageWrapper>
           <AuthorWrapper>
             <AuthorTitle>

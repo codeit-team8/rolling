@@ -4,25 +4,30 @@ import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import MessageCardList from '@/components/MessageCard/MessageCardList';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
-import { getMessages } from '@/api/message';
+import { getRecipientsId } from '@/api/recipients';
+import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 
 function Post() {
-  const [messageContents, setMessageContents] = useState([]);
+  const [messageContents, setMessageContents] = useState();
+  const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
   const { recipientId } = useParams();
 
-  const getMessageContents = useCallback(async () => {
-    const { results } = await getMessages({ recipientId });
-    setMessageContents(results);
-  }, [getMessages]);
+  const getRollingPaper = useCallback(async () => {
+    const results = await getRecipientsId({ id: recipientId });
+    setMessageContents(results.recentMessages);
+    const { backgroundColor, backgroundImageURL } = results;
+    const color = BACKGROUND_COLOR_PALETTE[backgroundColor].color;
+    setBackground({ color, backgroundImageURL });
+  }, [getRecipientsId]);
 
   useEffect(() => {
-    getMessageContents();
-  }, [getMessageContents]);
+    getRollingPaper();
+  }, [getRollingPaper]);
 
   return (
     <>
       <PostHeader profileImages={['', '', '', '', '']} />
-      <PostContainer>
+      <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         <PlusMessageCard />
         {messageContents && <MessageCardList cards={messageContents} />}
       </PostContainer>
@@ -33,12 +38,15 @@ function Post() {
 const PostContainer = styled.div`
   padding: 4.2rem 2rem 0;
   display: grid;
+  grid-template-columns: repeat(1, 32rem);
+  grid-template-rows: repeat(auto-fit, 23rem);
   justify-content: center;
   gap: 2.4rem;
   margin: 0 auto;
   align-items: center;
+  height: 100vh;
 
-  background: var(--orange-200, #ffe2ad);
+  background: ${({ $backgroundColor, $imageUrl }) => ($imageUrl ? `url(${$imageUrl})` : `${$backgroundColor}`)};
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 38.4rem);
