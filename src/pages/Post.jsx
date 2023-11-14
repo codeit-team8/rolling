@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
@@ -6,8 +6,14 @@ import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
+import Modal from '@/components/Modal/Modal.jsx';
+import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
+import useOnClickOutside from '@/hooks/useOnClickOutside.js';
 
 function Post() {
+  const modalRef = useRef();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
@@ -39,6 +45,12 @@ function Post() {
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
 
+  const handleModal = () => {
+    setIsOpenModal((prev) => !prev);
+  };
+
+  useOnClickOutside(modalRef, handleModal);
+
   useEffect(() => {
     handleRollingPaper();
   }, [handleRollingPaper]);
@@ -49,8 +61,15 @@ function Post() {
       <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         <PlusMessageCard />
         {messageContents &&
-          messageContents.map((messageCard) => <MessageCard value={messageCard} key={messageCard.id} />)}
+          messageContents.map((messageCard) =>
+            <MessageCard value={messageCard} key={messageCard.id} handleModal={handleModal} />
+          )}
       </PostContainer>
+      {isOpenModal && (
+        <Modal>
+          <MessageCardModal ref={modalRef} />
+        </Modal>
+      )}
     </>
   );
 }
