@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FONT24B } from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
@@ -29,9 +30,13 @@ function From() {
   const [, , sendMessageAsync] = useAsync(sendMessage);
   const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
+  const { recipientId } = useParams();
+  const navigate = useNavigate();
+
   const postResponse = useCallback(
     async (value) => {
-      const response = await sendMessageAsync(value);
+      await sendMessageAsync(value);
+      navigate(`/post/${recipientId}`);
     },
     [sendMessageAsync],
   );
@@ -55,7 +60,11 @@ function From() {
   };
 
   const getPostValue = (value) => {
-    setPostValue((prev) => ({ ...prev, sender: value }));
+    setPostValue((prev) => (
+      { ...prev,
+        recipientId,
+        sender: value,
+      }));
   };
 
   useEffect(() => {
