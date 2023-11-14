@@ -24,7 +24,7 @@ function Post() {
         .map((message) => message.profileImageURL)
         .slice(0, 3);
     setProfileImages(recentPostProfileImages);
-  }, [getRecipientsId]);
+  }, [recipientId]);
 
   useEffect(() => {
     handleRollingPaper();

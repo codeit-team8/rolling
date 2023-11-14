@@ -20,7 +20,7 @@ function PaperCard({ card }) {
       <CardContainer $backgroundColor={colorPalette.color} $imageUrl={backgroundImageURL}>
         <CardInfo>
           <Recipient $isImage={backgroundImageURL}>{`To. ${name}`}</Recipient>
-          <ProfileImageGroup profileImages={profileImages} />
+          <ProfileImageGroup profileImages={profileImages} messageCount={messageCount} />
           <WriterCounter $isImage={backgroundImageURL}>
             <span>{messageCount}</span>
             명이 작성했어요!
