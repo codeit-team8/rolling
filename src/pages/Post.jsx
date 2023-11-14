@@ -16,7 +16,7 @@ function Post() {
     const results = await getRecipientsId({ id: recipientId });
     setMessageContents(results.recentMessages);
     const { backgroundColor, backgroundImageURL } = results;
-    const color = BACKGROUND_COLOR_PALETTE[backgroundColor].color;
+    const { color } = BACKGROUND_COLOR_PALETTE[backgroundColor];
     setBackground({ color, backgroundImageURL });
   }, [getRecipientsId]);
 
