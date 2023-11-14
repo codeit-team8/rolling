@@ -20,7 +20,9 @@ function Post() {
 
   const handleRollingPaper = useCallback(async () => {
     const results = await getRecipientsId({ id: recipientId });
-    const { name, messageCount, backgroundColor, backgroundImageURL, topReactions } = { ...results };
+    const {
+ name, messageCount, backgroundColor, backgroundImageURL, topReactions 
+} = { ...results };
     const { color } = BACKGROUND_COLOR_PALETTE[backgroundColor];
     const recentMessages = [...results.recentMessages];
 
@@ -38,10 +40,8 @@ function Post() {
     setPostName(name);
     setPostMessageCount(messageCount);
     setReactions([...topReactions].slice(0, 3));
-    const recentPostProfileImages = recentMessages.length === 0 ? []
-      : recentMessages
-        .map((message) => message.profileImageURL)
-        .slice(0, 3);
+    const recentPostProfileImages =
+      recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
     setProfileImages(recentPostProfileImages);
   };
 
@@ -68,8 +68,12 @@ const PostContainer = styled.div`
   margin: 0 auto;
   align-items: center;
   height: 100vh;
-
-  background: ${({ $backgroundColor, $imageUrl }) => ($imageUrl ? `url(${$imageUrl})` : `${$backgroundColor}`)};
+  background: ${({ $backgroundColor, $imageUrl }) => 
+          ($imageUrl
+            ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+            : `${$backgroundColor}`)};
+  background-size: cover;
+  background-position: center;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 38.4rem);
