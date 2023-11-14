@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
@@ -12,10 +12,10 @@ function Post() {
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
   const [profileImages, setProfileImages] = useState([]);
-
   const [messageContents, setMessageContents] = useState();
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
-
+  const [offset, setOffset] = useState(8);
+  const observerRef = useRef(null);
   const { recipientId } = useParams();
 
   const handleRollingPaper = useCallback(async () => {
@@ -30,8 +30,13 @@ function Post() {
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
 
+  const io = new IntersectionObserver((entries) => {
+    console.log(entries);
+  });
+
   useEffect(() => {
     handleRollingPaper();
+    io.observe(observerRef.current);
   }, [handleRollingPaper]);
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
@@ -50,6 +55,7 @@ function Post() {
         <PlusMessageCard />
         {messageContents && <MessageCardList cards={messageContents} />}
       </PostContainer>
+      <div ref={observerRef}>여기 닿으면</div>
     </>
   );
 }
@@ -66,10 +72,10 @@ const PostContainer = styled.div`
   margin: 0 auto;
   align-items: center;
   height: 100vh;
-  background: ${({ $backgroundColor, $imageUrl }) => 
-          ($imageUrl
-            ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
-            : `${$backgroundColor}`)};
+  background: ${({ $backgroundColor, $imageUrl }) =>
+    $imageUrl
+      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+      : `${$backgroundColor}`};
   background-size: cover;
   background-position: center;
 
