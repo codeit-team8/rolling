@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
-import MessageCardList from '@/components/MessageCard/MessageCardList';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
+import MessageCard from '@/components/MessageCard/MessageCard';
 import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 
@@ -54,7 +54,8 @@ function Post() {
       <PostHeader name={postName} messageCount={postMessageCount} reactions={reactions} profileImages={profileImages} />
       <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         <PlusMessageCard />
-        {messageContents && <MessageCardList cards={messageContents} />}
+        {messageContents &&
+          messageContents.map((messageCard) => <MessageCard value={messageCard} key={messageCard.id} />)}
       </PostContainer>
       <div ref={observerRef}>여기 닿으면</div>
     </>
@@ -79,10 +80,18 @@ const PostContainer = styled.div`
       : `${$backgroundColor}`};
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
+  overflow: scroll;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 38.4rem);
-    grid-template-rows: repeat(auto-fit, 28rem);
+    grid-template-columns: repeat(2, 35.4rem);
+    grid-template-rows: repeat(auto-fit, 28.4rem);
     gap: 3rem;
     padding: 4.9rem 2.4rem;
   }
