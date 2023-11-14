@@ -9,6 +9,7 @@ import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
+import { deleteMessage } from '@/api/message';
 
 function Edit() {
   const [isEdit, setIsEdit] = useState(false);
@@ -56,7 +57,10 @@ function Edit() {
     setProfileImages(recentPostProfileImages);
   };
 
-  const 
+  const onDelete = useCallback(async (messageId) => {
+    await deleteMessage({ messageId });
+    setMessageContents((prevMessages) => prevMessages.filter((message) => message.id !== messageId));
+  });
 
   return (
     <>
@@ -72,7 +76,12 @@ function Edit() {
           {!isEdit && <PlusMessageCard />}
           {messageContents &&
             messageContents.map((messageCard) => (
-              <MessageCard value={messageCard} key={messageCard.id} isEdit={isEdit} />
+              <MessageCard
+                value={messageCard}
+                key={messageCard.id}
+                isEdit={isEdit}
+                onDelete={() => onDelete(messageCard.id)}
+              />
             ))}
         </CardContainer>
         {isEdit && (

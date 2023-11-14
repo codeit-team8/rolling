@@ -19,20 +19,20 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 import { FONT_PALETTE } from '@/util/font.jsx';
 
-function MessageCard({ value, isEdit }) {
+function MessageCard({ value, isEdit, onDelete }) {
   const { id, profileImageURL, sender, relationship, content, font, createdAt } = value;
   const fontFamily = FONT_PALETTE[font];
 
-  const handleDelete = useCallback(async () => {
-    const deleteId = await deleteMessage({ messageId: id });
-  }, [id]);
+  // const handleDelete = useCallback(async () => {
+  //   const deleteId = await deleteMessage({ messageId: id });
+  // }, [id]);
 
   return (
     <MessageCardWrapper>
       <MessageCardTop>
         {isEdit && (
           <DeleteBox>
-            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" onClick={handleDelete} />
+            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" onClick={() => onDelete(id)} />
           </DeleteBox>
         )}
         <MessageCardProfile>
