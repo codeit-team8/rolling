@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import plusIcon from '@/assets/icons/plus.svg';
 
-// TODO :
+function AddButton({ disabled }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/post/{id}/message`);
+  };
 
-function AddButton({ onClick, disabled }) {
   return (
-    <AddButtonContainer onClick={onClick} disabled={disabled}>
+    <AddButtonContainer onClick={handleClick} disabled={disabled}>
       <img src={plusIcon} alt="추가 버튼" />
     </AddButtonContainer>
   );
@@ -19,6 +23,10 @@ const AddButtonContainer = styled.button`
   border-radius: 100px;
   background-color: var(--gray-500);
   padding: 1.6rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {

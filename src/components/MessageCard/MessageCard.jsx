@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import Badge from '@/components/MessageCard/Badge.jsx';
 import {
   Author,
@@ -17,31 +18,37 @@ import {
 } from '@/components/MessageCard/MessageCard.style.jsx';
 import deleteIcon from '@/assets/icons/deleted.svg';
 
-function MessageCard({ contentHTML }) {
+function MessageCard({ value }) {
+  const { profileImageURL, sender, relationship, content, createdAt } = value;
+  const location = useLocation();
+  const deleteBoxVisible = location.pathname === '/edit';
+
   return (
     <MessageCardWrapper>
       <MessageCardTop>
-        <DeleteBox>
-          <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" />
-        </DeleteBox>
+        {deleteBoxVisible && (
+          <DeleteBox>
+            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" />
+          </DeleteBox>
+        )}
         <MessageCardProfile>
           <ProfileImageWrapper>
-            <ProfileImage />
+            <ProfileImage src={profileImageURL} />
           </ProfileImageWrapper>
           <AuthorWrapper>
             <AuthorTitle>
               <AuthorFrom>From.</AuthorFrom>
-              <Author>손상희</Author>
+              <Author>{sender}</Author>
             </AuthorTitle>
-            <Badge relationship="지인" />
+            <Badge relationship={relationship} />
           </AuthorWrapper>
         </MessageCardProfile>
       </MessageCardTop>
       <MessageCardDivLine />
       <MessageBody>
-        <div dangerouslySetInnerHTML={{ __html: contentHTML }} />
+        <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
-      <MessageDate>2023.07.08</MessageDate>
+      <MessageDate>{new Date(createdAt).toLocaleDateString()}</MessageDate>
     </MessageCardWrapper>
   );
 }
