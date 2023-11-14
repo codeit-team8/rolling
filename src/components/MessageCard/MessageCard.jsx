@@ -18,14 +18,14 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 import { FONT_PALETTE } from '@/util/font.jsx';
 
-function MessageCard({ value }) {
+function MessageCard({ value, handleModal }) {
   const { profileImageURL, sender, relationship, content, font, createdAt } = value;
   const location = useLocation();
   const deleteBoxVisible = location.pathname === '/edit';
   const fontFamily = FONT_PALETTE[font];
 
   return (
-    <MessageCardWrapper>
+    <MessageCardWrapper onClick={handleModal}>
       <MessageCardTop>
         {deleteBoxVisible && (
           <DeleteBox>
