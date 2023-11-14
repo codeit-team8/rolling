@@ -12,7 +12,7 @@ function Post() {
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
   const { recipientId } = useParams();
 
-  const getRollingPaper = useCallback(async () => {
+  const handleRollingPaper = useCallback(async () => {
     const results = await getRecipientsId({ id: recipientId });
     setMessageContents(results.recentMessages);
     const { backgroundColor, backgroundImageURL } = results;
@@ -21,8 +21,8 @@ function Post() {
   }, [getRecipientsId]);
 
   useEffect(() => {
-    getRollingPaper();
-  }, [getRollingPaper]);
+    handleRollingPaper();
+  }, [handleRollingPaper]);
 
   return (
     <>
