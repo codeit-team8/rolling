@@ -17,11 +17,13 @@ import {
   ProfileImageWrapper,
 } from '@/components/MessageCard/MessageCard.style.jsx';
 import deleteIcon from '@/assets/icons/deleted.svg';
+import { FONT_PALETTE } from '@/util/font.jsx';
 
 function MessageCard({ value }) {
-  const { profileImageURL, sender, relationship, content, createdAt } = value;
+  const { profileImageURL, sender, relationship, content, font, createdAt } = value;
   const location = useLocation();
   const deleteBoxVisible = location.pathname === '/edit';
+  const fontFamily = FONT_PALETTE[font];
 
   return (
     <MessageCardWrapper>
@@ -45,7 +47,7 @@ function MessageCard({ value }) {
         </MessageCardProfile>
       </MessageCardTop>
       <MessageCardDivLine />
-      <MessageBody>
+      <MessageBody $font={fontFamily}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
       <MessageDate>{new Date(createdAt).toLocaleDateString()}</MessageDate>

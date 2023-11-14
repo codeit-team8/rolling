@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FONT24B } from '@/styles/fontType';
 import TextInput from '@/styles/input/TextInput';
 import PrimaryButton from '@/styles/button/PrimaryButton';
@@ -25,20 +26,24 @@ const INIT_IMAGE = {
 function From() {
   const [postValue, setPostValue] = useState(INIT_MESSAGE);
   const [isValidForm, setIsValidForm] = useState(false);
-  const [profileImageData, setprofileImageData] = useState(INIT_IMAGE);
+  const [profileImageData, setProfileImageData] = useState(INIT_IMAGE);
   const [, , sendMessageAsync] = useAsync(sendMessage);
   const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
+  const { recipientId } = useParams();
+  const navigate = useNavigate();
+
   const postResponse = useCallback(
     async (value) => {
-      const response = await sendMessageAsync(value);
+      await sendMessageAsync(value);
+      navigate(`/post/${recipientId}`);
     },
     [sendMessageAsync],
   );
 
   const getProfile = useCallback(async () => {
     const response = await getProfileImagesAsync();
-    setprofileImageData({ ...response });
+    setProfileImageData({ ...response });
   }, [getProfileImagesAsync]);
 
   const handleSubmit = (e) => {
@@ -55,7 +60,11 @@ function From() {
   };
 
   const getPostValue = (value) => {
-    setPostValue((prev) => ({ ...prev, sender: value }));
+    setPostValue((prev) => (
+      { ...prev,
+        recipientId,
+        sender: value,
+      }));
   };
 
   useEffect(() => {
