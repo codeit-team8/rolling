@@ -14,6 +14,7 @@ function Post() {
   const [profileImages, setProfileImages] = useState([]);
   const [messageContents, setMessageContents] = useState();
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
+  const [hasNext, sethasNext] = useState(false);
   const [offset, setOffset] = useState(8);
   const observerRef = useRef(null);
   const { recipientId } = useParams();
