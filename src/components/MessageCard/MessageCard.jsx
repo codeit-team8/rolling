@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import Badge from '@/components/MessageCard/Badge.jsx';
 import {
   Author,
@@ -18,12 +19,17 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 
 function MessageCard({ value }) {
+  const location = useLocation();
+  const deleteBoxVisible = location.pathname === '/edit';
+
   return (
     <MessageCardWrapper>
       <MessageCardTop>
-        <DeleteBox>
-          <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" />
-        </DeleteBox>
+        {deleteBoxVisible && (
+          <DeleteBox>
+            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" />
+          </DeleteBox>
+        )}
         <MessageCardProfile>
           <ProfileImageWrapper>
             <ProfileImage src={value.profileImageURL} />
