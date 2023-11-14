@@ -40,7 +40,9 @@ function MessageCardModal({ modalInfo, handleCloseModal }, ref) {
         <ModalMessageBody $font={fontFamily}>
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </ModalMessageBody>
-        <ModalButton $size="small" onClick={handleCloseModal}>확인</ModalButton>
+        <ModalButton $size="small" onClick={handleCloseModal}>
+          확인
+        </ModalButton>
       </ModalContainer>
     </>
   );
@@ -63,7 +65,7 @@ const ModalContainer = styled.div`
   padding: 2rem;
   z-index: 2;
   width: 34rem;
-  height: 23.5rem;
+  height: 29.5rem;
   border-radius: 16px;
   background: var(--white, #fff);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
@@ -81,9 +83,14 @@ const ModalContainer = styled.div`
 const ModalMessageBody = styled.div`
   margin-top: 1.6rem;
   width: 100%;
-  height: 24rem;
+  height: 10.6rem;
+  padding-right: 1.5rem;
   overflow: scroll;
-  
+
+  @media (min-width: 768px) {
+    height: 24rem;
+  }
+
   p {
     ${FONT15};
     font-family: ${({ $font }) => $font};
@@ -92,12 +99,17 @@ const ModalMessageBody = styled.div`
       ${FONT18};
       font-family: ${({ $font }) => $font};
     }
+  }
 `;
 
 const ModalMessageDate = styled(MessageDate)`
   position: absolute;
   right: 0.5rem;
-  bottom: 4rem;
+  bottom: 2rem;
+
+  @media (min-width: 768px) {
+    bottom: 4rem;
+  }
 `;
 
 const ModalButton = styled(PrimaryButton)`
@@ -107,6 +119,11 @@ const ModalButton = styled(PrimaryButton)`
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: 24rem;
-  bottom: 4rem;
+  left: 10.7rem;
+  bottom: 1.8rem;
+
+  @media (min-width: 768px) {
+    left: 24rem;
+    bottom: 4rem;
+  }
 `;
