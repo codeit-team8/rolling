@@ -19,7 +19,7 @@ function Option({ setPostValue }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
   const [selectedChipIndex, setSelectedChipIndex] = useState(0);
   const [backgroundImages, setBackgroundImages] = useState([]);
-  const [isBackgroundImagesLoading, getBackgroundImagesError, getBackgroundImagesAsync] = useAsync(getBackgroundImages);
+  const [, , getBackgroundImagesAsync] = useAsync(getBackgroundImages);
 
   const getBackImages = useCallback(async () => {
     const { imageUrls } = await getBackgroundImagesAsync();

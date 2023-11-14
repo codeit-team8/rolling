@@ -6,6 +6,6 @@ export async function getBackgroundImages() {
     const response = await axios.get(`${DOMAIN}/background-images/`);
     return response.data;
   } catch (error) {
-    throw new Error('배경 화면 정보를 가져오지 못했습니다.');
+    throw new Error('배경 화면 정보를 가져오지 못했습니다.', { cause: { status: error.response.status } });
   }
 }
