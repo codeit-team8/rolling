@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import EmojiPicker from 'emoji-picker-react';
@@ -16,14 +16,13 @@ export default function EmojiAdd() {
     setIsOpen((prev) => !prev);
   };
 
-  // Bad Request라고 뜹니다.
   const postEmoji = useCallback(async (value) => {
     await reactionToRecipient(value);
   });
 
-  const handleEmojiSelect = (emoji) => {
-    setSelectedEmoji(emoji);
-    postEmoji({ id: recipientId, emoji: selectedEmoji, type: 'increase' });
+  const handleEmojiSelect = (emojiObject, event) => {
+    setSelectedEmoji(emojiObject);
+    postEmoji({ id: recipientId, emoji: selectedEmoji.emoji, type: 'increase' });
   };
 
   return (

@@ -36,8 +36,8 @@ function PostHeader({ name, messageCount, reactions, profileImages }) {
         </PostUserCounterContainer>
         <ProfileDivLine />
         <HeaderService>
-          {/* <EmojiList /> */}
-          {reactions.length !== 0 && reactions.map((el) => <Emoji reaction={el} key={el.emoji} />)}
+          {reactions.length !== 0 && <EmojiList />}
+          {/* {reactions.length !== 0 && reactions.map((el) => <Emoji reaction={el} key={el.emoji} />)} */}
           <ButtonContainer>
             <EmojiAdd />
             <ButtonDivLine />

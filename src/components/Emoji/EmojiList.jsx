@@ -11,15 +11,6 @@ import useAsync from '@/hooks/useAsync';
 // TODO: emoji api로 받아오기
 function EmojiList() {
   const [isOpen, setIsOpen] = useState(false);
-  const [reactions, setReactions] = useState([]);
-  const [, , getReactionOfRecipientAsync] = useAsync(getReactionOfRecipient);
-  const { recipientId } = useParams();
-
-  const getReactions = useCallback(async () => {
-    const { result } = await getReactionOfRecipientAsync({ id: recipientId });
-    setReactions(result);
-  }, [getReactionOfRecipientAsync, recipientId]);
-
   const { results } = mockReactions;
 
   // 아무것도 없을 때는 빈 배열을 슬라이스해서 에러가 뜬다.
@@ -29,10 +20,6 @@ function EmojiList() {
   const handleArrowClick = () => {
     setIsOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    getReactions();
-  }, [reactions, getReactions]);
 
   return (
     <EmojiListContainer>
