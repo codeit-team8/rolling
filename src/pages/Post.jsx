@@ -45,11 +45,15 @@ function Post() {
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
 
-  const handleModal = () => {
-    setIsOpenModal((prev) => !prev);
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
   };
 
-  useOnClickOutside(modalRef, handleModal);
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+
+  useOnClickOutside(modalRef, handleCloseModal);
 
   useEffect(() => {
     handleRollingPaper();
@@ -60,9 +64,8 @@ function Post() {
       <PostHeader name={postName} messageCount={postMessageCount} reactions={reactions} profileImages={profileImages} />
       <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         <PlusMessageCard />
-        {messageContents &&
-          messageContents.map((messageCard) =>
-            <MessageCard value={messageCard} key={messageCard.id} handleModal={handleModal} />
+        {messageContents && messageContents.map((messageCard) =>
+            <MessageCard value={messageCard} key={messageCard.id} handleModal={handleOpenModal} />
           )}
       </PostContainer>
       {isOpenModal && (
