@@ -10,9 +10,14 @@ export const MessageCardWrapper = styled.div`
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
 
   @media (min-width: 768px) {
+    width: 35.2rem;
+    height: 28.4rem;
+    padding: 2.8rem 2.4rem;
+  }
+
+  @media (min-width: 1248px) {
     width: 38.4rem;
     height: 28rem;
-    padding: 2.8rem 2.4rem;
   }
 `;
 
@@ -24,6 +29,7 @@ export const MessageCardTop = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   gap: 1.5rem;
+  border-bottom: 1px solid var(--gray-200, #eee);
 `;
 
 export const DeleteBox = styled.div`
@@ -95,15 +101,6 @@ export const Author = styled.h3`
   font-style: normal;
   font-weight: 700;
   line-height: 2.4rem;
-`;
-
-export const MessageCardDivLine = styled.div`
-  width: 27.2rem;
-  height: 1px;
-  background: var(--gray-200);
-
-  @media (min-width: 768px) {
-    width: 33.6rem;
 `;
 
 export const MessageBody = styled.div`
