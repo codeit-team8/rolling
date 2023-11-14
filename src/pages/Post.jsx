@@ -20,9 +20,7 @@ function Post() {
 
   const handleRollingPaper = useCallback(async () => {
     const results = await getRecipientsId({ id: recipientId });
-    const {
- name, messageCount, backgroundColor, backgroundImageURL, topReactions 
-} = { ...results };
+    const { name, messageCount, backgroundColor, backgroundImageURL, topReactions } = { ...results };
     const { color } = BACKGROUND_COLOR_PALETTE[backgroundColor];
     const recentMessages = [...results.recentMessages];
 
