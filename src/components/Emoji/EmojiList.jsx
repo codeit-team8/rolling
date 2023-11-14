@@ -3,15 +3,23 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EmojiPopover from '@/components/Emoji/EmojiPopover';
 import Emoji from '@/components/Emoji/Emoji';
-import mockReactions from '@/assets/mock/mockReactions';
+// import mockReactions from '@/assets/mock/mockReactions';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
 import { getReactionOfRecipient } from '@/api/recipients';
-import useAsync from '@/hooks/useAsync';
 
 // TODO: emoji api로 받아오기
 function EmojiList() {
   const [isOpen, setIsOpen] = useState(false);
-  const { results } = mockReactions;
+
+  const { recipientId } = useParams();
+
+  // const { results } = mockReactions;
+
+  // 리액션 불러오기
+  const handleGetEmoji = useCallback(async () => {
+    const response = await getReactionOfRecipient({ id: recipientId });
+    const { results } = response;
+  }, [recipientId]);
 
   // 아무것도 없을 때는 빈 배열을 슬라이스해서 에러가 뜬다.
   const defaultReactions = [...results].slice(0, 3);
@@ -20,6 +28,10 @@ function EmojiList() {
   const handleArrowClick = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    handleGetEmoji();
+  }, [handleGetEmoji]);
 
   return (
     <EmojiListContainer>
