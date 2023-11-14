@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EmojiPopover from '@/components/Emoji/EmojiPopover';
 import Emoji from '@/components/Emoji/Emoji';
-// import mockReactions from '@/assets/mock/mockReactions';
+import mockReactions from '@/assets/mock/mockReactions';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
 import { getReactionOfRecipient } from '@/api/recipients';
 import useAsync from '@/hooks/useAsync';
@@ -20,9 +20,11 @@ function EmojiList() {
     setReactions(result);
   }, [getReactionOfRecipientAsync, recipientId]);
 
-  // const { results } = mockReactions;
-  const defaultReactions = [...reactions].slice(0, 3);
-  const popoverReactions = [...reactions].slice(3, 11);
+  const { results } = mockReactions;
+
+  // 아무것도 없을 때는 빈 배열을 슬라이스해서 에러가 뜬다.
+  const defaultReactions = [...results].slice(0, 3);
+  const popoverReactions = [...results].slice(3, 11);
 
   const handleArrowClick = () => {
     setIsOpen((prev) => !prev);

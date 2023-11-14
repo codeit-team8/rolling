@@ -15,6 +15,7 @@ import {
 } from '@/components/Header/PostHeader.style.jsx';
 import { ButtonDivLine } from '@/styles/button/ButtonDivLine.jsx';
 import Emoji from '@/components/Emoji/Emoji.jsx';
+import EmojiList from '../Emoji/EmojiList';
 
 function PostHeader({ name, messageCount, reactions, profileImages }) {
   return (
@@ -35,6 +36,7 @@ function PostHeader({ name, messageCount, reactions, profileImages }) {
         </PostUserCounterContainer>
         <ProfileDivLine />
         <HeaderService>
+          {/* <EmojiList /> */}
           {reactions.length !== 0 && reactions.map((el) => <Emoji reaction={el} key={el.emoji} />)}
           <ButtonContainer>
             <EmojiAdd />

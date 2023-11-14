@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import EmojiPicker from 'emoji-picker-react';
 import addImg from '@/assets/icons/add-20.svg';
 import OutlineButton from '@/styles/button/OutlineButton.jsx';
+import { reactionToRecipient } from '@/api/recipients';
 
 export default function EmojiAdd() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState(null);
+
+  const { recipientId } = useParams();
+
   const handleOpenClick = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  // Bad Request라고 뜹니다.
+  const postEmoji = useCallback(async (value) => {
+    await reactionToRecipient(value);
+  });
+
+  const handleEmojiSelect = (emoji) => {
+    setSelectedEmoji(emoji);
+    postEmoji({ id: recipientId, emoji: selectedEmoji, type: 'increase' });
   };
 
   return (
@@ -18,7 +34,7 @@ export default function EmojiAdd() {
       </Box>
       {isOpen && (
         <EmojiPickerBox>
-          <EmojiPicker width="30.6914rem" height="39.2746rem" lazyLoadEmojis="true" />
+          <EmojiPicker width="30.6914rem" height="39.2746rem" lazyLoadEmojis="true" onEmojiClick={handleEmojiSelect} />
         </EmojiPickerBox>
       )}
     </EmojiAddContainer>
