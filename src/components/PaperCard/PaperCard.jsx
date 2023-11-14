@@ -8,7 +8,10 @@ import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 function PaperCard({ card }) {
   const { name, backgroundColor, backgroundImageURL, messageCount, topReactions } = card;
   const { recentMessages } = card;
-  const profileImages = recentMessages === 0 ? [] : recentMessages.map((message) => message.profileImageURL);
+  const profileImages = recentMessages === 0 ? []
+    : recentMessages
+      .map((message) => message.profileImageURL)
+      .slice(0, 3);
   const reactions = [...topReactions].slice(0, 3);
   const colorPalette = BACKGROUND_COLOR_PALETTE[backgroundColor];
 
@@ -17,7 +20,7 @@ function PaperCard({ card }) {
       <CardContainer $backgroundColor={colorPalette.color} $imageUrl={backgroundImageURL}>
         <CardInfo>
           <Recipient $isImage={backgroundImageURL}>{`To. ${name}`}</Recipient>
-          <ProfileImageGroup profileImages={profileImages} />
+          <ProfileImageGroup profileImages={profileImages} messageCount={messageCount} />
           <WriterCounter $isImage={backgroundImageURL}>
             <span>{messageCount}</span>
             명이 작성했어요!

@@ -14,15 +14,17 @@ function App() {
     <div>
       <GlobalStyle />
       <Nav />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/list" element={<PaperList />} />
-        <Route path="/post">
-          <Route index element={<To />} />
-          <Route path=":recipientId" element={<Post />} />
-          <Route path=":recipientId/message" element={<From />} />
-        </Route>
-      </Routes>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/list" element={<PaperList />} />
+          <Route path="/post">
+            <Route index element={<To />} />
+            <Route path=":recipientId" element={<Post />} />
+            <Route path=":recipientId/message" element={<From />} />
+          </Route>
+        </Routes>
+      </ErrorBoundary>
     </div>
   );
 }
