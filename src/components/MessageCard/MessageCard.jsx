@@ -45,7 +45,7 @@ function MessageCard({ value }) {
           </AuthorWrapper>
         </MessageCardProfile>
       </MessageCardTop>
-      <MessageBody>
+      <MessageBody $font={fontFamily}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
       <MessageDate>{new Date(createdAt).toLocaleDateString()}</MessageDate>
