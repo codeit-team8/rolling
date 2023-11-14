@@ -97,6 +97,6 @@ export async function getReactionOfRecipient({ id, limit = 8, offset = '' }) {
     const response = await axios.get(`${DOMAIN_TEAM}/recipients/${id}/reactions/?${query}`);
     return response.data;
   } catch (error) {
-    throw new Error('롤링 페이퍼 대상의 리액션 조회를 실패했습니다.');
+    throw new Error('롤링 페이퍼 대상의 리액션 조회를 실패했습니다.', { cause: { status: error.response.status } });
   }
 }
