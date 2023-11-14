@@ -1,4 +1,5 @@
-import { useLocation } from 'react-router-dom';
+import { useCallback } from 'react';
+import { deleteMessage } from '@/api/message';
 import Badge from '@/components/MessageCard/Badge.jsx';
 import {
   Author,
@@ -18,18 +19,20 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 import { FONT_PALETTE } from '@/util/font.jsx';
 
-function MessageCard({ value }) {
-  const { profileImageURL, sender, relationship, content, font, createdAt } = value;
-  const location = useLocation();
-  const deleteBoxVisible = location.pathname === '/edit';
+function MessageCard({ value, isEdit }) {
+  const { id, profileImageURL, sender, relationship, content, font, createdAt } = value;
   const fontFamily = FONT_PALETTE[font];
+
+  const handleDelete = useCallback(async () => {
+    const deleteId = await deleteMessage({ messageId: id });
+  }, [id]);
 
   return (
     <MessageCardWrapper>
       <MessageCardTop>
-        {deleteBoxVisible && (
+        {isEdit && (
           <DeleteBox>
-            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" />
+            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" onClick={handleDelete} />
           </DeleteBox>
         )}
         <MessageCardProfile>

@@ -47,6 +47,7 @@ export const DeleteBox = styled.div`
   border-radius: 6px;
   border: 1px solid var(--gray-300, #ccc);
   background: var(--white, #fff);
+  cursor: pointer;
 `;
 
 export const DeleteImg = styled.img`
