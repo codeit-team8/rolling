@@ -25,7 +25,7 @@ const INIT_IMAGE = {
 function From() {
   const [postValue, setPostValue] = useState(INIT_MESSAGE);
   const [isValidForm, setIsValidForm] = useState(false);
-  const [profileImageData, setprofileImageData] = useState(INIT_IMAGE);
+  const [profileImageData, setProfileImageData] = useState(INIT_IMAGE);
   const [, , sendMessageAsync] = useAsync(sendMessage);
   const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
@@ -38,7 +38,7 @@ function From() {
 
   const getProfile = useCallback(async () => {
     const response = await getProfileImagesAsync();
-    setprofileImageData({ ...response });
+    setProfileImageData({ ...response });
   }, [getProfileImagesAsync]);
 
   const handleSubmit = (e) => {
