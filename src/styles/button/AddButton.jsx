@@ -1,11 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import plusIcon from '@/assets/icons/plus.svg';
 
 function AddButton({ disabled }) {
+  const { recipientId } = useParams();
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/post/{id}/message`);
+    navigate(`/post/${recipientId}/message`);
   };
 
   return (
