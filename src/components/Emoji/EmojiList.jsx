@@ -1,20 +1,37 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import EmojiPopover from '@/components/Emoji/EmojiPopover';
 import Emoji from '@/components/Emoji/Emoji';
-import mockReactions from '@/assets/mock/mockReactions';
+// import mockReactions from '@/assets/mock/mockReactions';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
+import { getReactionOfRecipient } from '@/api/recipients';
+import useAsync from '@/hooks/useAsync';
 
 // TODO: emoji api로 받아오기
 function EmojiList() {
   const [isOpen, setIsOpen] = useState(false);
-  const { results } = mockReactions;
-  const defaultReactions = [...results].slice(0, 3);
-  const popoverReactions = [...results].slice(3, 11);
+  const [reactions, setReactions] = useState([]);
+  const [, , getReactionOfRecipientAsync] = useAsync(getReactionOfRecipient);
+  const { recipientId } = useParams();
+
+  const getReactions = useCallback(async () => {
+    const { result } = await getReactionOfRecipientAsync({ id: recipientId });
+    setReactions(result);
+  }, [getReactionOfRecipientAsync, recipientId]);
+
+  // const { results } = mockReactions;
+  const defaultReactions = [...reactions].slice(0, 3);
+  const popoverReactions = [...reactions].slice(3, 11);
 
   const handleArrowClick = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    getReactions();
+  }, [reactions, getReactions]);
+
   return (
     <EmojiListContainer>
       <Box>

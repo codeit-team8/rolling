@@ -42,6 +42,7 @@ const EmojiPickerBox = styled.div`
   top: 100%;
   margin-top: 0.5rem;
   right: -6rem;
+  z-index: 2;
 
   @media (min-width: 768px) {
     right: 0;

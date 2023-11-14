@@ -60,11 +60,7 @@ function From() {
   };
 
   const getPostValue = (value) => {
-    setPostValue((prev) => (
-      { ...prev,
-        recipientId,
-        sender: value,
-      }));
+    setPostValue((prev) => ({ ...prev, recipientId, sender: value }));
   };
 
   useEffect(() => {

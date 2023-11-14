@@ -17,7 +17,6 @@ import { ButtonDivLine } from '@/styles/button/ButtonDivLine.jsx';
 import Emoji from '@/components/Emoji/Emoji.jsx';
 
 function PostHeader({ name, messageCount, reactions, profileImages }) {
-
   return (
     <PostHeaderContainer>
       <PostUserContainer>
