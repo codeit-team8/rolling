@@ -1,4 +1,4 @@
-import { MessageCardWrapper } from './MessageCard.style';
+import { MessageCardWrapper } from '@/components/MessageCard/MessageCard.style';
 import AddButton from '@/styles/button/AddButton';
 
 function PlusMessageCard() {

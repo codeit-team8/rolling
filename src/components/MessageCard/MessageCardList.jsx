@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MessageCard from './MessageCard';
+import MessageCard from '@/components/MessageCard/MessageCard';
 
 function MessageCardList({ cards }) {
   return (
