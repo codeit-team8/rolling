@@ -31,17 +31,17 @@ function TextInput({ setIsValidForm, getPostValue }) {
   };
 
   return (
-    <div>
+    <>
       <InputBox
         type="text"
-        placeholder="받는 사람 이름을 입력하세요"
+        placeholder="이름을 입력하세요"
         onBlur={handleBlur}
         onChange={handleChange}
         value={value}
         $isValid={!isValid && isValid !== null}
       />
       {!isValid && isValid !== null && <Error>{errorMessage}</Error>}
-    </div>
+    </>
   );
 }
 

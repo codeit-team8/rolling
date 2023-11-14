@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { FONT24B, FONT16 } from '@/styles/fontType';
+import { FONT16 } from '@/styles/fontType';
 import ProfileImage from '@/styles/profileImage/ProfileImage';
 
-function ProfileSelect({ imageData }) {
+function ProfileSelect({ setPostValue, imageData }) {
   const [selectUrl, setSelectUrl] = useState('');
 
   const handleSelect = ({ imageSource }) => {
     setSelectUrl(imageSource);
+    setPostValue((prev) => ({ ...prev, profileImageURL: imageSource }));
   };
 
   return (
     <ProfileSelectContainer>
-      <H1>프로필 이미지</H1>
       <Section>
         <ProfileImage size="8rem" position="static" profileImage={selectUrl} />
         <SelectDiv>
@@ -32,7 +32,7 @@ export default ProfileSelect;
 
 const ProfileSelectContainer = styled.div`
   width: 32rem;
-  height: 17rem;
+  height: 12.2rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -42,11 +42,6 @@ const ProfileSelectContainer = styled.div`
     width: 71.7rem;
     height: 14.2rem;
   }
-`;
-
-const H1 = styled.h1`
-  color: var(--gray-900, #181818);
-  ${FONT24B}
 `;
 
 const Section = styled.div`

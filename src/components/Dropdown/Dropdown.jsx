@@ -9,7 +9,7 @@ const OPTIONS = {
   font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
 };
 
-function Dropdown({ selectOption }) {
+function Dropdown({ selectOption, setPostValue }) {
   const [selected, setSelected] = useState(OPTIONS[selectOption][1]);
   const [isActive, setIsActive] = useState(false);
 
@@ -20,6 +20,11 @@ function Dropdown({ selectOption }) {
   const handleDropdownContent = (option) => {
     setSelected(option);
     setIsActive(false);
+    if (selectOption === 'relationship') {
+      setPostValue((prev) => ({ ...prev, relationship: option }));
+    } else if (selectOption === 'font') {
+      setPostValue((prev) => ({ ...prev, font: option }));
+    }
   };
 
   return (
@@ -46,6 +51,7 @@ function Dropdown({ selectOption }) {
 }
 
 const DropdownContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,8 +87,12 @@ const DropdownBtn = styled.div`
 `;
 
 const DropdownContentsWrapper = styled.div`
+  position: absolute;
+  background-color: #fff;
+  z-index: 2;
+  top: 100%;
   margin-top: 0.8rem;
-  width: 32rem;
+  width: 100%;
   padding: 1rem 0;
   border-radius: 8px;
   border: 1px solid var(--gray-300, #ccc);

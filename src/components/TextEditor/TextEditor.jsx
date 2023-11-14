@@ -13,14 +13,17 @@ const MODULES = {
   },
 };
 
-function TextEditor({ contentHTML, setContentHTML }) {
+function TextEditor({ setPostValue }) {
+  const editorStyle = {
+    height: '100%',
+  };
+
   return (
     <TextEditorContainer>
       <ReactQuill
         modules={MODULES}
-        value={contentHTML || ''}
-        style={{ height: '100%' }}
-        onChange={(e) => setContentHTML(e)}
+        style={editorStyle}
+        onChange={(e) => setPostValue((prev) => ({ ...prev, content: e }))}
       />
     </TextEditorContainer>
   );
@@ -29,7 +32,7 @@ function TextEditor({ contentHTML, setContentHTML }) {
 export default TextEditor;
 
 const TextEditorContainer = styled.div`
-  width: 72rem;
+  width: -webkit-fill-available;
   height: 26rem;
   padding: 0.1rem 0.1rem 1.6rem 0.1rem;
 `;
