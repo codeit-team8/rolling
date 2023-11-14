@@ -10,9 +10,19 @@ import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
 
+const INIT_MODAL_INFO = {
+  profileImageURL: '',
+  sender: '',
+  relationship: '',
+  content: '',
+  fontFamily: '',
+  createdDate: '',
+};
+
 function Post() {
   const modalRef = useRef();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
 
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
@@ -45,12 +55,14 @@ function Post() {
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (values) => {
     setIsOpenModal(true);
+    setModalInfo({ ...modalInfo, ...values });
   };
 
   const handleCloseModal = () => {
     setIsOpenModal(false);
+    setModalInfo(INIT_MODAL_INFO);
   };
 
   useOnClickOutside(modalRef, handleCloseModal);
@@ -70,7 +82,7 @@ function Post() {
       </PostContainer>
       {isOpenModal && (
         <Modal>
-          <MessageCardModal ref={modalRef} />
+          <MessageCardModal ref={modalRef} modalInfo={modalInfo} />
         </Modal>
       )}
     </>
@@ -89,8 +101,7 @@ const PostContainer = styled.div`
   margin: 0 auto;
   align-items: center;
   height: 100vh;
-  background: ${({ $backgroundColor, $imageUrl }) =>
-    $imageUrl
+  background: ${({ $backgroundColor, $imageUrl }) => $imageUrl
       ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
       : `${$backgroundColor}`};
   background-size: cover;

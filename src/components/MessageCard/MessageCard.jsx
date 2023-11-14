@@ -23,9 +23,21 @@ function MessageCard({ value, handleModal }) {
   const location = useLocation();
   const deleteBoxVisible = location.pathname === '/edit';
   const fontFamily = FONT_PALETTE[font];
+  const createdDate = new Date(createdAt).toLocaleDateString();
+
+  const getCardInfo = () => {
+    handleModal({
+      profileImageURL,
+      sender,
+      relationship,
+      content,
+      fontFamily,
+      createdDate,
+    });
+  };
 
   return (
-    <MessageCardWrapper onClick={handleModal}>
+    <MessageCardWrapper onClick={getCardInfo}>
       <MessageCardTop>
         {deleteBoxVisible && (
           <DeleteBox>
@@ -48,7 +60,7 @@ function MessageCard({ value, handleModal }) {
       <MessageBody $font={fontFamily}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
-      <MessageDate>{new Date(createdAt).toLocaleDateString()}</MessageDate>
+      <MessageDate>{createdDate}</MessageDate>
     </MessageCardWrapper>
   );
 }
