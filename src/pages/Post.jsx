@@ -18,6 +18,15 @@ function Post() {
 
   const { recipientId } = useParams();
 
+  const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
+    setPostName(name);
+    setPostMessageCount(messageCount);
+    setReactions([...topReactions].slice(0, 3));
+    const recentPostProfileImages =
+      recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
+    setProfileImages(recentPostProfileImages);
+  };
+
   const handleRollingPaper = useCallback(async () => {
     const results = await getRecipientsId({ id: recipientId });
     const { name, messageCount, backgroundColor, backgroundImageURL, topReactions } = { ...results };
@@ -33,15 +42,6 @@ function Post() {
   useEffect(() => {
     handleRollingPaper();
   }, [handleRollingPaper]);
-
-  const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
-    setPostName(name);
-    setPostMessageCount(messageCount);
-    setReactions([...topReactions].slice(0, 3));
-    const recentPostProfileImages =
-      recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
-    setProfileImages(recentPostProfileImages);
-  };
 
   return (
     <>
