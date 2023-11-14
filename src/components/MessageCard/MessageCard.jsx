@@ -19,6 +19,7 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 
 function MessageCard({ value }) {
+  const { profileImageURL, sender, relationship, content, createdAt } = value;
   const location = useLocation();
   const deleteBoxVisible = location.pathname === '/edit';
 
@@ -32,22 +33,22 @@ function MessageCard({ value }) {
         )}
         <MessageCardProfile>
           <ProfileImageWrapper>
-            <ProfileImage src={value.profileImageURL} />
+            <ProfileImage src={profileImageURL} />
           </ProfileImageWrapper>
           <AuthorWrapper>
             <AuthorTitle>
               <AuthorFrom>From.</AuthorFrom>
-              <Author>{value.sender}</Author>
+              <Author>{sender}</Author>
             </AuthorTitle>
-            <Badge relationship={value.relationship} />
+            <Badge relationship={relationship} />
           </AuthorWrapper>
         </MessageCardProfile>
       </MessageCardTop>
       <MessageCardDivLine />
       <MessageBody>
-        <div dangerouslySetInnerHTML={{ __html: value.content }} />
+        <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
-      <MessageDate>{new Date(value.createdAt).toLocaleDateString()}</MessageDate>
+      <MessageDate>{new Date(createdAt).toLocaleDateString()}</MessageDate>
     </MessageCardWrapper>
   );
 }
