@@ -19,8 +19,8 @@ function App() {
         <Route path="/list" element={<PaperList />} />
         <Route path="/post">
           <Route index element={<To />} />
-          <Route path=":postId" element={<Post />} />
-          <Route path=":postId/message" element={<From />} />
+          <Route path=":recipientId" element={<Post />} />
+          <Route path=":recipientId/message" element={<From />} />
         </Route>
       </Routes>
     </div>
