@@ -8,7 +8,6 @@ import {
   DeleteBox,
   DeleteImg,
   MessageBody,
-  MessageCardDivLine,
   MessageCardProfile,
   MessageCardTop,
   MessageCardWrapper,
@@ -46,7 +45,6 @@ function MessageCard({ value }) {
           </AuthorWrapper>
         </MessageCardProfile>
       </MessageCardTop>
-      <MessageCardDivLine />
       <MessageBody $font={fontFamily}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
