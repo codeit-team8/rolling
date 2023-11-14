@@ -33,7 +33,7 @@ export async function sendMessage({ recipientId, sender, relationship, content, 
  * @param {number} offset - 가장 앞 객체부터 건너 뛰고 싶은 객체 수.
  * @returns {Promise<any>}
  */
-export async function getMessages({ recipientId, limit = '', offset = '' }) {
+export async function getMessages({ recipientId, limit = '8', offset = '0' }) {
   try {
     const query = `limit=${limit}&offset=${offset}`;
     const response = await axios.get(`${DOMAIN_TEAM}/recipients/${recipientId}/messages/?${query}`);
