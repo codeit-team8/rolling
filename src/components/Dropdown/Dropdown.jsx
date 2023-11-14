@@ -6,7 +6,7 @@ import arrowBottomIcon from '@/assets/icons/arrow_bottom.svg';
 
 const OPTIONS = {
   relationship: ['친구', '지인', '동료', '가족'],
-  font: ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'],
+  font: ['Pretendard', 'Noto Sans', '나눔명조', '나눔손글씨 손편지체'],
 };
 
 function Dropdown({ selectOption, setPostValue }) {
@@ -72,8 +72,7 @@ const DropdownBtn = styled.div`
   cursor: pointer;
 
   ${({ $isActive }) =>
-    $isActive ? 'outline: 2px solid var(--gray-500, #555);' : 'outline: 1px solid var(--gray-300, #ccc);'}
-
+    ($isActive ? 'outline: 2px solid var(--gray-500, #555);' : 'outline: 1px solid var(--gray-300, #ccc);')}
   &:hover {
     outline: 2px solid var(--gray-500, #555);
     color: var(--gray-500, #555);
