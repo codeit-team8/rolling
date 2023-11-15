@@ -53,8 +53,7 @@ function Post() {
   const navigate = useNavigate();
 
   // edit
-  const location = useLocation();
-  const EditPage = location.pathname.includes('/edit');
+  // const location = useLocation();
   const [isEdit, setIsEdit] = useState(false);
 
   const handleEditClick = () => {
@@ -65,6 +64,10 @@ function Post() {
     }
     setIsEdit(!isEdit);
   };
+
+  if (isEdit) {
+    navigate(`/post/${recipientId}/edit`);
+  }
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
@@ -189,13 +192,11 @@ function Post() {
         handleEmojiSelect={handleEmojiSelect}
       />
       <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
-        {EditPage && !isEdit && (
-          <EditButtonContainer>
-            <EditButton $size="H40" type="button" onClick={handleEditClick} isEdit={EditPage}>
-              편집하기
-            </EditButton>
-          </EditButtonContainer>
-        )}
+        <EditButtonContainer>
+          <EditButton $size="H40" type="button" onClick={handleEditClick}>
+            편집하기
+          </EditButton>
+        </EditButtonContainer>
         {isEdit && (
           <DeleteContainer>
             <DeleteButton onClick={handleDeletePage}>삭제하기</DeleteButton>
