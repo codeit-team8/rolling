@@ -5,7 +5,7 @@ export const MessageCardWrapper = styled.div`
   width: 32rem;
   position: relative;
   height: 23rem;
-  padding: 1.6rem;
+  padding: 2.8rem 2.4rem;
   border-radius: 16px;
   background: var(--white);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
@@ -14,7 +14,6 @@ export const MessageCardWrapper = styled.div`
   @media (min-width: 768px) {
     width: 35.2rem;
     height: 28.4rem;
-    padding: 2.8rem 2.4rem;
   }
 
   @media (min-width: 1248px) {
@@ -106,18 +105,31 @@ export const Author = styled.h3`
   line-height: 2.4rem;
 `;
 
+export const MessageWrapper = styled.div`
+  height: 5.6rem;
+  margin: 1.6rem 0;
+
+  @media (min-width: 768px) {
+    height: 11rem;
+  }
+
+  @media (min-width: 1248px) {
+    height: 10.6rem;
+  }
+`;
+
 export const MessageBody = styled.div`
   width: 100%;
-  height: 10.6rem;
   color: var(--gray-600, #4a4a4a);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  line-height: 2.4rem;
 
   @media (min-width: 768px) {
-    margin: 1.6rem 0;
+    -webkit-line-clamp: 3;
   }
 
   p {
