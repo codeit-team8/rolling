@@ -1,6 +1,5 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
@@ -11,9 +10,15 @@ import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
-import PrimaryButton from '@/styles/button/PrimaryButton';
-import OutlineButton from '@/styles/button/OutlineButton';
-import { FONT16 } from '@/styles/fontType.js';
+import {
+  PostBackground,
+  PostContainer,
+  DeleteContainer,
+  DeleteButton,
+  EditButtonContainer,
+  EditButton,
+  Loading,
+} from '@/pages/Post.style.jsx';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -231,136 +236,3 @@ function Post() {
 }
 
 export default Post;
-
-const PostBackground = styled.div`
-  background: ${({ $backgroundColor, $imageUrl }) =>
-    $imageUrl
-      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
-      : `${$backgroundColor}`};
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (min-width: 1248px) {
-    padding: 6.3rem 2.4rem 0;
-  }
-`;
-
-const PostContainer = styled.div`
-  // margin: 4.2rem 0 0 0;
-  padding: 0 2rem 0;
-  display: grid;
-  grid-template-columns: repeat(1, 32rem);
-  grid-template-rows: repeat(auto-fit, 23rem);
-  justify-content: center;
-  gap: 2.4rem;
-  margin: 2.4rem auto 0 auto;
-  align-items: center;
-  height: 100vh;
-  overflow: scroll;
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 35.4rem);
-    grid-template-rows: repeat(auto-fit, 28.4rem);
-    gap: 3rem;
-    padding: 0 2.4rem;
-    // margin-top: 49px;
-  }
-
-  @media (min-width: 1248px) {
-    margin-top: 1.2rem;
-    padding: 0;
-    grid-template-columns: repeat(3, 38.4rem);
-    grid-template-rows: repeat(auto-fit, 28rem);
-  }
-`;
-
-const DeleteContainer = styled.div`
-  position: fixed;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 2.4rem 2rem;
-  bottom: 0;
-
-  @media (min-width: 768px) {
-    padding: 2.4rem;
-  }
-
-  @media (min-width: 1248px) {
-    z-index: 4;
-    position: absolute;
-    justify-content: flex-end;
-    width: 120rem;
-    height: 3.9rem;
-    padding-right: 10rem;
-    top: 19.2rem;
-  }
-`;
-
-const DeleteButton = styled(PrimaryButton)`
-  width: 100%;
-
-  @media (min-width: 1248px) {
-    ${FONT16};
-    padding: 0.7rem 1.6rem;
-    width: 9.2rem;
-    height: 3.9rem;
-  }
-
-  @media (min-width: 1248px) {
-    position: relative;
-  }
-`;
-
-const EditButtonContainer = styled.div`
-  width: 360px;
-  padding: 24px 20px 0 20px;
-  // margin: 0 0 -26px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-
-  @media (min-width: 768px) {
-    width: 768px;
-  }
-
-  @media (min-width: 1248px) {
-    width: 120rem;
-    padding: 0;
-  }
-`;
-
-const EditButton = styled(OutlineButton)`
-  display: flex;
-  flex-direction: row;
-  border-radius: 8px;
-  font-size: 1.6rem;
-  z-index: 1;
-
-  @media (min-width: 768px) {
-    right: 24px;
-    top: 172px;
-  }
-
-  @media (min-width: 1248px) {
-    width: 9.2rem;
-    height: 3.9rem;
-}
-  }
-`;
-
-const Loading = styled.div`
-  height: 2rem;
-`;
