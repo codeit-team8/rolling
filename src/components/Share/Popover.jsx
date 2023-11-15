@@ -6,11 +6,11 @@ import shareKakao from '@/components/Share/ShareKakao.jsx';
 
 const { Kakao } = window;
 // TODO:searchParams를 인자로 받아와서 공유
-const PATH = 'post';
 const URL = 'http://localhost:5173/post';
 
-export default function Popover() {
+export default function Popover({ recipientId }) {
   const [isOpen, setIsOpen] = useState(false);
+  console.log(recipientId);
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init('838406c66469f9358aef57104417a0d7');
@@ -20,7 +20,7 @@ export default function Popover() {
     if (!isOpen) {
       setIsOpen(true);
     }
-    window.navigator.clipboard.writeText(URL);
+    window.navigator.clipboard.writeText(`${URL}/${recipientId}`);
   };
 
   const handleClose = () => {
@@ -28,7 +28,7 @@ export default function Popover() {
   };
 
   const handleKakao = () => {
-    shareKakao(Kakao, PATH);
+    shareKakao(Kakao, `post/${recipientId}`);
   };
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { deleteMessage } from '@/api/message';
 import Badge from '@/components/MessageCard/Badge.jsx';
+import { useLocation } from 'react-router-dom';
 import {
   Author,
   AuthorFrom,
@@ -19,16 +20,29 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 import { FONT_PALETTE } from '@/util/font.jsx';
 
-function MessageCard({ value, isEdit, onDelete }) {
+function MessageCard({ value, handleModal, isEdit, onDelete }) {
   const { id, profileImageURL, sender, relationship, content, font, createdAt } = value;
+
   const fontFamily = FONT_PALETTE[font];
+  const createdDate = new Date(createdAt).toLocaleDateString();
+
+  const getCardInfo = () => {
+    handleModal({
+      profileImageURL,
+      sender,
+      relationship,
+      content,
+      fontFamily,
+      createdDate,
+    });
+  };
 
   // const handleDelete = useCallback(async () => {
   //   const deleteId = await deleteMessage({ messageId: id });
   // }, [id]);
 
   return (
-    <MessageCardWrapper>
+    <MessageCardWrapper onClick={getCardInfo}>
       <MessageCardTop>
         {isEdit && (
           <DeleteBox>
@@ -51,7 +65,7 @@ function MessageCard({ value, isEdit, onDelete }) {
       <MessageBody $font={fontFamily}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
-      <MessageDate>{new Date(createdAt).toLocaleDateString()}</MessageDate>
+      <MessageDate>{createdDate}</MessageDate>
     </MessageCardWrapper>
   );
 }

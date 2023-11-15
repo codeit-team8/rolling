@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ProfileImageGroup from '@/styles/profileImage/ProfileImageGroup.jsx';
+import ProfileImageGroup from '@/components/profileImage/ProfileImageGroup.jsx';
 import { FONT18B, FONT24B } from '@/styles/fontType.js';
 import Emoji from '@/components/Emoji/Emoji.jsx';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';

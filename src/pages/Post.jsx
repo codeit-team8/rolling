@@ -1,14 +1,23 @@
-import { useCallback, useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
-import { deleteMessage } from '@/api/message';
-import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
-import OutlineButton from '@/styles/button/OutlineButton.jsx';
+import Modal from '@/components/Modal/Modal.jsx';
+import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
+import useOnClickOutside from '@/hooks/useOnClickOutside.js';
+
+const INIT_MODAL_INFO = {
+  profileImageURL: '',
+  sender: '',
+  relationship: '',
+  content: '',
+  fontFamily: '',
+  createdDate: '',
+};
 
 function Post() {
   const location = useLocation();
@@ -24,6 +33,10 @@ function Post() {
     setIsEdit(!isEdit);
   };
 
+  const modalRef = useRef();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
+
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
@@ -33,6 +46,15 @@ function Post() {
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
 
   const { recipientId } = useParams();
+
+  const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
+    setPostName(name);
+    setPostMessageCount(messageCount);
+    setReactions([...topReactions].slice(0, 3));
+    const recentPostProfileImages =
+      recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
+    setProfileImages(recentPostProfileImages);
+  };
 
   const handleRollingPaper = useCallback(async () => {
     const results = await getRecipientsId({ id: recipientId });
@@ -46,18 +68,21 @@ function Post() {
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
 
+  const handleOpenModal = (values) => {
+    setIsOpenModal(true);
+    setModalInfo({ ...modalInfo, ...values });
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+    setModalInfo(INIT_MODAL_INFO);
+  };
+
+  useOnClickOutside(modalRef, handleCloseModal);
+
   useEffect(() => {
     handleRollingPaper();
   }, [handleRollingPaper]);
-
-  const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
-    setPostName(name);
-    setPostMessageCount(messageCount);
-    setReactions([...topReactions].slice(0, 3));
-    const recentPostProfileImages =
-      recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
-    setProfileImages(recentPostProfileImages);
-  };
 
   const onDelete = useCallback(async (messageId) => {
     await deleteMessage({ messageId });
@@ -66,7 +91,13 @@ function Post() {
 
   return (
     <>
-      <PostHeader name={postName} messageCount={postMessageCount} reactions={reactions} profileImages={profileImages} />
+      <PostHeader
+        name={postName}
+        messageCount={postMessageCount}
+        reactions={reactions}
+        profileImages={profileImages}
+        recipientId={recipientId}
+      />
       <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         {EditPage && !isEdit && (
           <EditButton $size="H40" type="button" onClick={handleEditClick}>
@@ -82,6 +113,7 @@ function Post() {
                 key={messageCard.id}
                 isEdit={isEdit}
                 onDelete={() => onDelete(messageCard.id)}
+                handleModal={handleOpenModal}
               />
             ))}
         </PostContainer>
@@ -89,6 +121,11 @@ function Post() {
           <SaveButtonContainer>
             <SaveButton $size="big">삭제하기</SaveButton>
           </SaveButtonContainer>
+        )}
+        {isOpenModal && (
+          <Modal>
+            <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
+          </Modal>
         )}
       </PostBackground>
     </>

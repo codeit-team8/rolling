@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ProfileImage, { ProfileImageContainer } from '@/styles/profileImage/ProfileImage.jsx';
+import ProfileImage, { ProfileImageContainer } from '@/components/profileImage/ProfileImage.jsx';
 
 const PROFILE_SIZE = '2.8rem';
 
