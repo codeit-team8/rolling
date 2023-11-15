@@ -206,6 +206,10 @@ const PostBackground = styled.div`
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   @media (min-width: 1248px) {
     padding: 6.3rem 11.4rem 0;
   }
@@ -235,7 +239,6 @@ const PostContainer = styled.div`
     grid-template-rows: repeat(auto-fit, 28.4rem);
     gap: 3rem;
     padding: 0 2.4rem;
-    height: 120rem;
     margin-top: 49px;
   }
 
@@ -266,7 +269,7 @@ const DeleteContainer = styled.div`
     z-index: 4;
     position: static;
     justify-content: flex-end;
-    width: 100%;
+    width: 120rem;
     height: 3.9rem;
     padding: 0;
   }
