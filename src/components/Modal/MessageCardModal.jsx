@@ -54,7 +54,7 @@ const BackDrop = styled.div`
   top: 0;
   left: 0;
   position: fixed;
-  z-index: 3;
+  z-index: 4;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
@@ -63,7 +63,7 @@ const BackDrop = styled.div`
 const ModalContainer = styled.div`
   position: fixed;
   padding: 2rem;
-  z-index: 4;
+  z-index: 5;
   width: 34rem;
   height: 29.5rem;
   border-radius: 16px;
