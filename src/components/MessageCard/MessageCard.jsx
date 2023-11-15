@@ -1,5 +1,7 @@
-import { useLocation } from 'react-router-dom';
+import { useCallback } from 'react';
+import { deleteMessage } from '@/api/message';
 import Badge from '@/components/MessageCard/Badge.jsx';
+import { useLocation } from 'react-router-dom';
 import {
   Author,
   AuthorFrom,
@@ -7,6 +9,7 @@ import {
   AuthorWrapper,
   DeleteBox,
   DeleteImg,
+  MessageWrapper,
   MessageBody,
   MessageCardProfile,
   MessageCardTop,
@@ -18,10 +21,9 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 import { FONT_PALETTE } from '@/util/font.jsx';
 
-function MessageCard({ value, handleModal }) {
-  const { profileImageURL, sender, relationship, content, font, createdAt } = value;
-  const location = useLocation();
-  const deleteBoxVisible = location.pathname === '/edit';
+function MessageCard({ value, handleModal, isEdit, onDelete }) {
+  const { id, profileImageURL, sender, relationship, content, font, createdAt } = value;
+
   const fontFamily = FONT_PALETTE[font];
   const createdDate = new Date(createdAt).toLocaleDateString();
 
@@ -36,12 +38,16 @@ function MessageCard({ value, handleModal }) {
     });
   };
 
+  // const handleDelete = useCallback(async () => {
+  //   const deleteId = await deleteMessage({ messageId: id });
+  // }, [id]);
+
   return (
     <MessageCardWrapper onClick={getCardInfo}>
       <MessageCardTop>
-        {deleteBoxVisible && (
+        {isEdit && (
           <DeleteBox>
-            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" />
+            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" onClick={() => onDelete(id)} />
           </DeleteBox>
         )}
         <MessageCardProfile>
@@ -57,9 +63,11 @@ function MessageCard({ value, handleModal }) {
           </AuthorWrapper>
         </MessageCardProfile>
       </MessageCardTop>
-      <MessageBody $font={fontFamily}>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </MessageBody>
+      <MessageWrapper>
+        <MessageBody $font={fontFamily}>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        </MessageBody>
+      </MessageWrapper>
       <MessageDate>{createdDate}</MessageDate>
     </MessageCardWrapper>
   );

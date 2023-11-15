@@ -1,6 +1,7 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
+import '@/components/TextEditor/TextEditor.css';
 
 // prettier-ignore
 const MODULES = {
