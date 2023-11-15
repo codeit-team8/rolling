@@ -18,7 +18,6 @@ export const PostHeaderContainer = styled.header`
     max-width: 120rem;
     margin: 0 auto;
     padding: 0;
-    gap: 26.3rem;
   }
 `;
 
@@ -26,7 +25,7 @@ export const PostUserContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1.2rem 2rem;
-  flex-shrink: 0;
+  min-width: 0;
 
   @media (min-width: 768px) {
     padding: 0;
