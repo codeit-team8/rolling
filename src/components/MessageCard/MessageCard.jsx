@@ -43,11 +43,17 @@ function MessageCard({ value, handleModal, checkEditPage, onDelete }) {
   // }, [id]);
 
   return (
-    <MessageCardWrapper onClick={getCardInfo}>
+    <MessageCardWrapper
+      onClick={(e) => {
+        if (!e.target.classList.contains('icon')) {
+          getCardInfo();
+        }
+      }}
+    >
       <MessageCardTop>
         {checkEditPage && (
           <DeleteBox>
-            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" onClick={() => onDelete(id)} />
+            <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" onClick={() => onDelete(id)} className="icon" />
           </DeleteBox>
         )}
         <MessageCardProfile>
