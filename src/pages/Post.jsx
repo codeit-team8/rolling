@@ -60,7 +60,7 @@ function Post() {
     handlePostHeader(name, messageCount, topReactions, recentMessages);
 
     setBackground({ color, backgroundImageURL });
-  }, [recipientId]);
+  }, [getRecipientsIdAsync, recipientId]);
 
   const getMessageMore = useCallback(
     (entries) => {
