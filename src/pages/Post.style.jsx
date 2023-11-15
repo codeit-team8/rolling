@@ -68,7 +68,7 @@ export const DeleteContainer = styled.div`
   }
 
   @media (min-width: 1248px) {
-    z-index: 4;
+    z-index: 0;
     position: absolute;
     justify-content: flex-end;
     width: 120rem;
