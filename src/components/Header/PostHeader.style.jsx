@@ -26,6 +26,7 @@ export const PostUserContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1.2rem 2rem;
+  flex-shrink: 0;
 
   @media (min-width: 768px) {
     padding: 0;
@@ -40,6 +41,7 @@ export const PostHeaderLine = styled(HeaderDivLine)`
 
 export const PostUserCounterContainer = styled.div`
   display: none;
+  flex-shrink: 0;
 
   @media (min-width: 1248px) {
     display: flex;
@@ -70,6 +72,9 @@ export const PostUser = styled.h1`
   font-weight: 700;
   line-height: 2.8rem;
   letter-spacing: -0.018rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media (min-width: 768px) {
     font-size: 2.8rem;
