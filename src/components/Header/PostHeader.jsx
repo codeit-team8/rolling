@@ -25,7 +25,7 @@ function PostHeader({ name, messageCount, reactions, profileImages, recipientId 
       <PostHeaderLine />
       <HeaderServiceContainer>
         <PostUserCounterContainer>
-          <ProfileImageGroup profileImages={profileImages} />
+          <ProfileImageGroup profileImages={profileImages} messageCount={messageCount}/>
           <PostUserCounter>
             <h1>
               <span>{messageCount}</span>
