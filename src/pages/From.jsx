@@ -11,13 +11,15 @@ import { sendMessage } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
 import { getProfileImages } from '@/api/profileImage';
 
+export const DEFAULT_IMAGE_URL =
+  'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png';
+
 const INIT_MESSAGE = {
   sender: '',
   relationship: '지인',
   content: '',
   font: 'Noto Sans',
-  profileImageURL:
-    'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png',
+  profileImageURL: DEFAULT_IMAGE_URL,
 };
 
 function From() {

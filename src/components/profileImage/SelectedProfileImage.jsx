@@ -1,23 +1,16 @@
 import styled from 'styled-components';
 import avatar from '@/assets/icons/avatar.svg';
 
-function ProfileImage({ profileImage, size, order, position, handleSelect }) {
+function SelectedProfileImage({ handleInitImage, profileImage }) {
   const imageSource = profileImage || avatar;
   return (
-    <ProfileImageContainer
-      $size={size}
-      $order={order}
-      $position={position}
-      onClick={() => {
-        handleSelect({ imageSource });
-      }}
-    >
+    <ProfileImageContainer $size="8rem" $position="static" onClick={handleInitImage}>
       <Image src={imageSource} alt="아바타" />
     </ProfileImageContainer>
   );
 }
 
-export default ProfileImage;
+export default SelectedProfileImage;
 
 export const ProfileImageContainer = styled.div`
   display: flex;
