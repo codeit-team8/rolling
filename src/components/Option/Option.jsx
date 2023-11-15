@@ -12,6 +12,7 @@ import {
   OptionContainer,
 } from '@/components/Option/Option.style';
 import { BACKGROUND_COLORS } from '@/util/backgroundColors.jsx';
+import Loading from '@/util/Loading.jsx';
 
 const CATEGORIES = ['컬러', '이미지'];
 
@@ -19,7 +20,7 @@ function Option({ setPostValue }) {
   const [isCategorySelect, setIsCategorySelect] = useState(0);
   const [selectedChipIndex, setSelectedChipIndex] = useState(0);
   const [backgroundImages, setBackgroundImages] = useState([]);
-  const [, , getBackgroundImagesAsync] = useAsync(getBackgroundImages);
+  const [isLoadingBackgroundImages, , getBackgroundImagesAsync] = useAsync(getBackgroundImages);
 
   const getBackImages = useCallback(async () => {
     const { imageUrls } = await getBackgroundImagesAsync();
@@ -59,6 +60,7 @@ function Option({ setPostValue }) {
         ))}
       </ButtonContainer>
       <CardContainer>
+        {isLoadingBackgroundImages && <Loading />}
         {isCategorySelect === 0 &&
           BACKGROUND_COLORS.map(({ name, color }, index) => (
             <ColorChip

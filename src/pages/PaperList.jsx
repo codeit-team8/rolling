@@ -6,11 +6,12 @@ import * as F from '@/styles/fontType.js';
 import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
 import useAsync from '@/hooks/useAsync.js';
 import { getRecipients } from '@/api/recipients.js';
+import Loading from '@/util/Loading.jsx';
 
 function PaperList() {
   const [likePaperCardList, setLikePaperCardList] = useState([]);
   const [recentPaperCardList, setRecentPaperCardList] = useState([]);
-  const [getRecipientsIsLoading, getRecipientsError, getRecipientsAsync] = useAsync(getRecipients);
+  const [isLoadingRecipients, , getRecipientsAsync] = useAsync(getRecipients);
 
   const handleLikeLoad = useCallback(async () => {
     const result = await getRecipientsAsync({ sort: 'like' });
@@ -34,10 +35,12 @@ function PaperList() {
       <PaperListContainer>
         <PaperListTitle>인기 롤링 페이퍼 🔥</PaperListTitle>
         <RollingPaperList paperCardList={likePaperCardList} />
+        {isLoadingRecipients && <Loading />}
       </PaperListContainer>
       <PaperListContainer style={{ marginTop: '7.4rem' }}>
         <PaperListTitle>최근에 만든 롤링 페이퍼⭐️</PaperListTitle>
         <RollingPaperList paperCardList={recentPaperCardList} />
+        {isLoadingRecipients && <Loading />}
       </PaperListContainer>
       <ButtonContainer>
         <Link to="/post">
