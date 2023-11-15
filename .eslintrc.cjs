@@ -37,6 +37,7 @@ module.exports = {
   'rules': {
     'no-console': 'warn',
     'linebreak-style': 'off',
+    'object-curly-newline': 'off',
     'import/extensions': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
