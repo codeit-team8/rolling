@@ -239,7 +239,7 @@ const PostContainer = styled.div`
     grid-template-rows: repeat(auto-fit, 28.4rem);
     gap: 3rem;
     padding: 0 2.4rem;
-    margin-top: 49px;
+    // margin-top: 49px;
   }
 
   @media (min-width: 1248px) {
@@ -247,7 +247,6 @@ const PostContainer = styled.div`
     padding: 0;
     grid-template-columns: repeat(3, 38.4rem);
     grid-template-rows: repeat(auto-fit, 28rem);
-    margin-top: 113px;
   }
 `;
 
