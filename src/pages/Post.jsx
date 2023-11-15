@@ -213,13 +213,13 @@ const PostContainer = styled.div`
     grid-template-columns: repeat(2, 35.4rem);
     grid-template-rows: repeat(auto-fit, 28.4rem);
     gap: 3rem;
-    padding: 4.9rem 2.4rem;
+    padding: 0 2.4rem;
     height: 120rem;
     margin-top: 49px;
   }
 
   @media (min-width: 1248px) {
-    padding: 6rem 2.4rem;
+    padding: 0 2.4rem;
     grid-template-columns: repeat(3, 38.4rem);
     grid-template-rows: repeat(auto-fit, 28rem);
     margin-top: 113px;
@@ -259,7 +259,13 @@ const EditButtonContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
 
-}
+  @media (min-width: 768px) {
+    width: 768px;
+  }
+
+  @media (min-width: 1248px) {
+    width: 120rem;
+  }
 `;
 
 const EditButton = styled(OutlineButton)`
