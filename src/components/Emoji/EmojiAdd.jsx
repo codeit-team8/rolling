@@ -4,8 +4,9 @@ import EmojiPicker from 'emoji-picker-react';
 import addImg from '@/assets/icons/add-20.svg';
 import OutlineButton from '@/styles/button/OutlineButton.jsx';
 
-export default function EmojiAdd() {
+export default function EmojiAdd({ handleEmojiSelect }) {
   const [isOpen, setIsOpen] = useState(false);
+
   const handleOpenClick = () => {
     setIsOpen((prev) => !prev);
   };
@@ -18,7 +19,7 @@ export default function EmojiAdd() {
       </Box>
       {isOpen && (
         <EmojiPickerBox>
-          <EmojiPicker width="30.6914rem" height="39.2746rem" lazyLoadEmojis="true" />
+          <EmojiPicker width="30.6914rem" height="39.2746rem" lazyLoadEmojis="true" onEmojiClick={handleEmojiSelect} />
         </EmojiPickerBox>
       )}
     </EmojiAddContainer>
@@ -42,6 +43,7 @@ const EmojiPickerBox = styled.div`
   top: 100%;
   margin-top: 0.5rem;
   right: -6rem;
+  z-index: 2;
 
   @media (min-width: 768px) {
     right: 0;
