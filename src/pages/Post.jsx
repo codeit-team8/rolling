@@ -58,19 +58,20 @@ function Post() {
   const checkEditPage = () => location.pathname.includes('edit');
 
   const handleEditClick = () => {
-    setIsEdit(!isEdit);
-    console.log('클릭했나?');
-
-    if (isEdit) {
+    if (!location.pathname.includes('edit')) {
       navigate(`/post/${recipientId}/edit`);
     } else {
       navigate(-1);
     }
   };
 
-  // if (isEdit) {
-  //   navigate(`/post/${recipientId}/edit`);
-  // }
+  useEffect(() => {
+    if (location.pathname.includes('edit')) {
+      setIsEdit(true);
+    } else {
+      setIsEdit(false);
+    }
+  }, [location.pathname]);
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
