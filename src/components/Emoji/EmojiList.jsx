@@ -1,24 +1,11 @@
 import styled, { css } from 'styled-components';
-import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import EmojiPopover from '@/components/Emoji/EmojiPopover';
 import Emoji from '@/components/Emoji/Emoji';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
-import { getReactionOfRecipient } from '@/api/recipients';
 
-// TODO: emoji api로 받아오기
-function EmojiList() {
+function EmojiList({ emojiData }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [emojiData, setEmojiData] = useState([]);
-
-  const { recipientId } = useParams();
-
-  // 리액션 불러오기
-  const handleGetEmoji = useCallback(async () => {
-    const response = await getReactionOfRecipient({ id: recipientId });
-    const { results } = { ...response };
-    setEmojiData(() => [...results]); // 불러오는 데이터를 state로 관리하니 해결했다 (마운트 단계에서 아무 데이터가 없어서 처리하는 과정에서 에러가 났던 거다.)
-  }, [recipientId]);
 
   const defaultReactions = [...emojiData].slice(0, 3);
   const popoverReactions = [...emojiData].slice(3, 11);
@@ -26,10 +13,6 @@ function EmojiList() {
   const handleArrowClick = () => {
     setIsOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    handleGetEmoji();
-  }, [handleGetEmoji]);
 
   return (
     <EmojiListContainer>

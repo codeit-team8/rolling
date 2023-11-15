@@ -1,32 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import styled from 'styled-components';
 import EmojiPicker from 'emoji-picker-react';
 import addImg from '@/assets/icons/add-20.svg';
 import OutlineButton from '@/styles/button/OutlineButton.jsx';
-import { reactionToRecipient } from '@/api/recipients';
 
-export default function EmojiAdd() {
+export default function EmojiAdd({ handleEmojiSelect }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedEmoji, setSelectedEmoji] = useState(null);
-
-  const { recipientId } = useParams();
 
   const handleOpenClick = () => {
     setIsOpen((prev) => !prev);
   };
-
-  const postEmoji = useCallback(async (value, emojiObject) => {
-    await reactionToRecipient(value);
-    // 여기에 setState 쓰기 바로 보여짐
-  }, []);
-
-  const handleEmojiSelect = (emojiObject, event) => {
-    setSelectedEmoji(emojiObject);
-    postEmoji({ id: recipientId, emoji: selectedEmoji.emoji, type: 'increase' });
-  };
-
-  // useEffect
 
   return (
     <EmojiAddContainer>
