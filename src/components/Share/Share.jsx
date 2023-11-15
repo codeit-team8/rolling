@@ -4,7 +4,7 @@ import shareIcon from '@/assets/icons/share.svg';
 import Popover from '@/components/Share/Popover.jsx';
 import OutlineButton from '@/styles/button/OutlineButton.jsx';
 
-function Share() {
+function Share({ recipientId }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenClick = () => {
@@ -18,7 +18,7 @@ function Share() {
       </ShareButton>
       {isOpen && (
         <PopoverBox>
-          <Popover />
+          <Popover recipientId={recipientId} />
         </PopoverBox>
       )}
     </ShareContainer>

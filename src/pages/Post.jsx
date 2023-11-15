@@ -45,7 +45,13 @@ function Post() {
 
   return (
     <>
-      <PostHeader name={postName} messageCount={postMessageCount} reactions={reactions} profileImages={profileImages} />
+      <PostHeader
+        name={postName}
+        messageCount={postMessageCount}
+        reactions={reactions}
+        profileImages={profileImages}
+        recipientId={recipientId}
+      />
       <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         <PlusMessageCard />
         {messageContents &&
