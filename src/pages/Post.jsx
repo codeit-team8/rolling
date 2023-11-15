@@ -58,17 +58,19 @@ function Post() {
   const checkEditPage = () => location.pathname.includes('edit');
 
   const handleEditClick = () => {
-    if (isEdit) {
-      console.log('true상태!!');
-    } else {
-      console.log('false상태!!');
-    }
     setIsEdit(!isEdit);
+    console.log('클릭했나?');
+
+    if (isEdit) {
+      navigate(`/post/${recipientId}/edit`);
+    } else {
+      navigate(-1);
+    }
   };
 
-  if (isEdit) {
-    navigate(`/post/${recipientId}/edit`);
-  }
+  // if (isEdit) {
+  //   navigate(`/post/${recipientId}/edit`);
+  // }
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
@@ -195,7 +197,7 @@ function Post() {
       <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         <EditButtonContainer>
           <EditButton $size="H40" type="button" onClick={handleEditClick}>
-            편집하기
+            {isEdit ? '뒤로가기' : '편집하기'}
           </EditButton>
         </EditButtonContainer>
         {checkEditPage() && (
@@ -334,6 +336,7 @@ const EditButtonContainer = styled.div`
 
   @media (min-width: 1248px) {
     width: 120rem;
+    padding-right: 10rem;
   }
 `;
 
@@ -350,11 +353,8 @@ const EditButton = styled(OutlineButton)`
   }
 
   @media (min-width: 1248px) {
-    display: flex;
-    justify-content: flex-end;
-    position: fixed;
-    right: 200px;
-    top: 100px;
+    margin-bottom: -3.9rem;
+    margin-left: -2rem;
   }
 `;
 
