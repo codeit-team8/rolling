@@ -62,9 +62,7 @@ const CardContainer = styled.div`
 `;
 
 const Recipient = styled.h1`
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  white-space: nowrap;
   align-self: stretch;
   overflow: hidden;
   color: ${({ $isImage }) => ($isImage ? 'var(--white, #fff)' : 'var(--gray-900, #181818)')};

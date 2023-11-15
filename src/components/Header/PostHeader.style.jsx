@@ -70,6 +70,9 @@ export const PostUser = styled.h1`
   font-weight: 700;
   line-height: 2.8rem;
   letter-spacing: -0.018rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media (min-width: 768px) {
     font-size: 2.8rem;
