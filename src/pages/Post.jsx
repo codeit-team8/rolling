@@ -167,7 +167,20 @@ const SaveButton = styled(PrimaryButton)`
 `;
 
 const EditButton = styled(OutlineButton)`
+  position: absolute;
+  right: 20px;
+  top: 128px;
   display: flex;
   border-radius: 8px;
   font-size: 1.6rem;
+
+  @media (min-width: 768px) {
+    right: 24px;
+    top: 172px;
+  }
+
+  @media (min-width: 1248px) {
+    right: 196px;
+    top: 360px;
+  }
 `;
