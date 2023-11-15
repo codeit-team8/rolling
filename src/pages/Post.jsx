@@ -1,16 +1,18 @@
+import { useParams, useLocation } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
-import { getMessages } from '@/api/message';
+import { getMessages, deleteMessage } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
+import PrimaryButton from '@/styles/button/PrimaryButton';
+import OutlineButton from '@/styles/button/OutlineButton';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -21,7 +23,20 @@ const INIT_MODAL_INFO = {
   createdDate: '',
 };
 
-function Post() {
+export default function Post() {
+  const location = useLocation();
+  const EditPage = location.pathname.includes('/edit');
+
+  const [isEdit, setIsEdit] = useState(false);
+  const handleEditClick = () => {
+    if (isEdit) {
+      console.log('true상태!!');
+    } else {
+      console.log('false상태!!');
+    }
+    setIsEdit(!isEdit);
+  };
+
   const modalRef = useRef();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
@@ -91,6 +106,11 @@ function Post() {
     handleRollingPaper();
   }, [handleRollingPaper]);
 
+  const onDelete = useCallback(async (messageId) => {
+    await deleteMessage({ messageId });
+    setMessageContents((prevMessages) => prevMessages.filter((message) => message.id !== messageId));
+  });
+
   useEffect(() => {
     getMessageOffset();
   }, [getMessageOffset]);
@@ -119,24 +139,51 @@ function Post() {
         profileImages={profileImages}
         recipientId={recipientId}
       />
-      <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
-        <PlusMessageCard />
-        {messageContents &&
-          messageContents.map((messageCard) => (
-            <MessageCard value={messageCard} key={messageCard.id} handleModal={handleOpenModal} />
-          ))}
-        {hasNext && <Loading ref={observerRef} />}
-      </PostContainer>
-      {isOpenModal && (
-        <Modal>
-          <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
-        </Modal>
-      )}
+      <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
+        {EditPage && !isEdit && (
+          <EditButton $size="H40" type="button" onClick={handleEditClick}>
+            편집하기
+          </EditButton>
+        )}
+        <PostContainer>
+          {!isEdit && <PlusMessageCard />}
+          {messageContents &&
+            messageContents.map((messageCard) => (
+              <MessageCard
+                value={messageCard}
+                key={messageCard.id}
+                isEdit={isEdit}
+                onDelete={() => onDelete(messageCard.id)}
+                handleModal={handleOpenModal}
+              />
+            ))}
+          {hasNext && <Loading ref={observerRef} />}
+        </PostContainer>
+        {isEdit && (
+          <SaveButtonContainer>
+            <SaveButton $size="big">삭제하기</SaveButton>
+          </SaveButtonContainer>
+        )}
+
+        {isOpenModal && (
+          <Modal>
+            <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
+          </Modal>
+        )}
+      </PostBackground>
     </>
   );
 }
 
-export default Post;
+const PostBackground = styled.div`
+  background: ${({ $backgroundColor, $imageUrl }) =>
+    $imageUrl
+      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+      : `${$backgroundColor}`};
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+`;
 
 const PostContainer = styled.div`
   padding: 4.2rem 2rem 0;
@@ -148,13 +195,6 @@ const PostContainer = styled.div`
   margin: 0 auto;
   align-items: center;
   height: 100vh;
-  background: ${({ $backgroundColor, $imageUrl }) =>
-    $imageUrl
-      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
-      : `${$backgroundColor}`};
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   overflow: scroll;
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none;
@@ -168,12 +208,57 @@ const PostContainer = styled.div`
     grid-template-rows: repeat(auto-fit, 28.4rem);
     gap: 3rem;
     padding: 4.9rem 2.4rem;
+    height: 120rem;
   }
 
   @media (min-width: 1248px) {
     padding: 6rem 2.4rem;
     grid-template-columns: repeat(3, 38.4rem);
     grid-template-rows: repeat(auto-fit, 28rem);
+  }
+`;
+const SaveButtonContainer = styled.div`
+  bottom: 2.4rem;
+  position: absolute;
+  margin-top: 4.2rem;
+  padding: 2.4rem 2rem;
+  background-color: @media (min-width: 768px) {
+    margin-top: 13.2rem;
+    padding: 2.4rem;
+  }
+
+  @media (min-width: 1248px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+  }
+`;
+
+const SaveButton = styled(PrimaryButton)`
+  width: 100%;
+
+  @media (min-width: 1248px) {
+    width: 28rem;
+  }
+`;
+
+const EditButton = styled(OutlineButton)`
+  position: absolute;
+  right: 20px;
+  top: 128px;
+  display: flex;
+  border-radius: 8px;
+  font-size: 1.6rem;
+
+  @media (min-width: 768px) {
+    right: 24px;
+    top: 172px;
+  }
+
+  @media (min-width: 1248px) {
+    right: 196px;
+    top: 360px;
   }
 `;
 
