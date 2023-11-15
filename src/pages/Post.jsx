@@ -1,4 +1,4 @@
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
@@ -6,7 +6,7 @@ import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import { deleteRecipientsId, getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
-import { getMessages, deleteMessage } from '@/api/message';
+import { deleteMessage, getMessages } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
@@ -24,19 +24,6 @@ const INIT_MODAL_INFO = {
 };
 
 function Post() {
-  const location = useLocation();
-  const EditPage = location.pathname.includes('/edit');
-
-  const [isEdit, setIsEdit] = useState(false);
-  const handleEditClick = () => {
-    if (isEdit) {
-      console.log('true상태!!');
-    } else {
-      console.log('false상태!!');
-    }
-    setIsEdit(!isEdit);
-  };
-
   const modalRef = useRef();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
@@ -54,6 +41,18 @@ function Post() {
   const observerRef = useRef(null);
   const { recipientId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const EditPage = location.pathname.includes('/edit');
+  const [isEdit, setIsEdit] = useState(false);
+
+  const handleEditClick = () => {
+    if (isEdit) {
+      console.log('true상태!!');
+    } else {
+      console.log('false상태!!');
+    }
+    setIsEdit(!isEdit);
+  };
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
@@ -122,7 +121,7 @@ function Post() {
   const onDelete = useCallback(async (messageId) => {
     await deleteMessage({ messageId });
     setMessageContents((prevMessages) => prevMessages.filter((message) => message.id !== messageId));
-  });
+  }, []);
 
   useEffect(() => {
     getMessageOffset();
@@ -172,18 +171,17 @@ function Post() {
             ))}
           {hasNext && <Loading ref={observerRef} />}
         </PostContainer>
-        {isEdit && (
-          <SaveButtonContainer>
-            <SaveButton $size="big">삭제하기</SaveButton>
-          </SaveButtonContainer>
-        )}
-
         {isOpenModal && (
           <Modal>
             <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
           </Modal>
         )}
       </PostBackground>
+      {isEdit && (
+        <DeleteContainer>
+          <DeleteButton onClick={handleDeletePage}>삭제하기</DeleteButton>
+        </DeleteContainer>
+      )}
     </>
   );
 }
@@ -232,25 +230,23 @@ const PostContainer = styled.div`
     grid-template-rows: repeat(auto-fit, 28rem);
   }
 `;
-const SaveButtonContainer = styled.div`
-  bottom: 2.4rem;
-  position: absolute;
-  margin-top: 4.2rem;
-  padding: 2.4rem 2rem;
-  background-color: @media (min-width: 768px) {
-    margin-top: 13.2rem;
-    padding: 2.4rem;
-  }
 
-  @media (min-width: 1248px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 4rem;
+const DeleteContainer = styled.div`
+  position: fixed;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2.4rem 2rem;
+  bottom: 0;
+
+  @media (min-width: 768px) {
+    padding: 2.4rem;
   }
 `;
 
-const SaveButton = styled(PrimaryButton)`
+const DeleteButton = styled(PrimaryButton)`
   width: 100%;
 
   @media (min-width: 1248px) {
