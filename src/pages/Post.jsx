@@ -191,14 +191,14 @@ const PostBackground = styled.div`
 `;
 
 const PostContainer = styled.div`
-  margin: 4.2rem 0 0 0;
-  padding: 4.2rem 2rem 0;
+  // margin: 4.2rem 0 0 0;
+  padding: 0 2rem 0;
   display: grid;
   grid-template-columns: repeat(1, 32rem);
   grid-template-rows: repeat(auto-fit, 23rem);
   justify-content: center;
   gap: 2.4rem;
-  margin: 0 auto;
+  margin: 2.4rem auto 0 auto;
   align-items: center;
   height: 100vh;
   overflow: scroll;
@@ -215,12 +215,14 @@ const PostContainer = styled.div`
     gap: 3rem;
     padding: 4.9rem 2.4rem;
     height: 120rem;
+    margin-top: 49px;
   }
 
   @media (min-width: 1248px) {
     padding: 6rem 2.4rem;
     grid-template-columns: repeat(3, 38.4rem);
     grid-template-rows: repeat(auto-fit, 28rem);
+    margin-top: 113px;
   }
 `;
 const SaveButtonContainer = styled.div`
@@ -251,20 +253,21 @@ const SaveButton = styled(PrimaryButton)`
 
 const EditButtonContainer = styled.div`
   width: 360px;
-  padding: 24px 20px ;
-  margin: 0 0 -26px 0;
+  padding: 24px 20px 0 20px;
+  // margin: 0 0 -26px 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
 }
 `;
 
 const EditButton = styled(OutlineButton)`
-  // position: sticky;
   display: flex;
   flex-direction: row;
   border-radius: 8px;
   font-size: 1.6rem;
+  z-index: 1;
 
   @media (min-width: 768px) {
     right: 24px;
