@@ -8,10 +8,8 @@ import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 function PaperCard({ card }) {
   const { name, backgroundColor, backgroundImageURL, messageCount, topReactions } = card;
   const { recentMessages } = card;
-  const profileImages = recentMessages === 0 ? []
-    : recentMessages
-      .map((message) => message.profileImageURL)
-      .slice(0, 3);
+  const profileImages =
+    recentMessages === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
   const reactions = [...topReactions].slice(0, 3);
   const colorPalette = BACKGROUND_COLOR_PALETTE[backgroundColor];
 
@@ -44,13 +42,13 @@ const CardContainer = styled.div`
   width: 20.8rem;
   height: 23.2rem;
   flex-shrink: 0;
-  padding: 3rem 2.4rem 2rem;
+  padding: 3rem 1.5rem 2rem;
   border-radius: 16px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   background: ${({ $backgroundColor, $imageUrl }) =>
-          ($imageUrl
-                  ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
-                  : `${$backgroundColor}`)};
+    $imageUrl
+      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+      : `${$backgroundColor}`};
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 0 0.2rem 1.2rem 0 rgba(0, 0, 0, 0.08);
@@ -59,6 +57,7 @@ const CardContainer = styled.div`
   @media (min-width: 768px) {
     width: 27.5rem;
     height: 26rem;
+    padding: 3rem 2.4rem 2rem;
   }
 `;
 
