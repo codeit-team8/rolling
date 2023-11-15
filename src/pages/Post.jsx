@@ -211,7 +211,7 @@ const PostBackground = styled.div`
   align-items: center;
 
   @media (min-width: 1248px) {
-    padding: 6.3rem 11.4rem 0;
+    padding: 6.3rem 2.4rem 0;
   }
 `;
 
