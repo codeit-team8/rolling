@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
@@ -8,8 +8,23 @@ import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 import { getMessages } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
+import Modal from '@/components/Modal/Modal.jsx';
+import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
+import useOnClickOutside from '@/hooks/useOnClickOutside.js';
+
+const INIT_MODAL_INFO = {
+  profileImageURL: '',
+  sender: '',
+  relationship: '',
+  content: '',
+  fontFamily: '',
+  createdDate: '',
+};
 
 function Post() {
+  const modalRef = useRef();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
@@ -21,6 +36,15 @@ function Post() {
   const [isLoading, , getMessagesAsync] = useAsync(getMessages);
   const observerRef = useRef(null);
   const { recipientId } = useParams();
+
+  const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
+    setPostName(name);
+    setPostMessageCount(messageCount);
+    setReactions([...topReactions].slice(0, 3));
+    const recentPostProfileImages =
+      recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
+    setProfileImages(recentPostProfileImages);
+  };
 
   const handleRollingPaper = useCallback(async () => {
     const results = await getRecipientsId({ id: recipientId });
@@ -50,6 +74,17 @@ function Post() {
     setMessageContents((prev) => [...prev, ...results]);
     setHasNext(next);
   }, [offset, recipientId, getMessagesAsync]);
+  const handleOpenModal = (values) => {
+    setIsOpenModal(true);
+    setModalInfo({ ...modalInfo, ...values });
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+    setModalInfo(INIT_MODAL_INFO);
+  };
+
+  useOnClickOutside(modalRef, handleCloseModal);
 
   useEffect(() => {
     handleRollingPaper();
@@ -74,24 +109,22 @@ function Post() {
     };
   }, [getMessageMore]);
 
-  const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
-    setPostName(name);
-    setPostMessageCount(messageCount);
-    setReactions([...topReactions].slice(0, 3));
-    const recentPostProfileImages =
-      recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
-    setProfileImages(recentPostProfileImages);
-  };
-
   return (
     <>
       <PostHeader name={postName} messageCount={postMessageCount} reactions={reactions} profileImages={profileImages} />
       <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         <PlusMessageCard />
         {messageContents &&
-          messageContents.map((messageCard) => <MessageCard value={messageCard} key={messageCard.id} />)}
+          messageContents.map((messageCard) => (
+            <MessageCard value={messageCard} key={messageCard.id} handleModal={handleOpenModal} />
+          ))}
         {hasNext && <Loading ref={observerRef}>여기 닿으면 로~드</Loading>}
       </PostContainer>
+      {isOpenModal && (
+        <Modal>
+          <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
+        </Modal>
+      )}
     </>
   );
 }
