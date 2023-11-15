@@ -125,7 +125,7 @@ function Post() {
           messageContents.map((messageCard) => (
             <MessageCard value={messageCard} key={messageCard.id} handleModal={handleOpenModal} />
           ))}
-        {hasNext && <Loading ref={observerRef}>여기 닿으면 로~드</Loading>}
+        {hasNext && <Loading ref={observerRef} />}
       </PostContainer>
       {isOpenModal && (
         <Modal>
