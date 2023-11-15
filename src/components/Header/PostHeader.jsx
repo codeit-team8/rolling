@@ -14,7 +14,7 @@ import {
   ProfileDivLine,
 } from '@/components/Header/PostHeader.style.jsx';
 import { ButtonDivLine } from '@/styles/button/ButtonDivLine.jsx';
-import EmojiList from '../Emoji/EmojiList';
+import EmojiList from '@/Emoji/EmojiList';
 
 function PostHeader({ name, messageCount, profileImages, recipientId, emojiData, handleEmojiSelect }) {
   return (
