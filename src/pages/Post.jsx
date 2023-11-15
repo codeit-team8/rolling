@@ -6,6 +6,8 @@ import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
+import { getMessages } from '@/api/message';
+import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
@@ -23,15 +25,16 @@ function Post() {
   const modalRef = useRef();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
-
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
   const [profileImages, setProfileImages] = useState([]);
-
-  const [messageContents, setMessageContents] = useState();
+  const [messageContents, setMessageContents] = useState([]);
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
-
+  const [hasNext, setHasNext] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const [isLoading, , getMessagesAsync] = useAsync(getMessages);
+  const observerRef = useRef(null);
   const { recipientId } = useParams();
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
@@ -51,9 +54,26 @@ function Post() {
 
     handlePostHeader(name, messageCount, topReactions, recentMessages);
 
-    setMessageContents(recentMessages);
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
+
+  const getMessageMore = useCallback(
+    (entries) => {
+      if (!isLoading) {
+        const target = entries[0];
+        if (target.isIntersecting) {
+          setOffset((prev) => prev + 8);
+        }
+      }
+    },
+    [isLoading],
+  );
+
+  const getMessageOffset = useCallback(async () => {
+    const { results, next } = await getMessagesAsync({ recipientId, offset });
+    setMessageContents((prev) => [...prev, ...results]);
+    setHasNext(next);
+  }, [offset, recipientId, getMessagesAsync]);
 
   const handleOpenModal = (values) => {
     setIsOpenModal(true);
@@ -71,6 +91,25 @@ function Post() {
     handleRollingPaper();
   }, [handleRollingPaper]);
 
+  useEffect(() => {
+    getMessageOffset();
+  }, [getMessageOffset]);
+
+  useEffect(() => {
+    const option = {
+      root: null,
+      rootMargin: '20px',
+      threshold: 1,
+    };
+    const io = new IntersectionObserver(getMessageMore, option);
+    if (observerRef.current) {
+      io.observe(observerRef.current);
+    }
+    return () => {
+      io.disconnect();
+    };
+  }, [getMessageMore]);
+
   return (
     <>
       <PostHeader
@@ -86,6 +125,7 @@ function Post() {
           messageContents.map((messageCard) => (
             <MessageCard value={messageCard} key={messageCard.id} handleModal={handleOpenModal} />
           ))}
+        {hasNext && <Loading ref={observerRef} />}
       </PostContainer>
       {isOpenModal && (
         <Modal>
@@ -135,4 +175,8 @@ const PostContainer = styled.div`
     grid-template-columns: repeat(3, 38.4rem);
     grid-template-rows: repeat(auto-fit, 28rem);
   }
+`;
+
+const Loading = styled.div`
+  height: 2rem;
 `;
