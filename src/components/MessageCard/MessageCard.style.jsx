@@ -103,6 +103,18 @@ export const Author = styled.h3`
   font-style: normal;
   font-weight: 700;
   line-height: 2.4rem;
+  width: 15rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @media (min-width: 768px) {
+    width: 17rem;
+  }
+
+  @media (min-width: 1248px) {
+    width: 20rem;
+  }
 `;
 
 export const MessageWrapper = styled.div`
