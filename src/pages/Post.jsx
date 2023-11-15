@@ -69,7 +69,7 @@ function Post() {
     [isLoading],
   );
 
-  const getData = useCallback(async () => {
+  const getMessageOffset = useCallback(async () => {
     const { results, next } = await getMessagesAsync({ recipientId, offset });
     setMessageContents((prev) => [...prev, ...results]);
     setHasNext(next);
@@ -92,8 +92,8 @@ function Post() {
   }, [handleRollingPaper]);
 
   useEffect(() => {
-    getData();
-  }, [getData]);
+    getMessageOffset();
+  }, [getMessageOffset]);
 
   useEffect(() => {
     const option = {
