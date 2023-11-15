@@ -24,23 +24,30 @@ const INIT_MODAL_INFO = {
 };
 
 function Post() {
+  // Modal
   const modalRef = useRef();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
 
+  // PostHeader
   const [, , getRecipientsIdAsync] = useAsync(getRecipientsId);
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
   const [profileImages, setProfileImages] = useState([]);
-  const [messageContents, setMessageContents] = useState([]);
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
+
+  // Messages
+  const [messageContents, setMessageContents] = useState([]);
   const [hasNext, setHasNext] = useState(true);
   const [offset, setOffset] = useState(0);
   const [isLoading, , getMessagesAsync] = useAsync(getMessages);
   const observerRef = useRef(null);
+
   const { recipientId } = useParams();
   const navigate = useNavigate();
+
+  // edit
   const location = useLocation();
   const EditPage = location.pathname.includes('/edit');
   const [isEdit, setIsEdit] = useState(false);
