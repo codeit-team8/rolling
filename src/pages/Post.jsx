@@ -204,7 +204,7 @@ function Post() {
           </DeleteContainer>
         )}
         <PostContainer>
-          {checkEditPage() && <PlusMessageCard />}
+          {!checkEditPage() && <PlusMessageCard />}
           {messageContents &&
             messageContents.map((messageCard) => (
               <MessageCard
@@ -314,6 +314,10 @@ const DeleteButton = styled(PrimaryButton)`
     width: 9.2rem;
     height: 3.9rem;
   }
+
+  @media (min-width: 1248px) {
+    position: relative;
+  }
 `;
 
 const EditButtonContainer = styled.div`
@@ -346,8 +350,11 @@ const EditButton = styled(OutlineButton)`
   }
 
   @media (min-width: 1248px) {
-    right: 196px;
-    top: 360px;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    right: 200px;
+    top: 100px;
   }
 `;
 
