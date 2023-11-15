@@ -40,7 +40,9 @@ function MessageCardModal({ modalInfo, handleCloseModal }, ref) {
         <ModalMessageBody $font={fontFamily}>
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </ModalMessageBody>
-        <ModalButton $size="small" onClick={handleCloseModal}>확인</ModalButton>
+        <ModalButton $size="small" onClick={handleCloseModal}>
+          확인
+        </ModalButton>
       </ModalContainer>
     </>
   );

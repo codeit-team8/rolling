@@ -74,6 +74,7 @@ function Post() {
     setMessageContents((prev) => [...prev, ...results]);
     setHasNext(next);
   }, [offset, recipientId, getMessagesAsync]);
+
   const handleOpenModal = (values) => {
     setIsOpenModal(true);
     setModalInfo({ ...modalInfo, ...values });
