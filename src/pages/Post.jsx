@@ -54,7 +54,7 @@ function Post() {
 
   // edit
   const [isEdit, setIsEdit] = useState(false);
-
+  const location = useLocation();
   const checkEditPage = () => location.pathname.includes('edit');
 
   const handleEditClick = () => {
@@ -299,11 +299,12 @@ const DeleteContainer = styled.div`
 
   @media (min-width: 1248px) {
     z-index: 4;
-    position: static;
+    position: absolute;
     justify-content: flex-end;
     width: 120rem;
     height: 3.9rem;
-    padding: 0;
+    padding-right: 10rem;
+    top: 19.2rem;
   }
 `;
 
@@ -336,7 +337,7 @@ const EditButtonContainer = styled.div`
 
   @media (min-width: 1248px) {
     width: 120rem;
-    padding-right: 10rem;
+    padding: 0;
   }
 `;
 
@@ -353,8 +354,9 @@ const EditButton = styled(OutlineButton)`
   }
 
   @media (min-width: 1248px) {
-    margin-bottom: -3.9rem;
-    margin-left: -2rem;
+    width: 9.2rem;
+    height: 3.9rem;
+}
   }
 `;
 
