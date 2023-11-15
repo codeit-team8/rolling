@@ -50,7 +50,7 @@ function MessageCardModal({ modalInfo, handleCloseModal }, ref) {
 
 export default forwardRef(MessageCardModal);
 
-const BackDrop = styled.div`
+export const BackDrop = styled.div`
   top: 0;
   left: 0;
   position: fixed;

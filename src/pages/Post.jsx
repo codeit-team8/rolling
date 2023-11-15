@@ -14,6 +14,7 @@ import useOnClickOutside from '@/hooks/useOnClickOutside.js';
 import PrimaryButton from '@/styles/button/PrimaryButton';
 import OutlineButton from '@/styles/button/OutlineButton';
 import { FONT16 } from '@/styles/fontType.js';
+import LoadingModal from '@/components/Modal/LoadingModal.jsx';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -36,6 +37,9 @@ function Post() {
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
   const [emojiData, setEmojiData] = useState([]);
+  const [, , getReactionOfRecipientAsync] = useAsync(getReactionOfRecipient);
+  const [, , reactionToRecipientAsync] = useAsync(reactionToRecipient);
+  const [, setSelectedEmoji] = useState(null);
   const [profileImages, setProfileImages] = useState([]);
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
 
@@ -43,10 +47,7 @@ function Post() {
   const [messageContents, setMessageContents] = useState([]);
   const [hasNext, setHasNext] = useState(true);
   const [offset, setOffset] = useState(0);
-  const [isLoading, , getMessagesAsync] = useAsync(getMessages);
-  const [, , getReactionOfRecipientAsync] = useAsync(getReactionOfRecipient);
-  const [, , getReactionToRecipientAsync] = useAsync(reactionToRecipient);
-  const [, setSelectedEmoji] = useState(null);
+  const [isLoadingMessages, , getMessagesAsync] = useAsync(getMessages);
   const observerRef = useRef(null);
 
   const { recipientId } = useParams();
@@ -95,10 +96,10 @@ function Post() {
 
   const postEmoji = useCallback(
     async (value) => {
-      await getReactionToRecipientAsync(value);
+      await reactionToRecipientAsync(value);
       handleGetEmoji();
     },
-    [getReactionToRecipientAsync, handleGetEmoji],
+    [reactionToRecipientAsync, handleGetEmoji],
   );
 
   const handleEmojiSelect = (emojiObject) => {
@@ -108,14 +109,14 @@ function Post() {
 
   const getMessageMore = useCallback(
     (entries) => {
-      if (!isLoading) {
+      if (!isLoadingMessages) {
         const target = entries[0];
         if (target.isIntersecting) {
           setOffset((prev) => prev + 8);
         }
       }
     },
-    [isLoading],
+    [isLoadingMessages],
   );
 
   const getMessageOffset = useCallback(async () => {
@@ -201,6 +202,7 @@ function Post() {
         )}
         <PostContainer>
           {!isEdit && <PlusMessageCard />}
+          {isLoadingMessages && <LoadingModal />}
           {messageContents &&
             messageContents.map((messageCard) => (
               <MessageCard
@@ -211,7 +213,7 @@ function Post() {
                 handleModal={handleOpenModal}
               />
             ))}
-          {hasNext && <Loading ref={observerRef} />}
+          {hasNext && <LoadingDiv ref={observerRef} />}
         </PostContainer>
         {isOpenModal && (
           <Modal>
@@ -327,6 +329,6 @@ const EditButton = styled(OutlineButton)`
   }
 `;
 
-const Loading = styled.div`
+const LoadingDiv = styled.div`
   height: 2rem;
 `;
