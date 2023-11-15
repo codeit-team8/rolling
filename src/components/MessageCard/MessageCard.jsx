@@ -9,6 +9,7 @@ import {
   AuthorWrapper,
   DeleteBox,
   DeleteImg,
+  MessageWrapper,
   MessageBody,
   MessageCardProfile,
   MessageCardTop,
@@ -62,9 +63,11 @@ function MessageCard({ value, handleModal, isEdit, onDelete }) {
           </AuthorWrapper>
         </MessageCardProfile>
       </MessageCardTop>
-      <MessageBody $font={fontFamily}>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </MessageBody>
+      <MessageWrapper>
+        <MessageBody $font={fontFamily}>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        </MessageBody>
+      </MessageWrapper>
       <MessageDate>{createdDate}</MessageDate>
     </MessageCardWrapper>
   );
