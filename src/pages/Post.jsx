@@ -6,9 +6,13 @@ import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
 import { getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
+import { getMessages, deleteMessage } from '@/api/message';
+import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
+import PrimaryButton from '@/styles/button/PrimaryButton';
+import OutlineButton from '@/styles/button/OutlineButton';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -19,7 +23,7 @@ const INIT_MODAL_INFO = {
   createdDate: '',
 };
 
-function Post() {
+export default function Post() {
   const location = useLocation();
   const EditPage = location.pathname.includes('/edit');
 
@@ -36,15 +40,16 @@ function Post() {
   const modalRef = useRef();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
-
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
   const [profileImages, setProfileImages] = useState([]);
-
-  const [messageContents, setMessageContents] = useState();
+  const [messageContents, setMessageContents] = useState([]);
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
-
+  const [hasNext, setHasNext] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const [isLoading, , getMessagesAsync] = useAsync(getMessages);
+  const observerRef = useRef(null);
   const { recipientId } = useParams();
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
@@ -64,9 +69,26 @@ function Post() {
 
     handlePostHeader(name, messageCount, topReactions, recentMessages);
 
-    setMessageContents(recentMessages);
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
+
+  const getMessageMore = useCallback(
+    (entries) => {
+      if (!isLoading) {
+        const target = entries[0];
+        if (target.isIntersecting) {
+          setOffset((prev) => prev + 8);
+        }
+      }
+    },
+    [isLoading],
+  );
+
+  const getMessageOffset = useCallback(async () => {
+    const { results, next } = await getMessagesAsync({ recipientId, offset });
+    setMessageContents((prev) => [...prev, ...results]);
+    setHasNext(next);
+  }, [offset, recipientId, getMessagesAsync]);
 
   const handleOpenModal = (values) => {
     setIsOpenModal(true);
@@ -88,6 +110,25 @@ function Post() {
     await deleteMessage({ messageId });
     setMessageContents((prevMessages) => prevMessages.filter((message) => message.id !== messageId));
   });
+
+  useEffect(() => {
+    getMessageOffset();
+  }, [getMessageOffset]);
+
+  useEffect(() => {
+    const option = {
+      root: null,
+      rootMargin: '20px',
+      threshold: 1,
+    };
+    const io = new IntersectionObserver(getMessageMore, option);
+    if (observerRef.current) {
+      io.observe(observerRef.current);
+    }
+    return () => {
+      io.disconnect();
+    };
+  }, [getMessageMore]);
 
   return (
     <>
@@ -116,12 +157,14 @@ function Post() {
                 handleModal={handleOpenModal}
               />
             ))}
+          {hasNext && <Loading ref={observerRef} />}
         </PostContainer>
         {isEdit && (
           <SaveButtonContainer>
             <SaveButton $size="big">삭제하기</SaveButton>
           </SaveButtonContainer>
         )}
+
         {isOpenModal && (
           <Modal>
             <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
@@ -131,8 +174,6 @@ function Post() {
     </>
   );
 }
-
-export default Post;
 
 const PostBackground = styled.div`
   background: ${({ $backgroundColor, $imageUrl }) =>
@@ -154,7 +195,6 @@ const PostContainer = styled.div`
   margin: 0 auto;
   align-items: center;
   height: 100vh;
-
   overflow: scroll;
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none;
@@ -220,4 +260,8 @@ const EditButton = styled(OutlineButton)`
     right: 196px;
     top: 360px;
   }
+`;
+
+const Loading = styled.div`
+  height: 2rem;
 `;
