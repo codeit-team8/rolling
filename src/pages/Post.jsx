@@ -67,33 +67,45 @@ function Post() {
   return (
     <>
       <PostHeader name={postName} messageCount={postMessageCount} reactions={reactions} profileImages={profileImages} />
-      {EditPage && !isEdit && (
-        <EditButton $size="H40" type="button" onClick={handleEditClick}>
-          편집하기
-        </EditButton>
-      )}
-      <PostContainer $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
-        {!isEdit && <PlusMessageCard />}
-        {messageContents &&
-          messageContents.map((messageCard) => (
-            <MessageCard
-              value={messageCard}
-              key={messageCard.id}
-              isEdit={isEdit}
-              onDelete={() => onDelete(messageCard.id)}
-            />
-          ))}
-      </PostContainer>
-      {isEdit && (
-        <SaveButtonContainer>
-          <SaveButton $size="big">삭제하기</SaveButton>
-        </SaveButtonContainer>
-      )}
+      <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
+        {EditPage && !isEdit && (
+          <EditButton $size="H40" type="button" onClick={handleEditClick}>
+            편집하기
+          </EditButton>
+        )}
+        <PostContainer>
+          {!isEdit && <PlusMessageCard />}
+          {messageContents &&
+            messageContents.map((messageCard) => (
+              <MessageCard
+                value={messageCard}
+                key={messageCard.id}
+                isEdit={isEdit}
+                onDelete={() => onDelete(messageCard.id)}
+              />
+            ))}
+        </PostContainer>
+        {isEdit && (
+          <SaveButtonContainer>
+            <SaveButton $size="big">삭제하기</SaveButton>
+          </SaveButtonContainer>
+        )}
+      </PostBackground>
     </>
   );
 }
 
 export default Post;
+
+const PostBackground = styled.div`
+  background: ${({ $backgroundColor, $imageUrl }) =>
+    $imageUrl
+      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+      : `${$backgroundColor}`};
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+`;
 
 const PostContainer = styled.div`
   padding: 4.2rem 2rem 0;
@@ -105,13 +117,7 @@ const PostContainer = styled.div`
   margin: 0 auto;
   align-items: center;
   height: 100vh;
-  background: ${({ $backgroundColor, $imageUrl }) =>
-    $imageUrl
-      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
-      : `${$backgroundColor}`};
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+
   overflow: scroll;
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none;
