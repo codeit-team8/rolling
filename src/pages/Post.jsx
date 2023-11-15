@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
-import { getRecipientsId } from '@/api/recipients';
+import { deleteRecipientsId, getRecipientsId } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
+import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
+import useAsync from '@/hooks/useAsync.js';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -24,6 +26,7 @@ function Post() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState(INIT_MODAL_INFO);
 
+  const [, , getRecipientsIdAsync] = useAsync(getRecipientsId);
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
@@ -33,6 +36,7 @@ function Post() {
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
 
   const { recipientId } = useParams();
+  const navigate = useNavigate();
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
@@ -44,7 +48,8 @@ function Post() {
   };
 
   const handleRollingPaper = useCallback(async () => {
-    const results = await getRecipientsId({ id: recipientId });
+    const results = await getRecipientsIdAsync({ id: recipientId });
+
     const { name, messageCount, backgroundColor, backgroundImageURL, topReactions } = { ...results };
     const { color } = BACKGROUND_COLOR_PALETTE[backgroundColor];
     const recentMessages = [...results.recentMessages];
@@ -54,6 +59,15 @@ function Post() {
     setMessageContents(recentMessages);
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
+
+  useEffect(() => {
+    handleRollingPaper();
+  }, [handleRollingPaper]);
+
+  const handleDeletePage = async () => {
+    await deleteRecipientsId({ id: recipientId });
+    navigate('/list');
+  };
 
   const handleOpenModal = (values) => {
     setIsOpenModal(true);
@@ -67,10 +81,6 @@ function Post() {
 
   useOnClickOutside(modalRef, handleCloseModal);
 
-  useEffect(() => {
-    handleRollingPaper();
-  }, [handleRollingPaper]);
-
   return (
     <>
       <PostHeader name={postName} messageCount={postMessageCount} reactions={reactions} profileImages={profileImages} />
@@ -79,6 +89,7 @@ function Post() {
         {messageContents && messageContents.map((messageCard) =>
             <MessageCard value={messageCard} key={messageCard.id} handleModal={handleOpenModal} />
           )}
+        <PrimaryButton onClick={handleDeletePage}>삭제하기</PrimaryButton>
       </PostContainer>
       {isOpenModal && (
         <Modal>
