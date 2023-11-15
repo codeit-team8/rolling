@@ -13,6 +13,7 @@ import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
 import PrimaryButton from '@/styles/button/PrimaryButton';
 import OutlineButton from '@/styles/button/OutlineButton';
+import { FONT16 } from '@/styles/fontType.js';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -164,6 +165,11 @@ function Post() {
             편집하기
           </EditButton>
         )}
+        {isEdit && (
+          <DeleteContainer>
+            <DeleteButton onClick={handleDeletePage}>삭제하기</DeleteButton>
+          </DeleteContainer>
+        )}
         <PostContainer>
           {!isEdit && <PlusMessageCard />}
           {messageContents &&
@@ -184,11 +190,6 @@ function Post() {
           </Modal>
         )}
       </PostBackground>
-      {isEdit && (
-        <DeleteContainer>
-          <DeleteButton onClick={handleDeletePage}>삭제하기</DeleteButton>
-        </DeleteContainer>
-      )}
     </>
   );
 }
@@ -203,6 +204,10 @@ const PostBackground = styled.div`
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+
+  @media (min-width: 1248px) {
+    padding: 6.3rem 11.4rem 0;
+  }
 `;
 
 const PostContainer = styled.div`
@@ -232,7 +237,8 @@ const PostContainer = styled.div`
   }
 
   @media (min-width: 1248px) {
-    padding: 6rem 2.4rem;
+    margin-top: 1.2rem;
+    padding: 0;
     grid-template-columns: repeat(3, 38.4rem);
     grid-template-rows: repeat(auto-fit, 28rem);
   }
@@ -251,13 +257,25 @@ const DeleteContainer = styled.div`
   @media (min-width: 768px) {
     padding: 2.4rem;
   }
+
+  @media (min-width: 1248px) {
+    z-index: 4;
+    position: static;
+    justify-content: flex-end;
+    width: 100%;
+    height: 3.9rem;
+    padding: 0;
+  }
 `;
 
 const DeleteButton = styled(PrimaryButton)`
   width: 100%;
 
   @media (min-width: 1248px) {
-    width: 28rem;
+    ${FONT16};
+    padding: 0.7rem 1.6rem;
+    width: 9.2rem;
+    height: 3.9rem;
   }
 `;
 
