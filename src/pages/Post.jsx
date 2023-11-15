@@ -141,9 +141,11 @@ export default function Post() {
       />
       <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         {EditPage && !isEdit && (
-          <EditButton $size="H40" type="button" onClick={handleEditClick}>
-            편집하기
-          </EditButton>
+          <EditButtonContainer>
+            <EditButton $size="H40" type="button" onClick={handleEditClick} isEdit={EditPage}>
+              편집하기
+            </EditButton>
+          </EditButtonContainer>
         )}
         <PostContainer>
           {!isEdit && <PlusMessageCard />}
@@ -183,9 +185,13 @@ const PostBackground = styled.div`
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const PostContainer = styled.div`
+  margin: 4.2rem 0 0 0;
   padding: 4.2rem 2rem 0;
   display: grid;
   grid-template-columns: repeat(1, 32rem);
@@ -243,11 +249,20 @@ const SaveButton = styled(PrimaryButton)`
   }
 `;
 
-const EditButton = styled(OutlineButton)`
-  position: absolute;
-  right: 20px;
-  top: 128px;
+const EditButtonContainer = styled.div`
+  width: 360px;
+  padding: 24px 20px ;
+  margin: 0 0 -26px 0;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+`;
+
+const EditButton = styled(OutlineButton)`
+  // position: sticky;
+  display: flex;
+  flex-direction: row;
   border-radius: 8px;
   font-size: 1.6rem;
 
