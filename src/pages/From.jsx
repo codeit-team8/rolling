@@ -16,17 +16,14 @@ const INIT_MESSAGE = {
   relationship: '지인',
   content: '',
   font: 'Noto Sans',
-  profileImageURL: '',
-};
-
-const INIT_IMAGE = {
-  imageUrls: [],
+  profileImageURL:
+    'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png',
 };
 
 function From() {
   const [postValue, setPostValue] = useState(INIT_MESSAGE);
   const [isValidForm, setIsValidForm] = useState(false);
-  const [profileImageData, setProfileImageData] = useState(INIT_IMAGE);
+  const [profileImageData, setProfileImageData] = useState([]);
   const [, , sendMessageAsync] = useAsync(sendMessage);
   const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
@@ -42,8 +39,8 @@ function From() {
   );
 
   const getProfile = useCallback(async () => {
-    const response = await getProfileImagesAsync();
-    setProfileImageData({ ...response });
+    const { imageUrls } = await getProfileImagesAsync();
+    setProfileImageData([...imageUrls]);
   }, [getProfileImagesAsync]);
 
   const handleSubmit = (e) => {
@@ -69,7 +66,7 @@ function From() {
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
   return (
     <FromContainer>

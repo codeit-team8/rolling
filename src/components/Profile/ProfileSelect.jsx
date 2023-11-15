@@ -5,6 +5,7 @@ import ProfileImage from '@/components/profileImage/ProfileImage';
 
 function ProfileSelect({ setPostValue, imageData }) {
   const [selectUrl, setSelectUrl] = useState('');
+  const imageUrls = imageData.slice(1);
 
   const handleSelect = ({ imageSource }) => {
     setSelectUrl(imageSource);
@@ -18,7 +19,7 @@ function ProfileSelect({ setPostValue, imageData }) {
         <SelectDiv>
           <P>프로필 이미지를 선택해 주세요.</P>
           <ClickDiv>
-            {imageData.imageUrls.map((url) => (
+            {imageUrls.map((url) => (
               <ProfileImage key={url} profileImage={url} position="static" handleSelect={handleSelect} />
             ))}
           </ClickDiv>
