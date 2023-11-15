@@ -21,7 +21,7 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 import { FONT_PALETTE } from '@/util/font.jsx';
 
-function MessageCard({ value, handleModal, isEdit, onDelete }) {
+function MessageCard({ value, handleModal, checkEditPage, onDelete }) {
   const { id, profileImageURL, sender, relationship, content, font, createdAt } = value;
 
   const fontFamily = FONT_PALETTE[font];
@@ -45,7 +45,7 @@ function MessageCard({ value, handleModal, isEdit, onDelete }) {
   return (
     <MessageCardWrapper onClick={getCardInfo}>
       <MessageCardTop>
-        {isEdit && (
+        {checkEditPage && (
           <DeleteBox>
             <DeleteImg src={deleteIcon} alt="메시지 카드 삭제 버튼" onClick={() => onDelete(id)} />
           </DeleteBox>

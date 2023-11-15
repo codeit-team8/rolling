@@ -53,8 +53,9 @@ function Post() {
   const navigate = useNavigate();
 
   // edit
-  // const location = useLocation();
   const [isEdit, setIsEdit] = useState(false);
+
+  const checkEditPage = () => location.pathname.includes('edit');
 
   const handleEditClick = () => {
     if (isEdit) {
@@ -197,19 +198,19 @@ function Post() {
             편집하기
           </EditButton>
         </EditButtonContainer>
-        {isEdit && (
+        {checkEditPage() && (
           <DeleteContainer>
             <DeleteButton onClick={handleDeletePage}>삭제하기</DeleteButton>
           </DeleteContainer>
         )}
         <PostContainer>
-          {!isEdit && <PlusMessageCard />}
+          {checkEditPage() && <PlusMessageCard />}
           {messageContents &&
             messageContents.map((messageCard) => (
               <MessageCard
                 value={messageCard}
                 key={messageCard.id}
-                isEdit={isEdit}
+                checkEditPage={checkEditPage()}
                 onDelete={() => onDelete(messageCard.id)}
                 handleModal={handleOpenModal}
               />
