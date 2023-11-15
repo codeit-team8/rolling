@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
-import { getRecipientsId, reactionToRecipient, getReactionOfRecipient } from '@/api/recipients';
+import { getReactionOfRecipient, getRecipientsId, reactionToRecipient } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 import { getMessages } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
@@ -69,7 +69,6 @@ function Post() {
 
   const postEmoji = useCallback(
     async (value) => {
-      console.log('포스트이모지: ', value);
       await getReactionToRecipientAsync(value);
       handleGetEmoji();
     },
@@ -78,8 +77,7 @@ function Post() {
 
   const handleEmojiSelect = (emojiObject) => {
     setSelectedEmoji(emojiObject);
-    console.log(emojiObject);
-    postEmoji({ id: recipientId, emoji: selectedEmoji.emoji, type: 'increase' });
+    postEmoji({ id: recipientId, emoji: emojiObject.emoji, type: 'increase' });
   };
 
   const getMessageMore = useCallback(
