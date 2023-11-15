@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { FONT16 } from '@/styles/fontType';
-import ProfileImage from '@/styles/profileImage/ProfileImage';
+import ProfileImage from '@/components/profileImage/ProfileImage';
+import SelectedProfileImage from '@/components/profileImage/SelectedProfileImage.jsx';
+import { DEFAULT_IMAGE_URL } from '@/pages/From.jsx';
 
 function ProfileSelect({ setPostValue, imageData }) {
   const [selectUrl, setSelectUrl] = useState('');
+  const imageUrls = imageData.slice(1);
+
+  const handleInitImage = () => {
+    setSelectUrl('');
+    setPostValue((prev) => ({ ...prev, profileImageURL: DEFAULT_IMAGE_URL }));
+  };
 
   const handleSelect = ({ imageSource }) => {
     setSelectUrl(imageSource);
@@ -14,11 +22,11 @@ function ProfileSelect({ setPostValue, imageData }) {
   return (
     <ProfileSelectContainer>
       <Section>
-        <ProfileImage size="8rem" position="static" profileImage={selectUrl} />
+        <SelectedProfileImage profileImage={selectUrl} handleInitImage={handleInitImage} />
         <SelectDiv>
           <P>프로필 이미지를 선택해 주세요.</P>
           <ClickDiv>
-            {imageData.imageUrls.map((url) => (
+            {imageUrls.map((url) => (
               <ProfileImage key={url} profileImage={url} position="static" handleSelect={handleSelect} />
             ))}
           </ClickDiv>
