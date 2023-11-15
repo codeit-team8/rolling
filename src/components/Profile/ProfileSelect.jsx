@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { FONT16 } from '@/styles/fontType';
-import ProfileImage from '@/styles/profileImage/ProfileImage';
+import ProfileImage from '@/components/profileImage/ProfileImage';
 
 function ProfileSelect({ setPostValue, imageData }) {
   const [selectUrl, setSelectUrl] = useState('');

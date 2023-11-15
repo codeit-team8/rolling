@@ -1,6 +1,6 @@
 import Share from '@/components/Share/Share.jsx';
 import EmojiAdd from '@/components/Emoji/EmojiAdd.jsx';
-import ProfileImageGroup from '@/styles/profileImage/ProfileImageGroup.jsx';
+import ProfileImageGroup from '@/components/profileImage/ProfileImageGroup.jsx';
 import {
   ButtonContainer,
   HeaderService,
