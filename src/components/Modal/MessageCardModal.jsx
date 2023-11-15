@@ -86,6 +86,7 @@ const ModalMessageBody = styled.div`
   height: 10.6rem;
   padding-right: 1.5rem;
   overflow: scroll;
+  overflow-x: hidden;
 
   @media (min-width: 768px) {
     height: 24rem;
