@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
-import { getReactionOfRecipient, deleteRecipientsId, getRecipientsId, reactionToRecipient } from '@/api/recipients';
+import { deleteRecipientsId, getReactionOfRecipient, getRecipientsId, reactionToRecipient } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 import { deleteMessage, getMessages } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
@@ -46,7 +46,7 @@ function Post() {
   const [isLoading, , getMessagesAsync] = useAsync(getMessages);
   const [, , getReactionOfRecipientAsync] = useAsync(getReactionOfRecipient);
   const [, , getReactionToRecipientAsync] = useAsync(reactionToRecipient);
-  const [selectedEmoji, setSelectedEmoji] = useState(null);
+  const [, setSelectedEmoji] = useState(null);
   const observerRef = useRef(null);
 
   const { recipientId } = useParams();
