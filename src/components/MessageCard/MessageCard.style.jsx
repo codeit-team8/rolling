@@ -9,6 +9,7 @@ export const MessageCardWrapper = styled.div`
   border-radius: 16px;
   background: var(--white);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 
   @media (min-width: 768px) {
     width: 35.2rem;
