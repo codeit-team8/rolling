@@ -1,6 +1,6 @@
 import Share from '@/components/Share/Share.jsx';
 import EmojiAdd from '@/components/Emoji/EmojiAdd.jsx';
-import ProfileImageGroup from '@/styles/profileImage/ProfileImageGroup.jsx';
+import ProfileImageGroup from '@/components/profileImage/ProfileImageGroup.jsx';
 import {
   ButtonContainer,
   HeaderService,
@@ -17,7 +17,7 @@ import { ButtonDivLine } from '@/styles/button/ButtonDivLine.jsx';
 import Emoji from '@/components/Emoji/Emoji.jsx';
 import EmojiList from '../Emoji/EmojiList';
 
-function PostHeader({ name, messageCount, reactions, profileImages }) {
+function PostHeader({ name, messageCount, reactions, profileImages, recipientId }) {
   return (
     <PostHeaderContainer>
       <PostUserContainer>
@@ -42,7 +42,7 @@ function PostHeader({ name, messageCount, reactions, profileImages }) {
           <ButtonContainer>
             <EmojiAdd />
             <ButtonDivLine />
-            <Share />
+            <Share recipientId={recipientId} />
           </ButtonContainer>
         </HeaderService>
       </HeaderServiceContainer>

@@ -18,14 +18,26 @@ import {
 import deleteIcon from '@/assets/icons/deleted.svg';
 import { FONT_PALETTE } from '@/util/font.jsx';
 
-function MessageCard({ value }) {
+function MessageCard({ value, handleModal }) {
   const { profileImageURL, sender, relationship, content, font, createdAt } = value;
   const location = useLocation();
   const deleteBoxVisible = location.pathname === '/edit';
   const fontFamily = FONT_PALETTE[font];
+  const createdDate = new Date(createdAt).toLocaleDateString();
+
+  const getCardInfo = () => {
+    handleModal({
+      profileImageURL,
+      sender,
+      relationship,
+      content,
+      fontFamily,
+      createdDate,
+    });
+  };
 
   return (
-    <MessageCardWrapper>
+    <MessageCardWrapper onClick={getCardInfo}>
       <MessageCardTop>
         {deleteBoxVisible && (
           <DeleteBox>
@@ -48,7 +60,7 @@ function MessageCard({ value }) {
       <MessageBody $font={fontFamily}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </MessageBody>
-      <MessageDate>{new Date(createdAt).toLocaleDateString()}</MessageDate>
+      <MessageDate>{createdDate}</MessageDate>
     </MessageCardWrapper>
   );
 }
