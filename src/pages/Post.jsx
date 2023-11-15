@@ -30,10 +30,6 @@ function Post() {
     setBackground({ color, backgroundImageURL });
   }, [recipientId]);
 
-  useEffect(() => {
-    handleRollingPaper();
-  }, [handleRollingPaper]);
-
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
     setPostMessageCount(messageCount);
@@ -42,6 +38,10 @@ function Post() {
       recentMessages.length === 0 ? [] : recentMessages.map((message) => message.profileImageURL).slice(0, 3);
     setProfileImages(recentPostProfileImages);
   };
+
+  useEffect(() => {
+    handleRollingPaper();
+  }, [handleRollingPaper]);
 
   return (
     <>

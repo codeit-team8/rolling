@@ -16,14 +16,17 @@ export default function EmojiAdd() {
     setIsOpen((prev) => !prev);
   };
 
-  const postEmoji = useCallback(async (value) => {
+  const postEmoji = useCallback(async (value, emojiObject) => {
     await reactionToRecipient(value);
-  });
+    // 여기에 setState 쓰기 바로 보여짐
+  }, []);
 
   const handleEmojiSelect = (emojiObject, event) => {
     setSelectedEmoji(emojiObject);
     postEmoji({ id: recipientId, emoji: selectedEmoji.emoji, type: 'increase' });
   };
+
+  // useEffect
 
   return (
     <EmojiAddContainer>
