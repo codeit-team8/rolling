@@ -1,6 +1,5 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
@@ -11,9 +10,15 @@ import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
-import PrimaryButton from '@/styles/button/PrimaryButton';
-import OutlineButton from '@/styles/button/OutlineButton';
-import { FONT16 } from '@/styles/fontType.js';
+import {
+  PostBackground,
+  PostContainer,
+  DeleteContainer,
+  DeleteButton,
+  EditButtonContainer,
+  EditButton,
+  Loading,
+} from '@/pages/Post.style.jsx';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -53,18 +58,25 @@ function Post() {
   const navigate = useNavigate();
 
   // edit
-  const location = useLocation();
-  const EditPage = location.pathname.includes('/edit');
   const [isEdit, setIsEdit] = useState(false);
+  const location = useLocation();
+  const checkEditPage = () => location.pathname.includes('edit');
 
   const handleEditClick = () => {
-    if (isEdit) {
-      console.log('true상태!!');
+    if (!location.pathname.includes('edit')) {
+      navigate(`/post/${recipientId}/edit`);
     } else {
-      console.log('false상태!!');
+      navigate(-1);
     }
-    setIsEdit(!isEdit);
   };
+
+  useEffect(() => {
+    if (location.pathname.includes('edit')) {
+      setIsEdit(true);
+    } else {
+      setIsEdit(false);
+    }
+  }, [location.pathname]);
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
@@ -189,24 +201,24 @@ function Post() {
         handleEmojiSelect={handleEmojiSelect}
       />
       <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
-        {EditPage && !isEdit && (
+        <EditButtonContainer>
           <EditButton $size="H40" type="button" onClick={handleEditClick}>
-            편집하기
+            {isEdit ? '뒤로가기' : '편집하기'}
           </EditButton>
-        )}
-        {isEdit && (
+        </EditButtonContainer>
+        {checkEditPage() && (
           <DeleteContainer>
             <DeleteButton onClick={handleDeletePage}>삭제하기</DeleteButton>
           </DeleteContainer>
         )}
         <PostContainer>
-          {!isEdit && <PlusMessageCard />}
+          {!checkEditPage() && <PlusMessageCard />}
           {messageContents &&
             messageContents.map((messageCard) => (
               <MessageCard
                 value={messageCard}
                 key={messageCard.id}
-                isEdit={isEdit}
+                checkEditPage={checkEditPage()}
                 onDelete={() => onDelete(messageCard.id)}
                 handleModal={handleOpenModal}
               />
@@ -224,109 +236,3 @@ function Post() {
 }
 
 export default Post;
-
-const PostBackground = styled.div`
-  background: ${({ $backgroundColor, $imageUrl }) =>
-    $imageUrl
-      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
-      : `${$backgroundColor}`};
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-
-  @media (min-width: 1248px) {
-    padding: 6.3rem 11.4rem 0;
-  }
-`;
-
-const PostContainer = styled.div`
-  padding: 4.2rem 2rem 0;
-  display: grid;
-  grid-template-columns: repeat(1, 32rem);
-  grid-template-rows: repeat(auto-fit, 23rem);
-  justify-content: center;
-  gap: 2.4rem;
-  margin: 0 auto;
-  align-items: center;
-  height: 100vh;
-  overflow: scroll;
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 35.4rem);
-    grid-template-rows: repeat(auto-fit, 28.4rem);
-    gap: 3rem;
-    padding: 4.9rem 2.4rem;
-    height: 120rem;
-  }
-
-  @media (min-width: 1248px) {
-    margin-top: 1.2rem;
-    padding: 0;
-    grid-template-columns: repeat(3, 38.4rem);
-    grid-template-rows: repeat(auto-fit, 28rem);
-  }
-`;
-
-const DeleteContainer = styled.div`
-  position: fixed;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 2.4rem 2rem;
-  bottom: 0;
-
-  @media (min-width: 768px) {
-    padding: 2.4rem;
-  }
-
-  @media (min-width: 1248px) {
-    z-index: 4;
-    position: static;
-    justify-content: flex-end;
-    width: 100%;
-    height: 3.9rem;
-    padding: 0;
-  }
-`;
-
-const DeleteButton = styled(PrimaryButton)`
-  width: 100%;
-
-  @media (min-width: 1248px) {
-    ${FONT16};
-    padding: 0.7rem 1.6rem;
-    width: 9.2rem;
-    height: 3.9rem;
-  }
-`;
-
-const EditButton = styled(OutlineButton)`
-  position: absolute;
-  right: 20px;
-  top: 128px;
-  display: flex;
-  border-radius: 8px;
-  font-size: 1.6rem;
-
-  @media (min-width: 768px) {
-    right: 24px;
-    top: 172px;
-  }
-
-  @media (min-width: 1248px) {
-    right: 196px;
-    top: 360px;
-  }
-`;
-
-const Loading = styled.div`
-  height: 2rem;
-`;
