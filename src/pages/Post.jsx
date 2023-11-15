@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
