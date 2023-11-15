@@ -2,19 +2,18 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import EmojiPopover from '@/components/Emoji/EmojiPopover';
 import Emoji from '@/components/Emoji/Emoji';
-import mockReactions from '@/assets/mock/mockReactions';
 import arrowDownImg from '@/assets/icons/arrow_down.svg';
 
-// TODO: emoji api로 받아오기
-function EmojiList() {
+function EmojiList({ emojiData }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { results } = mockReactions;
-  const defaultReactions = [...results].slice(0, 3);
-  const popoverReactions = [...results].slice(3, 11);
+
+  const defaultReactions = [...emojiData].slice(0, 3);
+  const popoverReactions = [...emojiData].slice(3, 11);
 
   const handleArrowClick = () => {
     setIsOpen((prev) => !prev);
   };
+
   return (
     <EmojiListContainer>
       <Box>
@@ -23,9 +22,11 @@ function EmojiList() {
             <Emoji reaction={el} key={el.emoji} />
           ))}
         </DefaultEmojis>
-        <ArrowButton onClick={handleArrowClick} type="button">
-          <img src={arrowDownImg} alt="드롭다운" />
-        </ArrowButton>
+        {popoverReactions.length > 0 && (
+          <ArrowButton onClick={handleArrowClick} type="button">
+            <img src={arrowDownImg} alt="드롭다운" />
+          </ArrowButton>
+        )}
         {isOpen && <EmojiPopover popoverReactions={popoverReactions} />}
       </Box>
     </EmojiListContainer>
@@ -40,13 +41,18 @@ const FlexCenter = css`
 `;
 
 const Box = styled.div`
-  ${FlexCenter}
+  ${FlexCenter};
   position: relative;
 `;
 
 const EmojiListContainer = styled.div`
-  ${FlexCenter}
+  ${FlexCenter};
+  width: 20rem;
   gap: 0.2rem;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const DefaultEmojis = styled.div`
@@ -55,7 +61,7 @@ const DefaultEmojis = styled.div`
 `;
 
 const ArrowButton = styled.button`
-  ${FlexCenter}
+  ${FlexCenter};
   justify-content: center;
   width: 3.6rem;
   height: 3.6rem;

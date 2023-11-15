@@ -59,4 +59,5 @@ const PopoverBox = styled.div`
   top: 100%;
   margin-top: 0.5rem;
   right: 0;
+  z-index: 2;
 `;

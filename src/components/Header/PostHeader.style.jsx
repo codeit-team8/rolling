@@ -91,11 +91,13 @@ export const HeaderServiceContainer = styled.div`
 export const HeaderService = styled.div`
   display: flex;
   padding: 0 2rem;
-  gap: 0.2rem;
-  align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+  gap: 2rem;
 
   @media (min-width: 1248px) {
     padding: 0;
+    width: auto;
   }
 `;
 

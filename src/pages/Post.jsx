@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PostHeader from '@/components/Header/PostHeader.jsx';
 import PlusMessageCard from '@/components/MessageCard/PlusMessageCard';
 import MessageCard from '@/components/MessageCard/MessageCard';
-import { deleteRecipientsId, getRecipientsId } from '@/api/recipients';
+import { deleteRecipientsId, getReactionOfRecipient, getRecipientsId, reactionToRecipient } from '@/api/recipients';
 import { BACKGROUND_COLOR_PALETTE } from '@/util/backgroundColors.jsx';
 import { deleteMessage, getMessages } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
@@ -35,6 +35,7 @@ function Post() {
   const [postName, setPostName] = useState('');
   const [postMessageCount, setPostMessageCount] = useState(0);
   const [reactions, setReactions] = useState([]);
+  const [emojiData, setEmojiData] = useState([]);
   const [profileImages, setProfileImages] = useState([]);
   const [background, setBackground] = useState('var(--orange-200, #ffe2ad)');
 
@@ -43,6 +44,9 @@ function Post() {
   const [hasNext, setHasNext] = useState(true);
   const [offset, setOffset] = useState(0);
   const [isLoading, , getMessagesAsync] = useAsync(getMessages);
+  const [, , getReactionOfRecipientAsync] = useAsync(getReactionOfRecipient);
+  const [, , getReactionToRecipientAsync] = useAsync(reactionToRecipient);
+  const [, setSelectedEmoji] = useState(null);
   const observerRef = useRef(null);
 
   const { recipientId } = useParams();
@@ -82,6 +86,25 @@ function Post() {
 
     setBackground({ color, backgroundImageURL });
   }, [getRecipientsIdAsync, recipientId]);
+
+  const handleGetEmoji = useCallback(async () => {
+    const response = await getReactionOfRecipientAsync({ id: recipientId });
+    const { results } = { ...response };
+    setEmojiData([...results]);
+  }, [getReactionOfRecipientAsync, recipientId]);
+
+  const postEmoji = useCallback(
+    async (value) => {
+      await getReactionToRecipientAsync(value);
+      handleGetEmoji();
+    },
+    [getReactionToRecipientAsync, handleGetEmoji],
+  );
+
+  const handleEmojiSelect = (emojiObject) => {
+    setSelectedEmoji(emojiObject);
+    postEmoji({ id: recipientId, emoji: emojiObject.emoji, type: 'increase' });
+  };
 
   const getMessageMore = useCallback(
     (entries) => {
@@ -136,6 +159,10 @@ function Post() {
   }, [getMessageOffset]);
 
   useEffect(() => {
+    handleGetEmoji();
+  }, [handleGetEmoji]);
+
+  useEffect(() => {
     const option = {
       root: null,
       rootMargin: '20px',
@@ -158,6 +185,8 @@ function Post() {
         reactions={reactions}
         profileImages={profileImages}
         recipientId={recipientId}
+        emojiData={emojiData}
+        handleEmojiSelect={handleEmojiSelect}
       />
       <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
         {EditPage && !isEdit && (
