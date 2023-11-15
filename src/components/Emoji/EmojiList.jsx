@@ -41,13 +41,18 @@ const FlexCenter = css`
 `;
 
 const Box = styled.div`
-  ${FlexCenter}
+  ${FlexCenter};
   position: relative;
 `;
 
 const EmojiListContainer = styled.div`
-  ${FlexCenter}
+  ${FlexCenter};
+  width: 20rem;
   gap: 0.2rem;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const DefaultEmojis = styled.div`
@@ -56,7 +61,7 @@ const DefaultEmojis = styled.div`
 `;
 
 const ArrowButton = styled.button`
-  ${FlexCenter}
+  ${FlexCenter};
   justify-content: center;
   width: 3.6rem;
   height: 3.6rem;
