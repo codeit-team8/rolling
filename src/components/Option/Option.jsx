@@ -30,6 +30,11 @@ function Option({ setPostValue }) {
   const handleClickCategory = (index) => {
     setIsCategorySelect(index);
     setSelectedChipIndex(0);
+    if (index === 0) {
+      setPostValue((prev) => ({ ...prev, backgroundColor: 'beige', backgroundImageURL: null }));
+    } else {
+      setPostValue((prev) => ({ ...prev, backgroundColor: 'beige', backgroundImageURL: backgroundImages[0] }));
+    }
   };
 
   const handleChip = (e, index) => {
