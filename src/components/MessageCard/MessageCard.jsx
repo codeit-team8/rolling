@@ -1,7 +1,4 @@
-import { useCallback } from 'react';
-import { deleteMessage } from '@/api/message';
 import Badge from '@/components/MessageCard/Badge.jsx';
-import { useLocation } from 'react-router-dom';
 import {
   Author,
   AuthorFrom,
@@ -37,10 +34,6 @@ function MessageCard({ value, handleModal, checkEditPage, onDelete }) {
       createdDate,
     });
   };
-
-  // const handleDelete = useCallback(async () => {
-  //   const deleteId = await deleteMessage({ messageId: id });
-  // }, [id]);
 
   return (
     <MessageCardWrapper

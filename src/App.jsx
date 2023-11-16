@@ -8,6 +8,7 @@ import From from '@/pages/From.jsx';
 import PaperList from '@/pages/PaperList.jsx';
 import To from '@/pages/To.jsx';
 import ErrorFallback from './Error/ErrorFallback';
+import NotFound from '@/pages/NotFound.jsx';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path=":recipientId/edit" element={<Post />} />
             <Route path=":recipientId/message" element={<From />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ErrorBoundary>
     </div>
