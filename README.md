@@ -24,14 +24,14 @@ Rolling이라는 자리를 빌어 표현해보세요.
 <table>
   <tbody>
     <tr>
-      <td align="center"><img src="https://avatars.githubusercontent.com/u/144667455?v=4" width="200px;" alt=""/><br /><sub><b>팀장 : 신혜윤</b></sub><br /></td>
+      <td align="center"><img src="https://github.com/BeMatthewsong/vanillaJS/assets/98685266/f7555406-5578-41ff-ac9b-b233cbcfa03d" width="200px;" alt=""/><br /><sub><b>팀장 : 신혜윤</b></sub><br /></td>
       <td align="center"><img src="https://avatars.githubusercontent.com/u/144667600?v=4" width="200px;" alt=""/><br /><sub><b>팀원 : 구혜지</b></sub><br /></td>
       <td align="center"><img src="https://avatars.githubusercontent.com/u/49144662?v=4" width="200px;" alt=""/><br /><sub><b>팀원 : 손상희</b></sub><br /></td>
       <td align="center"><img src="https://avatars.githubusercontent.com/u/98685266?v=4" width="200px;" alt=""/><br /><sub><b>팀원 : 송민혁</b></sub><br /></td>
      <tr/>
     <tr>
       <td>1인분 하는 그 날까지 🔥</td>
-      <td>코딩계의 페이커</td>
+      <td>8팀 파이팅❗ T1 파이팅❗</td>
       <td>잠 죽 자</td>
       <td>중도하차 == 코드잇 1억 기부</td>
     </tr>
