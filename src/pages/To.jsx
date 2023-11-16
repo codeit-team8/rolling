@@ -57,7 +57,7 @@ function To() {
           <P>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</P>
         </TextBox2>
         <Option setPostValue={setPostValue} />
-        <PrimaryButton type="submit" disabled={!isValidForm}>
+        <PrimaryButton type="submit" disabled={!isValidForm || isPostRecipientsLoading}>
           생성하기
         </PrimaryButton>
       </Form>
