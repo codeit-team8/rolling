@@ -18,7 +18,7 @@ function AddButton({ disabled }) {
 
 export default AddButton;
 
-const AddButtonContainer = styled.button`
+export const AddButtonContainer = styled.button`
   width: 5.6rem;
   height: 5.6rem;
   border-radius: 100px;
