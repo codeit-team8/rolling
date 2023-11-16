@@ -10,7 +10,6 @@ import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
-import LoadingModal from '@/components/Modal/LoadingModal.jsx';
 import FloatButton from '@/components/FloatButton/FloatButton';
 import {
   DeleteButton,
@@ -215,7 +214,6 @@ function Post() {
         )}
         <PostContainer>
           {!checkEditPage() && <PlusMessageCard />}
-          {isLoadingMessages && <LoadingModal />}
           {messageContents &&
             messageContents.map((messageCard) => (
               <MessageCard
