@@ -27,7 +27,7 @@ export const PostContainer = styled.div`
   grid-template-rows: repeat(auto-fit, 23rem);
   justify-content: center;
   gap: 2.4rem;
-  margin: 2.4rem auto 0 auto;
+  margin: 2.4rem auto 2.5rem auto;
   align-items: center;
   height: 100vh;
   overflow: scroll;
