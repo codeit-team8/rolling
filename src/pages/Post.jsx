@@ -10,6 +10,7 @@ import useAsync from '@/hooks/useAsync';
 import Modal from '@/components/Modal/Modal.jsx';
 import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
+import FloatButton from '@/components/FloatButton/FloatButton';
 import {
   DeleteButton,
   DeleteContainer,
@@ -230,6 +231,7 @@ function Post() {
             <MessageCardModal ref={modalRef} modalInfo={modalInfo} handleCloseModal={handleCloseModal} />
           </Modal>
         )}
+        {!isEdit && <FloatButton />}
       </PostBackground>
     </>
   );
