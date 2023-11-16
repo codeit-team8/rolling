@@ -30,14 +30,19 @@ function Option({ setPostValue }) {
   const handleClickCategory = (index) => {
     setIsCategorySelect(index);
     setSelectedChipIndex(0);
+    if (index === 0) {
+      setPostValue((prev) => ({ ...prev, backgroundColor: 'beige', backgroundImageURL: null }));
+    } else {
+      setPostValue((prev) => ({ ...prev, backgroundColor: 'beige', backgroundImageURL: backgroundImages[0] }));
+    }
   };
 
   const handleChip = (e, index) => {
     setSelectedChipIndex(index);
     if (isCategorySelect === 0) {
-      setPostValue((prev) => ({ ...prev, backgroundColor: e.target.id, backgroundImageURL: null }));
+      setPostValue((prev) => ({ ...prev, backgroundColor: e.target.id }));
     } else {
-      setPostValue((prev) => ({ ...prev, backgroundColor: 'beige', backgroundImageURL: e.target.id }));
+      setPostValue((prev) => ({ ...prev, backgroundImageURL: e.target.id }));
     }
   };
 
