@@ -12,12 +12,13 @@ import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
 import LoadingModal from '@/components/Modal/LoadingModal.jsx';
 import {
-  DeleteButton,
-  DeleteContainer,
-  EditButton,
-  LoadingDiv,
   PostBackground,
   PostContainer,
+  DeleteContainer,
+  DeleteButton,
+  EditButtonContainer,
+  EditButton,
+  Loading,
 } from '@/pages/Post.style.jsx';
 
 const INIT_MODAL_INFO = {
@@ -58,18 +59,25 @@ function Post() {
   const navigate = useNavigate();
 
   // edit
-  const location = useLocation();
-  const EditPage = location.pathname.includes('/edit');
   const [isEdit, setIsEdit] = useState(false);
+  const location = useLocation();
+  const checkEditPage = () => location.pathname.includes('edit');
 
   const handleEditClick = () => {
-    if (isEdit) {
-      console.log('true상태!!');
+    if (!location.pathname.includes('edit')) {
+      navigate(`/post/${recipientId}/edit`);
     } else {
-      console.log('false상태!!');
+      navigate(-1);
     }
-    setIsEdit(!isEdit);
   };
+
+  useEffect(() => {
+    if (location.pathname.includes('edit')) {
+      setIsEdit(true);
+    } else {
+      setIsEdit(false);
+    }
+  }, [location.pathname]);
 
   const handlePostHeader = (name, messageCount, topReactions, recentMessages) => {
     setPostName(name);
@@ -194,25 +202,25 @@ function Post() {
         handleEmojiSelect={handleEmojiSelect}
       />
       <PostBackground $backgroundColor={background.color} $imageUrl={background.backgroundImageURL}>
-        {EditPage && !isEdit && (
+        <EditButtonContainer>
           <EditButton $size="H40" type="button" onClick={handleEditClick}>
-            편집하기
+            {isEdit ? '뒤로가기' : '편집하기'}
           </EditButton>
-        )}
-        {isEdit && (
+        </EditButtonContainer>
+        {checkEditPage() && (
           <DeleteContainer>
             <DeleteButton onClick={handleDeletePage}>삭제하기</DeleteButton>
           </DeleteContainer>
         )}
         <PostContainer>
-          {!isEdit && <PlusMessageCard />}
+          {!checkEditPage() && <PlusMessageCard />}
           {isLoadingMessages && <LoadingModal />}
           {messageContents &&
             messageContents.map((messageCard) => (
               <MessageCard
                 value={messageCard}
                 key={messageCard.id}
-                isEdit={isEdit}
+                checkEditPage={checkEditPage()}
                 onDelete={() => onDelete(messageCard.id)}
                 handleModal={handleOpenModal}
               />

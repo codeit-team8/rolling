@@ -1,30 +1,33 @@
 import styled from 'styled-components';
-import PrimaryButton from '@/styles/button/PrimaryButton.jsx';
+import PrimaryButton from '@/styles/button/PrimaryButton';
+import OutlineButton from '@/styles/button/OutlineButton';
 import { FONT16 } from '@/styles/fontType.js';
-import OutlineButton from '@/styles/button/OutlineButton.jsx';
 
 export const PostBackground = styled.div`
   background: ${({ $backgroundColor, $imageUrl }) =>
-  $imageUrl
-    ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
-    : `${$backgroundColor}`};
+    $imageUrl
+      ? `linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.54) 100%), url(${$imageUrl})`
+      : `${$backgroundColor}`};
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media (min-width: 1248px) {
-    padding: 6.3rem 11.4rem 0;
+    padding: 6.3rem 2.4rem 0;
   }
 `;
 
 export const PostContainer = styled.div`
-  padding: 4.2rem 2rem 0;
+  padding: 0 2rem 0;
   display: grid;
   grid-template-columns: repeat(1, 32rem);
   grid-template-rows: repeat(auto-fit, 23rem);
   justify-content: center;
   gap: 2.4rem;
-  margin: 0 auto;
+  margin: 2.4rem auto 0 auto;
   align-items: center;
   height: 100vh;
   overflow: scroll;
@@ -39,8 +42,7 @@ export const PostContainer = styled.div`
     grid-template-columns: repeat(2, 35.4rem);
     grid-template-rows: repeat(auto-fit, 28.4rem);
     gap: 3rem;
-    padding: 4.9rem 2.4rem;
-    height: 120rem;
+    padding: 0 2.4rem;
   }
 
   @media (min-width: 1248px) {
@@ -66,12 +68,13 @@ export const DeleteContainer = styled.div`
   }
 
   @media (min-width: 1248px) {
-    z-index: 4;
-    position: static;
+    z-index: 0;
+    position: absolute;
     justify-content: flex-end;
-    width: 100%;
+    width: 120rem;
     height: 3.9rem;
-    padding: 0;
+    padding-right: 10rem;
+    top: 19.2rem;
   }
 `;
 
@@ -84,27 +87,47 @@ export const DeleteButton = styled(PrimaryButton)`
     width: 9.2rem;
     height: 3.9rem;
   }
+
+  @media (min-width: 1248px) {
+    position: relative;
+  }
 `;
 
-export const EditButton = styled(OutlineButton)`
-  position: absolute;
-  right: 20px;
-  top: 128px;
+export const EditButtonContainer = styled.div`
+  width: 36rem;
+  padding: 2.4rem 2rem 0 2rem;
   display: flex;
-  border-radius: 8px;
-  font-size: 1.6rem;
+  flex-direction: row;
+  justify-content: flex-end;
 
   @media (min-width: 768px) {
-    right: 24px;
-    top: 172px;
+    width: 76.8rem;
   }
 
   @media (min-width: 1248px) {
-    right: 196px;
-    top: 360px;
+    width: 120rem;
+    padding: 0;
   }
 `;
 
-export const LoadingDiv = styled.div`
+export const EditButton = styled(OutlineButton)`
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  font-size: 1.6rem;
+  z-index: 1;
+
+  @media (min-width: 768px) {
+    right: 2.4rem;
+    top: 17.2rem;
+  }
+
+  @media (min-width: 1248px) {
+    width: 9.2rem;
+    height: 3.9rem;
+  }
+`;
+
+export const Loading = styled.div`
   height: 2rem;
 `;
