@@ -7,7 +7,6 @@ import Nav from '@/components/Nav/Nav.jsx';
 import From from '@/pages/From.jsx';
 import PaperList from '@/pages/PaperList.jsx';
 import To from '@/pages/To.jsx';
-import Edit from '@/pages/Edit';
 import ErrorFallback from './Error/ErrorFallback';
 
 function App() {
@@ -22,8 +21,8 @@ function App() {
           <Route path="/post">
             <Route index element={<To />} />
             <Route path=":recipientId" element={<Post />} />
+            <Route path=":recipientId/edit" element={<Post />} />
             <Route path=":recipientId/message" element={<From />} />
-            <Route path=":recipientId/edit" element={<Edit />} />
           </Route>
         </Routes>
       </ErrorBoundary>
