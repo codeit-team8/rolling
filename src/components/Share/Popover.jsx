@@ -5,8 +5,7 @@ import Toast from '@/components/Toast/Toast';
 import shareKakao from '@/components/Share/ShareKakao.jsx';
 
 const { Kakao } = window;
-// TODO:searchParams를 인자로 받아와서 공유
-const URL = 'http://localhost:5173/post';
+const URL = 'https://teal-marshmallow-46e8a1.netlify.app/post';
 
 export default function Popover({ recipientId }) {
   const [isOpen, setIsOpen] = useState(false);
