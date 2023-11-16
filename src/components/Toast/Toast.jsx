@@ -3,8 +3,6 @@ import styled, { keyframes } from 'styled-components';
 import completedIcon from '@/assets/icons/completed.svg';
 import closeIcon from '@/assets/icons/close.svg';
 
-// TODO: 나중에 닫기 버튼에 set함수 추가
-
 function Toast({ onClose, isOpen }) {
   const [shouldRender, setRender] = useState(isOpen);
 
