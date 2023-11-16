@@ -2,7 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import * as F from '@/styles/fontType';
 
-const REGEX = /^[\sa-zA-Z0-9가-힣]{2,20}$/;
+const MAX_LENGTH = 20;
+const REGEX = /^[\sa-zA-Z0-9가-힣]{2,}$/;
 
 function TextInput({ setIsValidForm, getPostValue }) {
   const [value, setValue] = useState('');
@@ -10,6 +11,9 @@ function TextInput({ setIsValidForm, getPostValue }) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
+    if (e.target.value.length > MAX_LENGTH) {
+      e.target.value = e.target.value.slice(0, MAX_LENGTH);
+    }
     setValue(e.target.value);
   };
 
@@ -39,6 +43,7 @@ function TextInput({ setIsValidForm, getPostValue }) {
         onChange={handleChange}
         value={value}
         $isValid={!isValid && isValid !== null}
+        maxLength={MAX_LENGTH}
       />
       {!isValid && isValid !== null && <Error>{errorMessage}</Error>}
     </>
