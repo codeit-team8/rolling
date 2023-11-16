@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import * as F from '@/styles/fontType';
 
 const MAX_LENGTH = 20;
-const REGEX = /^[\sa-zA-Z0-9가-힣]{2,}$/;
+const REGEX = /^[\s\p{L}\p{N}]{2,}$/u;
 
 function TextInput({ setIsValidForm, getPostValue }) {
   const [value, setValue] = useState('');
