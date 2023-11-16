@@ -26,7 +26,7 @@ function From() {
   const [postValue, setPostValue] = useState(INIT_MESSAGE);
   const [isValidForm, setIsValidForm] = useState(false);
   const [profileImageData, setProfileImageData] = useState([]);
-  const [, , sendMessageAsync] = useAsync(sendMessage);
+  const [isLoading, , sendMessageAsync] = useAsync(sendMessage);
   const [, , getProfileImagesAsync] = useAsync(getProfileImages);
 
   const { recipientId } = useParams();
@@ -89,7 +89,7 @@ function From() {
           <Title>폰트 선택</Title>
           <Dropdown selectOption="font" setPostValue={setPostValue} />
         </Section>
-        <Button type="submit" disabled={!isValidForm || !postValue.content}>
+        <Button type="submit" disabled={!isValidForm || !postValue.content || isLoading}>
           생성하기
         </Button>
       </Form>

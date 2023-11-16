@@ -10,7 +10,6 @@ const URL = 'http://localhost:5173/post';
 
 export default function Popover({ recipientId }) {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(recipientId);
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init('838406c66469f9358aef57104417a0d7');
