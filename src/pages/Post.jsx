@@ -12,13 +12,13 @@ import MessageCardModal from '@/components/Modal/MessageCardModal.jsx';
 import useOnClickOutside from '@/hooks/useOnClickOutside.js';
 import LoadingModal from '@/components/Modal/LoadingModal.jsx';
 import {
+  DeleteButton,
+  DeleteContainer,
+  EditButton,
+  EditButtonContainer,
+  Loading,
   PostBackground,
   PostContainer,
-  DeleteContainer,
-  DeleteButton,
-  EditButtonContainer,
-  EditButton,
-  Loading,
 } from '@/pages/Post.style.jsx';
 
 const INIT_MODAL_INFO = {
@@ -225,7 +225,7 @@ function Post() {
                 handleModal={handleOpenModal}
               />
             ))}
-          {hasNext && <LoadingDiv ref={observerRef} />}
+          {hasNext && <Loading ref={observerRef} />}
         </PostContainer>
         {isOpenModal && (
           <Modal>
