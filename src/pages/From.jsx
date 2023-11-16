@@ -10,6 +10,7 @@ import TextEditor from '@/components/TextEditor/TextEditor';
 import { sendMessage } from '@/api/message';
 import useAsync from '@/hooks/useAsync';
 import { getProfileImages } from '@/api/profileImage';
+import Loading from '@/util/Loading.jsx';
 
 export const DEFAULT_IMAGE_URL =
   'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png';
@@ -27,7 +28,7 @@ function From() {
   const [isValidForm, setIsValidForm] = useState(false);
   const [profileImageData, setProfileImageData] = useState([]);
   const [isLoading, , sendMessageAsync] = useAsync(sendMessage);
-  const [, , getProfileImagesAsync] = useAsync(getProfileImages);
+  const [isLoadingProfileImages, , getProfileImagesAsync] = useAsync(getProfileImages);
 
   const { recipientId } = useParams();
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ function From() {
         </Section>
         <Section>
           <Title>프로필 이미지</Title>
+          {isLoadingProfileImages && <Loading />}
           <ProfileSelect imageData={profileImageData} setPostValue={setPostValue} />
         </Section>
         <Section>
