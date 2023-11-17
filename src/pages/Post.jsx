@@ -20,6 +20,7 @@ import {
   PostBackground,
   PostContainer,
 } from '@/pages/Post.style.jsx';
+import { throttle } from 'lodash';
 
 const INIT_MODAL_INFO = {
   profileImageURL: '',
@@ -107,11 +108,11 @@ function Post() {
   }, [getReactionOfRecipientAsync, recipientId]);
 
   const postEmoji = useCallback(
-    async (value) => {
+    throttle(async (value) => {
       await reactionToRecipientAsync(value);
       handleGetEmoji();
-    },
-    [reactionToRecipientAsync, handleGetEmoji],
+    }, 500),
+    [],
   );
 
   const handleEmojiSelect = (emojiObject) => {
