@@ -128,7 +128,11 @@ const EmojiContainer = styled.div`
   display: flex;
   align-items: flex-start;
   z-index: 1;
-  gap: 0.8rem;
+  gap: 0.3rem;
+
+  @media (min-width: 768px) {
+    gap: 0.8rem;
+  }
 `;
 
 const PatternImg = styled.img`
